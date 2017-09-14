@@ -110,7 +110,7 @@
 			// what mimimum score is required until we accept the company as correct
 			$this->subjectMatchRating = $this->db->getConfigValue("subjectMatchRating");
 
-			
+			$this->dateRegEx = $this->db->getConfigValue("dateRegEx");
 			
 			
 			// reads the pdf
@@ -198,7 +198,7 @@
 			$this->addToLog('LOOKING FOR DATES');	
 
 			// Datumsformate
-			preg_match_all ($this->matchDates, $this->content, $dates);
+			preg_match_all ($this->dateRegEx, $this->content, $dates);
 
 
 			// only consider full matches and remove duplicates

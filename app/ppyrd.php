@@ -23,7 +23,7 @@
 		function getTextFromPdf($pdf) {
 			// reads content into $this->content 
 			exec('pdftotext "' . $pdf . '" -', $this->content);
-			exec('pdftotext "' . $pdf . '"');	
+			//exec('pdftotext "' . $pdf . '"');	
 		}
 		
 		/**
@@ -183,7 +183,7 @@
 			$this->matchRules();
 
 			// renaming the file
-			// exec('mv "' . $pdf . '" "' . $this->newName . '"');	
+			exec('mv "' . $this->oldName . '" "' . $this->newName . '"');	
 			
 			// logging everything to database
 			$this->db->writeLog($this->oldName, $this->newName, $this->content, $this->log);
@@ -241,7 +241,15 @@
 		
 	}
 
-	$pdf=new pdfNamer($argv[1]);
+
+// looping main directory and calling the pdf parser
+echo "starting paperyard\n";
+$files = glob("/data/ddatum*.pdf");
+foreach($files as $pdf){
+    $pdf=new pdfNamer($pdf);
 	$pdf->run();
+}
+
+
    
 ?>

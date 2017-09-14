@@ -9,13 +9,20 @@
 		$this->db = new SQLite3("/data/paperyard.sqlite");
 		
 		// creating tables in case they do not exist
-		// ruleset
-		$this->db->exec("CREATE TABLE IF NOT EXISTS ruleSet(
+		// rules to detect senders of a document
+		$this->db->exec("CREATE TABLE IF NOT EXISTS rule_senders(
 		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
 		   foundWords TEXT,   
 		   fileCompany TEXT,
-		   fileSubject TEXT,
 		   companyScore INTEGER NOT NULL DEFAULT (0),
+		   isActive INTEGER NOT NULL DEFAULT (1))");
+
+		// rules to detect subject of a document
+		$this->db->exec("CREATE TABLE IF NOT EXISTS rule_subjects(
+		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		   foundWords TEXT,   
+		   foundCompany TEXT,
+		   fileSubject TEXT,
 		   subjectScore INTEGER NOT NULL DEFAULT (0),
 		   isActive INTEGER NOT NULL DEFAULT (1))");
 		
@@ -32,11 +39,44 @@
 		   newFileName TEXT,   
 		   fileContent TEXT,   
 		   log TEXT)");				
-		}
+
+		// recipients
+		$this->db->exec("CREATE TABLE IF NOT EXISTS rule_recipients (
+		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		   recipientName TEXT,   
+		   shortNameForFile TEXT,
+		   isActive INTEGER DEFAULT (1) )");				
+		} // End constructor
+		
+
+				
 		
 		// gets active ruleset
 		function getActiveRules () {
 			return $this->db->query("SELECT * FROM ruleSet WHERE isActive = 1");
+		}
+
+		// gets active ruleset
+		function getActiveSenders () {
+			return $this->db->query("SELECT * FROM rule_senders WHERE isActive = 1");
+		}
+		
+		function getConfigValue ($variable) {
+			$results = $this->db->query("SELECT * FROM config WHERE configVariable = '$variable'");
+			$row = $results->fetchArray();
+			return $row['configValue'];
+			
+		
+		}
+		
+		// gets active ruleset
+		function getActiveSubjects () {
+			return $this->db->query("SELECT * FROM rule_subjects WHERE isActive = 1");
+		}		
+
+		// gets active ruleset
+		function getActiveRecipients () {
+			return $this->db->query("SELECT * FROM rule_recipients WHERE isActive = 1");
 		}
 		
 		// adds something to the log
@@ -60,9 +100,18 @@
 			// old name equals new name in the beginning
 			$this->oldName=$pdf;
 			$this->newName=$pdf;
-			
+						
 			// creating db handler to talk to DB
 			$this->db=new dbHandler();
+			
+			// what mimimum score is required until we accept the company as correct
+			$this->companyMatchRating = $this->db->getConfigValue("companyMatchRating");
+
+			// what mimimum score is required until we accept the company as correct
+			$this->subjectMatchRating = $this->db->getConfigValue("subjectMatchRating");
+
+			
+			
 			
 			// reads the pdf
 			$this->getTextFromPdf($pdf);
@@ -133,7 +182,7 @@
 			// todo: remove everything but digits and letters
 			$this->content = preg_replace("/[^0-9a-zA-ZÄäÖöÜüß\.\,\-]+/", " ", $this->content);					
 					
-			var_dump($this->content);
+			//var_dump($this->content);
 		}
 		
 		// 
@@ -149,7 +198,8 @@
 			$this->addToLog('LOOKING FOR DATES');	
 
 			// Datumsformate
-			preg_match_all ('/(\d{2}\.\d{2}\.\d{4})|([0-9]{1,2})\.\s?(januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember)\s?(\d{2,4})/', $this->content, $dates);
+			preg_match_all ($this->matchDates, $this->content, $dates);
+
 
 			// only consider full matches and remove duplicates
 			$dates = array_unique($dates[0]);
@@ -173,52 +223,201 @@
 		 * @param none
 		 * @return none
 		 */
-		function matchRules() {
+		function matchSenders () {
 			// looking for active rules from database to check document against
-			$results = $this->db->getActiveRules();		
-		
-			// going thru ruleset
-			$company = array();
-			$subject = array();
+			$results = $this->db->getActiveSenders();
+			$company = array();	
 			
-			$this->addToLog('');
-			$this->addToLog('===');
-			$this->addToLog('COMPANY AND SUBJECT SCORE');
-
+			// start  matching search terms vs content
 			while ($row = $results->fetchArray()) {
-				$cfound = substr_count($this->content, strtolower($row['foundWords']));
-				@$company[$row['fileCompany']] += $row['companyScore'] *  $cfound;
-				$this->addToLog('"' . $row['foundWords'] . '" ' . "$cfound found - " . $cfound*$row['companyScore'] . " points for company " . $row['fileCompany']);
-	
-				@$subject[$row['fileSubject']] += $row['subjectScore'] *  $cfound;
-				$this->addToLog('"' . $row['foundWords'] . '" ' . "$cfound found - " . $cfound*$row['subjectScore'] . " points for subject " . $row['fileSubject']);
 
-			}
+				// checking if there are multiple search terms separated by a comma
+				
+				// start - just one searchterm
+				if (strpos($row['foundWords'], ",")=== false) {
+					
+					// checking if we found it at least once
+					if (substr_count($this->content, strtolower($row['foundWords']))>0) {
+						@$company[$row['fileCompany']] += $row['companyScore'];
+						}
+				} // end - just one search
+				
+				
+				// start - multiple search terms
+				 else {
+
+					// separating search terms and removing white spaces				
+					$split = explode(',',  strtolower($row['foundWords']));
+
+					// break variable to stop in case one word was not found
+					$foundAll = true;
+					foreach ($split as $value) {
+						if($foundAll) {
+						
+							// removing any whitespace
+							$value = trim($value);
+							
+							// counting occurances
+							$cfound = substr_count($this->content, $value);
+							
+							
+							// setting stop variable since nothing was found	
+							if ($cfound==0) {
+								$foundAll= false;
+							}
+						}
+					}
+					
+					// found all - lets write the result
+					if ($foundAll) 	{
+						@$company[$row['fileCompany']] += $row['companyScore'];
+					} 
+					
+					// not all found - thus no results to write
+					else {
+					}					
+				}
+			} // end - matching search terms vs content
+			
 
 			// sorting so highest match is on top
 			arsort($company);
-			arsort($subject);
 
 			$companyMatchRating = $company[key($company)];
-			$subjectMatchRating = $subject[key($subject)];
-			$companyName = key($company);
-			$subjectName = key($subject);
+			$this->companyName = key($company);
 
 			// checking match ranking
-			echo "company: " . $companyName . " has rating " . $companyMatchRating . "\n";
-			echo "subject: " . $subjectName . " has rating " . $subjectMatchRating . "\n";
+			echo "company: " . $this->companyName . " scored " . $companyMatchRating . "\n";
 
-			if ($companyMatchRating > 20) {
-				$this->newName = str_replace("ffirma",$companyName, $this->newName);
+			if ($companyMatchRating > $this->companyMatchRating) {
+				$this->newName = str_replace("ffirma",$this->companyName, $this->newName);
+			}			
+			
+
+			// writing log
+			$this->addToLog('"' . $row['foundWords'] . '" ' . " found - " . $row['companyScore'] . " points for company " . $row['fileCompany']);			
+		
+		}
+		
+		
+		
+		function matchSubjects() {
+			// looking for active rules from database to check document against
+			$results = $this->db->getActiveSubjects();
+			$subject = array();	
+			
+			// start  matching search terms vs content
+			while ($row = $results->fetchArray()) {
+
+				// checking if the found company matches the company specified in subject rule
+				// also checking that it is not empty
+				if ($row['foundCompany']== $this->companyName || empty(trim($row['foundCompany']))) {
+
+
+					// checking if there are multiple search terms separated by a comma
+				
+					// start - just one searchterm
+					if (strpos($row['foundWords'], ",")=== false) {
+					
+						// checking if we found it at least once
+						if (substr_count($this->content, strtolower($row['foundWords']))>0) {
+							@$subject[$row['fileSubject']] += $row['subjectScore'];
+							}
+					} // end - just one search
+				
+				
+					// start - multiple search terms
+					 else {
+
+						// separating search terms and removing white spaces				
+						$split = explode(',',  strtolower($row['foundWords']));
+
+						// break variable to stop in case one word was not found
+						$foundAll = true;
+						foreach ($split as $value) {
+							if($foundAll) {
+						
+								// removing any whitespace
+								$value = trim($value);
+							
+								// counting occurances
+								$cfound = substr_count($this->content, $value);
+							
+							
+								// setting stop variable since nothing was found	
+								if ($cfound==0) {
+									$foundAll= false;
+								}
+							}
+						}
+					
+						// found all - lets write the result
+						if ($foundAll) 	{
+							@$subject[$row['fileSubject']] += $row['subjectScore'];
+						} 
+					
+						// not all found - thus no results to write
+						else {
+							}					
+						}
+					} // end check if company name matches
+			} // end - matching search terms vs content
+			
+
+			// sorting so highest match is on top
+			arsort($subject);
+
+			$subjectMatchRating = $subject[key($subject)];
+			$this->subjectName = key($subject);
+
+			// checking match ranking
+			echo "subject: " . $this->subjectName . " scored " . $subjectMatchRating . "\n";
+
+			if ($subjectMatchRating > $this->subjectMatchRating) {
+				$this->newName = str_replace("bbetreff",$this->subjectName, $this->newName);
+			}			
+			
+
+			// writing log
+			$this->addToLog('"' . $row['foundWords'] . '" ' . " found - " . $row['subjectScore'] . " points for subject " . $row['fileSubject']);			
+		
+		
+		}
+		
+
+		/**
+		 * reads recipient list from database and tries to match in text
+		 *
+		 * @param none
+		 * @return none
+		 */		
+		function matchRecipients() {
+			// looking for active rules from database to check document against
+			$results = $this->db->getActiveRecipients();
+			$recipients = array();
+		
+			// for each rule check if the name occures in the text.
+			while ($row = $results->fetchArray()) {
+				$cfound = substr_count($this->content, strtolower($row['recipientName']));
+				@$recipients[$row['shortNameForFile']] += $cfound;	
 			}
-
-			if ($subjectMatchRating > 20) {
-				$this->newName = str_replace("bbetreff",$subjectName, $this->newName);
+		
+			// sort the results alphabetically
+			asort($recipients);
+			
+			// kill all entries which have not been matched
+			foreach ($recipients as $name => $score) {
+				if ($score == 0) unset($recipients[$name]);
 			}
+			
+			// switch key & values => as we want to have the name and not the # of hits
+			// join all hits with a comma
+			$recipients = implode(',',array_flip($recipients));
+			
+			// write the new name
+			$this->newName = str_replace("wwer",$recipients, $this->newName);
+			
 
-
-			echo "new name: " . $this->newName . "\n";
-	
 		}
 		
 		
@@ -237,10 +436,25 @@
 			$this->matchDates();
 	
 			// matching rule sets from database
-			$this->matchRules();
+			//$this->matchRules();
+			
+			// match recipients from database
+			$this->matchSenders();
+			// match recipients from database
+			$this->matchSubjects();
+
+
+			
+			// match recipients from database
+			$this->matchRecipients();
+
+
 
 			// renaming the file
 			//exec('mv "' . $this->oldName . '" "' . $this->newName . '"');	
+			
+			echo "new name: " . $this->newName . "\n";
+
 			
 			// logging everything to database
 			$this->db->writeLog($this->oldName, $this->newName, $this->content, $this->log);

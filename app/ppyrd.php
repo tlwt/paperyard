@@ -1,4 +1,54 @@
 <?php
+	class dbHandler {
+		var $db;
+	
+		// constructor
+		// takes care of basic db handling
+		function dbHandler() {
+		// connects or creates sqlite db file
+		$this->db = new SQLite3("/data/paperyard.sqlite");
+		
+		// creating tables in case they do not exist
+		// ruleset
+		$this->db->exec("CREATE TABLE IF NOT EXISTS ruleSet(
+		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		   foundWords TEXT,   
+		   fileCompany TEXT,
+		   fileSubject TEXT,
+		   companyScore INTEGER NOT NULL DEFAULT (0),
+		   subjectScore INTEGER NOT NULL DEFAULT (0),
+		   isActive INTEGER NOT NULL DEFAULT (1))");
+		
+		// config
+		$this->db->exec("CREATE TABLE IF NOT EXISTS config(
+		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		   configVariable TEXT,   
+		   configValue TEXT)");
+		
+		// logs
+		$this->db->exec("CREATE TABLE IF NOT EXISTS logs(
+		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
+		   oldFileName TEXT,   
+		   newFileName TEXT,   
+		   fileContent TEXT,   
+		   log TEXT)");				
+		}
+		
+		// gets active ruleset
+		function getActiveRules () {
+			return $this->db->query("SELECT * FROM ruleSet WHERE isActive = 1");
+		}
+		
+		// adds something to the log
+		function writeLog($oldName, $newName, $content, $log) {
+			$safe = SQLite3::escapeString($content);
+			$this->db->exec("INSERT INTO logs (oldFileName, newFileName, fileContent, log) VALUES ('$oldName', '$newName', '$safe', '$log');");			
+		}
+		
+		
+	}
+
+
 
 	class pdfNamer {
 	
@@ -22,7 +72,7 @@
 		// extracts text from PDF and writes it into variable
 		function getTextFromPdf($pdf) {
 			// reads content into $this->content 
-			exec('pdftotext "' . $pdf . '" -', $this->content);
+			exec('pdftotext -layout "' . $pdf . '" -', $this->content);
 			//exec('pdftotext "' . $pdf . '"');	
 		}
 		
@@ -71,12 +121,19 @@
 		 * @return none
 		 */			
 		function cleanContent() {
-			// todo: remove everything but digits and letters
+			// get everything into one long string
+			$this->content = implode(" ", $this->content);
 			
-			// ?? remove all whitespaces to ease recognition?
-		
-			// cleaning output removing duplicate spaces
-			$this->content = preg_replace("/\s\s+/", " ", implode(" ", $this->content));		
+			// convert everything to lowercase to avoid case sensitive mismatches
+			$this->content = strtolower($this->content);
+			
+			// remove spaces if there is more than one (double space, tripple space etc.);
+			$this->content = preg_replace("/\s\s+/", " ", $this->content);								
+			
+			// todo: remove everything but digits and letters
+			$this->content = preg_replace("/[^0-9a-zA-ZÄäÖöÜüß\.\,\-]+/", " ", $this->content);					
+					
+			var_dump($this->content);
 		}
 		
 		// 
@@ -92,7 +149,7 @@
 			$this->addToLog('LOOKING FOR DATES');	
 
 			// Datumsformate
-			preg_match_all ('/(\d{2}\.\d{2}\.\d{4})|([0-9]{1,2})\.\s?(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\s?(\d{2,4})/', $this->content, $dates);
+			preg_match_all ('/(\d{2}\.\d{2}\.\d{4})|([0-9]{1,2})\.\s?(januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember)\s?(\d{2,4})/', $this->content, $dates);
 
 			// only consider full matches and remove duplicates
 			$dates = array_unique($dates[0]);
@@ -129,7 +186,7 @@
 			$this->addToLog('COMPANY AND SUBJECT SCORE');
 
 			while ($row = $results->fetchArray()) {
-				$cfound = substr_count($this->content, $row['foundWords']);
+				$cfound = substr_count($this->content, strtolower($row['foundWords']));
 				@$company[$row['fileCompany']] += $row['companyScore'] *  $cfound;
 				$this->addToLog('"' . $row['foundWords'] . '" ' . "$cfound found - " . $cfound*$row['companyScore'] . " points for company " . $row['fileCompany']);
 	
@@ -183,7 +240,7 @@
 			$this->matchRules();
 
 			// renaming the file
-			exec('mv "' . $this->oldName . '" "' . $this->newName . '"');	
+			//exec('mv "' . $this->oldName . '" "' . $this->newName . '"');	
 			
 			// logging everything to database
 			$this->db->writeLog($this->oldName, $this->newName, $this->content, $this->log);
@@ -192,54 +249,8 @@
 	}
 
 
-	class dbHandler {
-		var $db;
-	
-		// constructor
-		// takes care of basic db handling
-		function dbHandler() {
-		// connects or creates sqlite db file
-		$this->db = new SQLite3("/data/ruleSet.sqlite");
-		
-		// creating tables in case they do not exist
-		// ruleset
-		$this->db->exec("CREATE TABLE IF NOT EXISTS ruleSet(
-		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		   foundWords TEXT,   
-		   fileCompany TEXT,
-		   fileSubject TEXT,
-		   companyScore INTEGER NOT NULL DEFAULT (0),
-		   subjectScore INTEGER NOT NULL DEFAULT (0),
-		   isActive INTEGER NOT NULL DEFAULT (1))");
-		
-		// config
-		$this->db->exec("CREATE TABLE IF NOT EXISTS config(
-		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		   configVariable TEXT,   
-		   configValue TEXT)");
-		
-		// logs
-		$this->db->exec("CREATE TABLE IF NOT EXISTS logs(
-		   id INTEGER PRIMARY KEY AUTOINCREMENT, 
-		   oldFileName TEXT,   
-		   newFileName TEXT,   
-		   fileContent TEXT,   
-		   log TEXT)");				
-		}
-		
-		// gets active ruleset
-		function getActiveRules () {
-			return $this->db->query("SELECT * FROM ruleSet WHERE isActive = 1");
-		}
-		
-		// adds something to the log
-		function writeLog($oldName, $newName, $content, $log) {
-			$safe = SQLite3::escapeString($content);
-			$this->db->exec("INSERT INTO logs (oldFileName, newFileName, fileContent, log) VALUES ('$oldName', '$newName', '$safe', '$log');");			
-		}
-		
-		
-	}
+
+
 
 
 // looping main directory and calling the pdf parser
@@ -250,6 +261,6 @@ foreach($files as $pdf){
 	$pdf->run();
 }
 
-
+?>
    
 ?>

@@ -195,12 +195,12 @@
 			// convert everything to lowercase to avoid case sensitive mismatches
 			$this->content = strtolower($this->content);
 
-			// remove spaces if there is more than one (double space, tripple space etc.);
-			$this->content = preg_replace("/\s\s+/", " ", $this->content);
-
 			// todo: remove everything but digits and letters
 			$this->content = preg_replace("/[^0-9a-zA-ZÄäÖöÜüß\.\,\-]+/", " ", $this->content);
 
+			// remove spaces if there is more than one (double space, tripple space etc.);
+			$this->content = preg_replace("/\s\s+/", " ", $this->content);
+			
 			//var_dump($this->content);
 		}
 
@@ -290,12 +290,16 @@
 					// found all - lets write the result
 					if ($foundAll) 	{
 						@$company[$row['fileCompany']] += $row['companyScore'];
+
+						// writing log
+						$this->addToLog('"' . $row['foundWords'] . '" ' . " found - " . $row['companyScore'] . " points for company " . $row['fileCompany']);
 					}
 
 					// not all found - thus no results to write
 					else {
 					}
 				}
+
 			} // end - matching search terms vs content
 
 
@@ -313,8 +317,6 @@
 			}
 
 
-			// writing log
-			$this->addToLog('"' . $row['foundWords'] . '" ' . " found - " . $row['companyScore'] . " points for company " . $row['fileCompany']);
 
 		}
 
@@ -402,6 +404,9 @@
 						// found all - lets write the result
 						if ($foundAll) 	{
 							@$subject[$row['fileSubject']] += $row['subjectScore'];
+
+							// writing log
+							$this->addToLog('"' . $row['foundWords'] . '" ' . " found - " . $row['subjectScore'] . " points for subject " . $row['fileSubject']);
 						}
 
 						// not all found - thus no results to write
@@ -426,8 +431,6 @@
 			}
 
 
-			// writing log
-			$this->addToLog('"' . $row['foundWords'] . '" ' . " found - " . $row['subjectScore'] . " points for subject " . $row['fileSubject']);
 
 
 		}
@@ -500,7 +503,7 @@
 			$this->matchPrice();
 
 			// renaming the file
-			//exec('mv "' . $this->oldName . '" "../outbox/' . $this->newName . '"');
+			exec('mv "' . $this->oldName . '" "../outbox/' . $this->newName . '"');
 
 			echo "new name: " . $this->newName . "\n";
 

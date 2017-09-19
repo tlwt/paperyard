@@ -48,6 +48,25 @@
 		   recipientName TEXT,
 		   shortNameForFile TEXT,
 		   isActive INTEGER DEFAULT (1) )");
+
+		// Setting up config values in case they dont exist
+		$this->db->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'companyMatchRating', '20'
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'companyMatchRating')");
+
+		$this->db->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'subjectMatchRating', '20'
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'subjectMatchRating')");
+		$this->db->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'dateRegEx', '/(\d{2}\.\d{2}\.\d{4})|([0-9]{1,2})\.\s?(januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember)\s?(\d{2,4})/'
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'dateRegEx')");
+		$this->db->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'stripCharactersFromContent', '/[^0-9a-zA-ZÄäÖöÜüß\.\,\-]+/'
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'stripCharactersFromContent')");
+		$this->db->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'matchPriceRegex', '/(\s?\d*,\d\d\s?(euro?|€)?)/'
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'matchPriceRegex')");
+
 		} // End constructor
 
 
@@ -67,9 +86,8 @@
 			$results = $this->db->query("SELECT * FROM config WHERE configVariable = '$variable'");
 			$row = $results->fetchArray();
 			return $row['configValue'];
-
-
 		}
+
 
 		// gets active ruleset
 		function getActiveSubjects () {
@@ -112,11 +130,13 @@
 
 			// set new name only if it has not been applied already (e.g. a document is not fully recognized and rematched with updated DB entries)
 			if (!preg_match('(ddatum|ffirma|bbetreff|wwer|bbetrag)',$pdf)) {
-					$this->newName="ddatum - ffirma - bbetreff (wwer) (bbetrag) [tags_]" . $pdf;
+					$this->newName="ddatum - ffirma - bbetreff (wwer) (bbetrag) ttags -- " . $pdf;
 					}
 				else {
 					$this->newName=$pdf;
 				}
+
+			$this->tags = "";
 
 			// creating db handler to talk to DB
 			$this->db=new dbHandler();
@@ -128,7 +148,6 @@
 			$this->subjectMatchRating = $this->db->getConfigValue("subjectMatchRating");
 
 			$this->dateRegEx = $this->db->getConfigValue("dateRegEx");
-
 
 			// reads the pdf
 			$this->getTextFromPdf($pdf);
@@ -196,11 +215,11 @@
 			$this->content = strtolower($this->content);
 
 			// todo: remove everything but digits and letters
-			$this->content = preg_replace("/[^0-9a-zA-ZÄäÖöÜüß\.\,\-]+/", " ", $this->content);
+			$this->content = preg_replace($this->db->getConfigValue('stripCharactersFromContent'), " ", $this->content);
 
 			// remove spaces if there is more than one (double space, tripple space etc.);
 			$this->content = preg_replace("/\s\s+/", " ", $this->content);
-			
+
 			//var_dump($this->content);
 		}
 
@@ -258,6 +277,9 @@
 					// checking if we found it at least once
 					if (substr_count($this->content, strtolower($row['foundWords']))>0) {
 						@$company[$row['fileCompany']] += $row['companyScore'];
+						// keeping a list of match hits for later tagging
+						$tmpMatchedCompanyTags[$row['fileCompany']][]=$row['tags'];
+
 						}
 				} // end - just one search
 
@@ -290,6 +312,8 @@
 					// found all - lets write the result
 					if ($foundAll) 	{
 						@$company[$row['fileCompany']] += $row['companyScore'];
+						// keeping a list of match hits for later tagging
+						$tmpMatchedCompanyTags[$row['fileCompany']][]=$row['tags'];
 
 						// writing log
 						$this->addToLog('"' . $row['foundWords'] . '" ' . " found - " . $row['companyScore'] . " points for company " . $row['fileCompany']);
@@ -308,6 +332,8 @@
 
 			$companyMatchRating = $company[key($company)];
 			$this->companyName = key($company);
+			$this->matchedCompanyTags = $tmpMatchedCompanyTags[$this->companyName];
+
 
 			// checking match ranking
 			echo "company: " . $this->companyName . " scored " . $companyMatchRating . "\n";
@@ -322,11 +348,8 @@
 
 		// checks if there is a price in the text
 		function matchPrice() {
-			$currency = '(euro?|€)';
-			$regex      = '(\s?\d*,\d\d\s?' . $currency .'?)';
-
 			// matching all potential price mentions
-			preg_match_all('/' . $regex . '/', $this->content, $results);
+			preg_match_all($this->db->getConfigValue('matchPriceRegex'), $this->content, $results);
 
 			// getting values of full match only
 			$prices = array_values($results[0]);
@@ -345,7 +368,7 @@
 
 			$this->newName = str_replace("bbetrag","EUR".$this->price, $this->newName);
 
-			echo "EUR" . $this->price ."\n";
+			echo "amount:  EUR" . $this->price ."\n";
 
 			}
 
@@ -372,6 +395,9 @@
 						// checking if we found it at least once
 						if (substr_count($this->content, strtolower($row['foundWords']))>0) {
 							@$subject[$row['fileSubject']] += $row['subjectScore'];
+
+							// keeping a list of match hits for later tagging
+							$tmpMatchedSubjectTags[$row['fileSubject']][]=$row['tags'];
 							}
 					} // end - just one search
 
@@ -404,7 +430,8 @@
 						// found all - lets write the result
 						if ($foundAll) 	{
 							@$subject[$row['fileSubject']] += $row['subjectScore'];
-
+							// keeping a list of match hits for later tagging
+							$tmpMatchedSubjectTags[$row['fileSubject']][]=$row['tags'];
 							// writing log
 							$this->addToLog('"' . $row['foundWords'] . '" ' . " found - " . $row['subjectScore'] . " points for subject " . $row['fileSubject']);
 						}
@@ -422,6 +449,7 @@
 
 			@$subjectMatchRating = $subject[key($subject)];
 			$this->subjectName = key($subject);
+			$this->matchedSubjectTags = $tmpMatchedSubjectTags[$this->subjectName];
 
 			// checking match ranking
 			echo "subject: " . $this->subjectName . " scored " . $subjectMatchRating . "\n";
@@ -467,7 +495,39 @@
 
 			// write the new name
 			$this->newName = str_replace("wwer",$recipients, $this->newName);
+		}
 
+		/**
+		 * function adds tags once company and subject are correctly matched
+		 **/
+		function addTags() {
+			// tossing all tags into one array
+			$alltags = array_merge($this->matchedCompanyTags, $this->matchedSubjectTags);
+
+			// splitting up comma separated values and putting them back into the array
+			$tags = explode(',',join(",", $alltags));
+
+			// cleaning the tags
+			$cleantags = "";
+			foreach ($tags as $tag) {
+				$tag = trim($tag);
+				if (!empty($tag))
+					$cleantags[] = "[$tag]";
+			}
+
+			// removing duplicates
+			$cleantags = array_unique($cleantags);
+
+			// sorting tags
+			asort($cleantags);
+
+			// joining them into one string
+			$this->tags=implode($cleantags);
+
+			echo "tags:    " . $this->tags . "\n";
+
+			// changing date in fileName
+			$this->newName = str_replace("ttags",$this->tags, $this->newName);
 
 		}
 
@@ -494,6 +554,9 @@
 			// match recipients from database
 			$this->matchSubjects();
 
+			// matching tags once company and subject are matched
+			$this->addTags();
+
 
 
 			// match recipients from database
@@ -502,8 +565,14 @@
 			//
 			$this->matchPrice();
 
-			// renaming the file
-			exec('mv "' . $this->oldName . '" "../outbox/' . $this->newName . '"');
+			// renaming the file in case everything matched
+			if (!preg_match('(ddatum|ffirma|bbetreff|wwer|bbetrag)',$this->newName)) {
+					exec('mv --backup=numbered "' . $this->oldName . '" "../outbox/' . $this->newName . '"');
+					}
+				else {
+					// dont move in case something is still unmatched
+					exec('mv --backup=numbered "' . $this->oldName . '" "' . $this->newName . '"');
+				}
 
 			echo "new name: " . $this->newName . "\n";
 
@@ -514,10 +583,13 @@
 
 	}
 
+// main program
 // looping main directory and calling the pdf parser
 echo "starting paperyard\n";
 
-
+// creating folder structure in case it does not exist
+exec('mkdir -p /data/inbox');
+exec('mkdir -p /data/outbox');
 
 // switching to working directory
 chdir("/data/inbox");
@@ -528,7 +600,6 @@ foreach($files as $pdf){
     $pdf=new pdfNamer($pdf);
 	$pdf->run();
 }
-
-?>
+echo "\n Thanks for watching....\n\n";
 
 ?>

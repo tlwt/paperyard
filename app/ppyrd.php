@@ -70,11 +70,9 @@
 		} // End constructor
 
 
-
-
 		// gets active ruleset
-		function getActiveRules () {
-			return $this->db->query("SELECT * FROM ruleSet WHERE isActive = 1");
+		function getActiveArchiveRules () {
+			return $this->db->query("SELECT * FROM rule_archive WHERE isActive = 1");
 		}
 
 		// gets active ruleset
@@ -607,6 +605,115 @@
 
 	}
 
+	class pdfSorter {
+
+		function pdfSorter($pdf) {
+				$this->pdf = $pdf;
+
+				// creating db handler to talk to DB
+				$this->db=new dbHandler();
+
+		}
+
+		function splitUpFilename() {
+			echo $this->pdf . "\n";
+
+			// separating the file name into its parts
+			$parts = explode(" - ", $this->pdf);
+
+			// date is 1st
+			$this->date = trim($parts[0]);
+			$this->year = date('Y',strtotime($this->date));
+			$this->month = date('m',strtotime($this->date));
+			$this->day = date('d',strtotime($this->date));
+
+			// company 2nd
+			$this->company = trim($parts[1]);
+
+			// remainder needs to be processed further
+			$remainder = $parts[2];
+
+			//get recipient
+			preg_match('/\(.*\)/',$remainder,$recipients);
+			$this->recipient = trim(str_replace(array('(',')'),'',$recipients[0]));
+			$this->subject = trim(substr($remainder, 0,strpos($remainder, "(" .$this->recipient. ")")));
+
+
+
+			// getting all tags @todo - needs to be least greedy ...
+			preg_match_all('/\[(\d|\w)*\]/',$remainder,$tags);
+			$this->tags = implode($tags[0]);
+
+			//
+			echo "date: " . $this->date ."\n";
+			echo "year: " . $this->year ."\n";
+			echo "month: " . $this->month ."\n";
+			echo "day: " . $this->day ."\n";
+
+			echo "company: " . $this->company ."\n";
+			echo "recipient: " . $this->recipient ."\n";
+			echo "subject: " . $this->subject ."\n";
+			echo "tags: " . $this->tags ."\n";
+
+		}
+
+		function checkRules() {
+			$rules = $this->db->getActiveArchiveRules();
+			while ($row = $rules->fetchArray()) {
+				// we have  a rule match if the company found matches the specified string
+				// * is the wild card like in file names
+				$match = fnmatch($row['company'], $this->company)
+								&& fnmatch($row['subject'], $this->subject)
+								&& fnmatch($row['recipient'], $this->recipient)
+								&& fnmatch($row['tags'], $this->tags);
+
+				// if everything matched - go ahead
+				if ($match) {
+						// processing the folder to which document shall be moved
+						$toFolder = $row['toFolder'];
+
+						// in case the [year] variable has been used etc.
+						$toFolder = str_replace('[year]', $this->year, $toFolder);
+						$toFolder = str_replace('[month]', $this->month, $toFolder);
+						$toFolder = str_replace('[day]', $this->day, $toFolder);
+						$toFolder = str_replace('[recipient]', $this->recipient, $toFolder);
+
+						// adding a trailing slash in case none existed
+						$toFolder = rtrim($toFolder, '/') . '/';
+
+						// create folders in case required
+						exec("mkdir -p $toFolder");
+
+						// move the file to destination folder
+						exec('mv --backup=numbered "' . $this->pdf . '" "' . $toFolder . $this->pdf . '"');
+
+						$this->db->writeLog($this->pdf, $this->pdf, "", "Moved file to: " . $toFolder);
+
+
+				}
+
+			}
+
+		}
+
+		function run() {
+
+			// process the file name first
+			$this->splitUpFilename();
+
+			// then see if there is any rule to process
+			$this->checkRules();
+
+
+
+			// what mimimum score is required until we accept the company as correct
+			//$this->db->getArchiveRules();
+
+
+
+		}
+	}
+
 // main program
 // looping main directory and calling the pdf parser
 echo "starting paperyard\n";
@@ -614,8 +721,11 @@ echo "starting paperyard\n";
 // creating folder structure in case it does not exist
 exec('mkdir -p /data/inbox');
 exec('mkdir -p /data/outbox');
+exec('mkdir -p /data/sort');
+
 
 // switching to working directory
+echo "calling the renamer ... \n";
 chdir("/data/inbox");
 
 //loop all pdfs
@@ -624,6 +734,19 @@ foreach($files as $pdf){
     $pdf=new pdfNamer($pdf);
 	$pdf->run();
 }
+
+/********************************************************************************/
+
+echo "calling the sorter ... \n";
+chdir("/data/sort");
+
+//loop all pdfs
+$files = glob("*.pdf");
+foreach($files as $pdf){
+    $pdf=new pdfSorter($pdf);
+		$pdf->run();
+}
+
 echo "\n Thanks for watching....\n\n";
 
 ?>

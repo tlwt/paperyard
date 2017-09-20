@@ -6,7 +6,7 @@
 		// takes care of basic db handling
 		function dbHandler() {
 		// connects or creates sqlite db file
-		$this->db = new SQLite3("/data/paperyard.sqlite");
+		$this->db = new SQLite3("/data/database/paperyard.sqlite");
 
 		// creating tables in case they do not exist
 		// rules to detect senders of a document
@@ -64,7 +64,7 @@
 											SELECT 'stripCharactersFromContent', '/[^0-9a-zA-ZÄäÖöÜüß\.\,\-]+/'
 											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'stripCharactersFromContent')");
 		$this->db->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'matchPriceRegex', '/(\s?\d*,\d\d\s?(euro?|€)?)/'
+											SELECT 'matchPriceRegex', '/(\s?((\d{1,3}(\.\d{3})+)|(\d{1,3})),\d\ds?(euro?|€)?)/'
 											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'matchPriceRegex')");
 
 		} // End constructor
@@ -125,18 +125,25 @@
 			// cleaning the log
 			$this->log = "";
 
+			// dont output debug information
+			$this->debug = false;
+
 			// old name equals new name in the beginning
 			$this->oldName=$pdf;
 
 			// set new name only if it has not been applied already (e.g. a document is not fully recognized and rematched with updated DB entries)
-			if (!preg_match('(ddatum|ffirma|bbetreff|wwer|bbetrag)',$pdf)) {
-					$this->newName="ddatum - ffirma - bbetreff (wwer) (bbetrag) ttags -- " . $pdf;
+			if (!preg_match('(ddatum|ffirma|bbetreff|wwer|bbetrag)',$pdf) && !preg_match('(^\d{8}\s\-)',$pdf)) {
+					$this->newName="ddatum - ffirma - bbetreff (wwer) (bbetrag) [nt] -- " . $pdf;
 					}
 				else {
 					$this->newName=$pdf;
 				}
 
-			$this->tags = "";
+			$this->companyName = "";
+			$this->subjectName = "";
+
+			// standard tag if no tags are found
+			$this->tags = "[nt]";
 
 			// creating db handler to talk to DB
 			$this->db=new dbHandler();
@@ -182,7 +189,12 @@
 		 */
 		function toDate(&$item, $key)	{
 			self::addtolog("Date found $item");
-			$item = date("Ymd", strtotime($item));
+			if (strpos($item, "im") !== false) {
+				$item =str_replace("im ","",$item);
+				$item = date("Ymt", strtotime($item));
+			} else {
+				$item = date("Ymd", strtotime($item));
+			}
 		}
 
 		/**
@@ -238,7 +250,6 @@
 			// Datumsformate
 			preg_match_all ($this->dateRegEx, $this->content, $dates);
 
-
 			// only consider full matches and remove duplicates
 			$dates = array_unique($dates[0]);
 
@@ -265,6 +276,7 @@
 			// looking for active rules from database to check document against
 			$results = $this->db->getActiveSenders();
 			$company = array();
+			$tmpMatchedCompanyTags= array();
 
 			// start  matching search terms vs content
 			while ($row = $results->fetchArray()) {
@@ -330,16 +342,17 @@
 			// sorting so highest match is on top
 			arsort($company);
 
-			$companyMatchRating = $company[key($company)];
-			$this->companyName = key($company);
-			$this->matchedCompanyTags = $tmpMatchedCompanyTags[$this->companyName];
+			if (isset($company[key($company)])) {
+				$companyMatchRating = $company[key($company)];
+				$this->companyName = key($company);
+				$this->matchedCompanyTags = $tmpMatchedCompanyTags[$this->companyName];
 
+				// checking match ranking
+				echo "company: " . $this->companyName . " scored " . $companyMatchRating . "\n";
 
-			// checking match ranking
-			echo "company: " . $this->companyName . " scored " . $companyMatchRating . "\n";
-
-			if ($companyMatchRating > $this->companyMatchRating) {
-				$this->newName = str_replace("ffirma",$this->companyName, $this->newName);
+				if ($companyMatchRating >= $this->companyMatchRating) {
+					$this->newName = str_replace("ffirma",$this->companyName, $this->newName);
+				}
 			}
 
 
@@ -356,10 +369,9 @@
 
 			// removing all non numeric characters except comma and period
 			$prices = preg_replace("/[^0-9,.]/", "", $prices);
-
 			$maxprice = 0;
 			foreach ($prices as $price) {
-				$price = floatval(str_replace(',','.', $price));
+				$price = floatval(str_replace(',','.',str_replace('.','', $price)));
 				if ($price > $maxprice) $maxprice = $price;
 			}
 
@@ -379,12 +391,15 @@
 			$results = $this->db->getActiveSubjects();
 			$subject = array();
 
+			$tmpMatchedSubjectTags = array();
+
 			// start  matching search terms vs content
 			while ($row = $results->fetchArray()) {
 
 				// checking if the found company matches the company specified in subject rule
 				// also checking that it is not empty
-				if ($row['foundCompany']== $this->companyName || empty(trim($row['foundCompany']))) {
+				@$tmpFoundCompany = trim($row['foundCompany']);
+				if ($tmpFoundCompany== $this->companyName || empty($tmpFoundCompany)) {
 
 
 					// checking if there are multiple search terms separated by a comma
@@ -449,12 +464,12 @@
 
 			@$subjectMatchRating = $subject[key($subject)];
 			$this->subjectName = key($subject);
-			$this->matchedSubjectTags = $tmpMatchedSubjectTags[$this->subjectName];
+			@$this->matchedSubjectTags = $tmpMatchedSubjectTags[$this->subjectName];
 
 			// checking match ranking
 			echo "subject: " . $this->subjectName . " scored " . $subjectMatchRating . "\n";
 
-			if ($subjectMatchRating > $this->subjectMatchRating) {
+			if ($subjectMatchRating >= $this->subjectMatchRating) {
 				$this->newName = str_replace("bbetreff",$this->subjectName, $this->newName);
 			}
 
@@ -478,6 +493,7 @@
 			// for each rule check if the name occures in the text.
 			while ($row = $results->fetchArray()) {
 				$cfound = substr_count($this->content, strtolower($row['recipientName']));
+				if ($this->debug) echo "look for " . $row['recipientName'] . " found $cfound" . "\n";
 				@$recipients[$row['shortNameForFile']] += $cfound;
 			}
 
@@ -494,7 +510,8 @@
 			$recipients = implode(',',array_flip($recipients));
 
 			// write the new name
-			$this->newName = str_replace("wwer",$recipients, $this->newName);
+			if (!empty($recipients))
+				$this->newName = str_replace("wwer",$recipients, $this->newName);
 		}
 
 		/**
@@ -502,10 +519,10 @@
 		 **/
 		function addTags() {
 			// tossing all tags into one array
-			$alltags = array_merge($this->matchedCompanyTags, $this->matchedSubjectTags);
+			@$alltags = array_merge($this->matchedCompanyTags, $this->matchedSubjectTags);
 
 			// splitting up comma separated values and putting them back into the array
-			$tags = explode(',',join(",", $alltags));
+			@$tags = explode(',',join(",", $alltags));
 
 			// cleaning the tags
 			$cleantags = "";
@@ -516,18 +533,23 @@
 			}
 
 			// removing duplicates
-			$cleantags = array_unique($cleantags);
+			if (is_array($cleantags)) {
+				$cleantags = array_unique($cleantags);
 
-			// sorting tags
-			asort($cleantags);
+				// sorting tags
+				asort($cleantags);
 
-			// joining them into one string
-			$this->tags=implode($cleantags);
+				// joining them into one string
+				$this->tags=implode($cleantags);
 
-			echo "tags:    " . $this->tags . "\n";
+			echo "tags:    " . $this->tags . "\n"; }
+				else {
+					echo "tags:    no tags to assign\n";
+				}
 
-			// changing date in fileName
-			$this->newName = str_replace("ttags",$this->tags, $this->newName);
+			// changing date in fileName only if tags are to assign
+			if (!empty($this->tags))
+				$this->newName = str_replace("[nt]",$this->tags, $this->newName);
 
 		}
 
@@ -571,10 +593,12 @@
 					}
 				else {
 					// dont move in case something is still unmatched
-					exec('mv --backup=numbered "' . $this->oldName . '" "' . $this->newName . '"');
+					if ($this->oldName != $this->newName) {
+						exec('mv --backup=numbered "' . $this->oldName . '" "' . $this->newName . '"');
+					}
 				}
 
-			echo "new name: " . $this->newName . "\n";
+			echo "new name: " . $this->newName . "\n\n";
 
 
 			// logging everything to database

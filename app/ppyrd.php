@@ -203,6 +203,7 @@
 		 * @return string YYYYMMDD if match or ddatum if failed to match a date
 		 */
 		function closestDateToToday ($array) {
+			arsort($array);
 			foreach ($array as $value) {
 				if ($value<=date('Ymd'))
 					return $value;
@@ -254,7 +255,6 @@
 			// getting into YYYYmmdd format
 			array_walk($dates, 'self::toDate');
 			$dates = array_unique($dates);
-			arsort($dates);
 
 			// most likely date found
 			$this->newDate = $this->closestDateToToday($dates);

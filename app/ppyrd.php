@@ -4,7 +4,7 @@
 
 		// constructor
 		// takes care of basic db handling
-		function dbHandler() {
+		public function __construct() {
 		// connects or creates sqlite db file
 		$this->db = new SQLite3("/data/database/paperyard.sqlite");
 
@@ -119,7 +119,7 @@
 		 * @param $pdf string with file name to process
 		 * @return none
 		 **/
-		function pdfNamer($pdf) {
+		public function __construct($pdf) {
 			// cleaning the log
 			$this->log = "";
 
@@ -607,7 +607,7 @@
 
 	class pdfSorter {
 
-		function pdfSorter($pdf) {
+		public function __construct($pdf) {
 				$this->pdf = $pdf;
 
 				// creating db handler to talk to DB

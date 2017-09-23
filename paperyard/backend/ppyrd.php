@@ -1,3 +1,6 @@
+<html>
+<body>
+	<pre>
 <?php
 	class dbHandler {
 		var $db;
@@ -66,7 +69,9 @@
 		$this->db->exec("INSERT INTO config(configVariable,configValue)
 											SELECT 'matchPriceRegex', '/(\s?((\d{1,3}(\.\d{3})+)|(\d{1,3})),\d\ds?(euro?|€)?)/'
 											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'matchPriceRegex')");
-
+		$this->db->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'enableCron', '1'
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'enableCron')");
 		} // End constructor
 
 
@@ -119,7 +124,7 @@
 		 * @param $pdf string with file name to process
 		 * @return none
 		 **/
-		function pdfNamer($pdf) {
+		function pdfNamer($pdf, $db) {
 			// cleaning the log
 			$this->log = "";
 
@@ -144,7 +149,7 @@
 			$this->tags = "[nt]";
 
 			// creating db handler to talk to DB
-			$this->db=new dbHandler();
+			$this->db=$db;
 
 			// what mimimum score is required until we accept the company as correct
 			$this->companyMatchRating = $this->db->getConfigValue("companyMatchRating");
@@ -156,6 +161,11 @@
 
 			// reads the pdf
 			$this->getTextFromPdf($pdf);
+		}
+
+		function output($string, $debug=0) {
+					echo "$string\n";
+
 		}
 
 
@@ -346,7 +356,7 @@
 				$this->matchedCompanyTags = $tmpMatchedCompanyTags[$this->companyName];
 
 				// checking match ranking
-				echo "company: " . $this->companyName . " scored " . $companyMatchRating . "\n";
+				$this->output("company: " . $this->companyName . " scored " . $companyMatchRating);
 
 				if ($companyMatchRating >= $this->companyMatchRating) {
 					$this->newName = str_replace("ffirma",$this->companyName, $this->newName);
@@ -378,7 +388,7 @@
 
 			$this->newName = str_replace("bbetrag","EUR".$this->price, $this->newName);
 
-			echo "amount:  EUR" . $this->price ."\n";
+			$this->output("amount:  EUR" . $this->price);
 
 			}
 
@@ -465,7 +475,7 @@
 			@$this->matchedSubjectTags = $tmpMatchedSubjectTags[$this->subjectName];
 
 			// checking match ranking
-			echo "subject: " . $this->subjectName . " scored " . $subjectMatchRating . "\n";
+			$this->output("subject: " . $this->subjectName . " scored " . $subjectMatchRating);
 
 			if ($subjectMatchRating >= $this->subjectMatchRating) {
 				$this->newName = str_replace("bbetreff",$this->subjectName, $this->newName);
@@ -491,7 +501,7 @@
 			// for each rule check if the name occures in the text.
 			while ($row = $results->fetchArray()) {
 				$cfound = substr_count($this->content, strtolower($row['recipientName']));
-				if ($this->debug) echo "look for " . $row['recipientName'] . " found $cfound" . "\n";
+				$this->output("look for " . $row['recipientName'] . " found $cfound", 1);
 				@$recipients[$row['shortNameForFile']] += $cfound;
 			}
 
@@ -540,9 +550,10 @@
 				// joining them into one string
 				$this->tags=implode($cleantags);
 
-			echo "tags:    " . $this->tags . "\n"; }
+			$this->output("tags:    " . $this->tags);
+			}
 				else {
-					echo "tags:    no tags to assign\n";
+					$this->output("tags:    no tags to assign");
 				}
 
 			// changing date in fileName only if tags are to assign
@@ -596,7 +607,7 @@
 					}
 				}
 
-			echo "new name: " . $this->newName . "\n\n";
+			$this->output("new name: " . $this->newName);
 
 
 			// logging everything to database
@@ -607,11 +618,11 @@
 
 	class pdfSorter {
 
-		function pdfSorter($pdf) {
+		function pdfSorter($pdf, $db) {
 				$this->pdf = $pdf;
 
 				// creating db handler to talk to DB
-				$this->db=new dbHandler();
+				$this->db=$db;
 
 		}
 
@@ -645,15 +656,15 @@
 			$this->tags = implode($tags[0]);
 
 			//
-			echo "date: " . $this->date ."\n";
-			echo "year: " . $this->year ."\n";
-			echo "month: " . $this->month ."\n";
-			echo "day: " . $this->day ."\n";
+			$this->output( "date: " . $this->date);
+			$this->output( "year: " . $this->year);
+			$this->output( "month: " . $this->month);
+			$this->output( "day: " . $this->day);
 
-			echo "company: " . $this->company ."\n";
-			echo "recipient: " . $this->recipient ."\n";
-			echo "subject: " . $this->subject ."\n";
-			echo "tags: " . $this->tags ."\n";
+			$this->output( "company: " . $this->company);
+			$this->output( "recipient: " . $this->recipient);
+			$this->output( "subject: " . $this->subject);
+			$this->output( "tags: " . $this->tags);
 
 		}
 
@@ -718,6 +729,19 @@
 // looping main directory and calling the pdf parser
 echo "starting paperyard\n";
 
+// creating db handler to talk to DB
+$db=new dbHandler();
+
+if (php_sapi_name() == "cli") {
+    echo "CLI\n";
+		if ($db->getConfigValue('enableCron')==0) {
+				echo "please enable cron in config\n";
+				die();
+			}
+} else {
+    echo "WebServer\n";
+}
+
 // creating folder structure in case it does not exist
 exec('mkdir -p /data/inbox');
 exec('mkdir -p /data/outbox');
@@ -731,7 +755,7 @@ chdir("/data/inbox");
 //loop all pdfs
 $files = glob("*.pdf");
 foreach($files as $pdf){
-    $pdf=new pdfNamer($pdf);
+    $pdf=new pdfNamer($pdf, $db);
 	$pdf->run();
 }
 
@@ -743,10 +767,13 @@ chdir("/data/sort");
 //loop all pdfs
 $files = glob("*.pdf");
 foreach($files as $pdf){
-    $pdf=new pdfSorter($pdf);
+    $pdf=new pdfSorter($pdf, $db);
 		$pdf->run();
 }
 
 echo "\n Thanks for watching....\n\n";
 
 ?>
+	</pre>
+</body>
+</html>

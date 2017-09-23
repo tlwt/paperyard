@@ -7,7 +7,7 @@
 
 		// constructor
 		// takes care of basic db handling
-		function dbHandler() {
+		public function __construct() {
 		// connects or creates sqlite db file
 		$this->db = new SQLite3("/data/database/paperyard.sqlite");
 
@@ -124,7 +124,7 @@
 		 * @param $pdf string with file name to process
 		 * @return none
 		 **/
-		function pdfNamer($pdf, $db) {
+		public function __construct($pdf, $db) {
 			// cleaning the log
 			$this->log = "";
 
@@ -213,6 +213,7 @@
 		 * @return string YYYYMMDD if match or ddatum if failed to match a date
 		 */
 		function closestDateToToday ($array) {
+			arsort($array);
 			foreach ($array as $value) {
 				if ($value<=date('Ymd'))
 					return $value;
@@ -264,7 +265,6 @@
 			// getting into YYYYmmdd format
 			array_walk($dates, 'self::toDate');
 			$dates = array_unique($dates);
-			arsort($dates);
 
 			// most likely date found
 			$this->newDate = $this->closestDateToToday($dates);
@@ -618,7 +618,7 @@
 
 	class pdfSorter {
 
-		function pdfSorter($pdf, $db) {
+		public function __construct($pdf, $db) {
 				$this->pdf = $pdf;
 
 				// creating db handler to talk to DB

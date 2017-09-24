@@ -6,6 +6,11 @@ server {
     access_log /root/access.log;
     root /var/www/html/;
 
+    location /static/ {
+        autoindex on;
+        root  /var/www/html/frontend/public;
+    }
+
     location /phpliteadmin {
         try_files $uri $uri/ /phpliteadmin/index.php?args;
     }

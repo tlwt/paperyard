@@ -1,0 +1,51 @@
+body {
+    color: #343537;
+    font-family: "Open Sans";
+}
+
+h1 {
+    color: #999ea5;
+}
+
+a {
+    color: #18bae2;
+}
+a:hover {
+    color: #149ec0;
+}
+
+
+nav.bg-light {
+    background-color: white !important;
+}
+body > .navbar {
+    border-bottom-color: #dde0e3;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #55585d;
+}
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #18bae2;
+}
+.nav-item {
+    font-weight: 600;
+}
+
+
+.breadcrumb {
+    background-color: white;
+    padding-left: 0;
+}
+.breadcrumb-item.active, .breadcrumb-item {
+    font: normal normal normal 12px/1 "Open Sans"
+}
+.breadcrumb-item.active {
+    color: #343537;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    color: #343537;
+    content: "\f105";
+    font: normal normal normal 12px/1 "FontAwesome";
+}

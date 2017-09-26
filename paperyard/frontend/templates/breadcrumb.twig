@@ -1,0 +1,10 @@
+<!-- Main content -->
+<main class="main">
+
+<!-- Breadcrumb -->
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">Home</li>
+    {% for breadcrumb in breadcrumbs %}
+    <li class="breadcrumb-item{% if loop.last %} active{% endif %}">{{ breadcrumb }}</li>
+    {% endfor %}
+</ol>

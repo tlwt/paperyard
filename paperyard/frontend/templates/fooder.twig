@@ -1,0 +1,34 @@
+<!-- /.conainer-fluid -->
+</main>
+
+</div>
+
+<footer class="app-footer">
+    <a href="http://coreui.io">Paperyard</a> © 2017 consider it GmbH.
+    <span class="float-right">Powered by <i class="fa fa-heart text-danger" aria-hidden="true"></i>
+        </span>
+</footer>
+
+<!-- Bootstrap and necessary plugins -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/popper.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/pace.min.js"></script>
+
+<!-- TODO: move plugin logic to controller -->
+<script src="/static/js/bootstrap-tagsinput.min.js"></script>
+
+<!-- Genesis UI main scripts -->
+<script src="/static/js/app.js"></script>
+
+<!-- Plugins and scripts required by this views -->
+
+
+<!-- Custom scripts required by this view -->
+{% if pageScript is defined and pageScript != "" %}
+<script src="/static/js/views/{{ pageScript }}.js"></script>
+{% endif %}
+
+</body>
+
+</html>

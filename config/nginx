@@ -1,13 +1,13 @@
 server {
     listen 80;
     server_name _;
-    index index.php;
+    #index index.php;
     error_log /root/error.log;
     access_log /root/access.log;
     root /var/www/html/;
 
     location /static/ {
-        autoindex on;
+        autoindex off;
         root  /var/www/html/frontend/public;
     }
 

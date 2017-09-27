@@ -22,4 +22,5 @@ $app->get('/rules/senders', function (Request $request, Response $response, arra
 
 $app->post('/rules/senders/add', function (Request $request, Response $response, array $args) {
     $parsedBody = $request->getParsedBody();
+
 });

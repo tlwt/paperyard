@@ -2,6 +2,11 @@
 <body>
 	<pre>
 <?php
+
+	class paperyard {
+
+	}
+
 	class dbHandler {
 		var $db;
 
@@ -40,7 +45,8 @@
 		// logs
 		$this->db->exec("CREATE TABLE IF NOT EXISTS logs(
 		   id INTEGER PRIMARY KEY AUTOINCREMENT,
-		   oldFileName TEXT,
+			 execDate TEXT DEFAULT (datetime('NOW')),
+			 oldFileName TEXT,
 		   newFileName TEXT,
 		   fileContent TEXT,
 		   log TEXT)");
@@ -72,7 +78,14 @@
 		$this->db->exec("INSERT INTO config(configVariable,configValue)
 											SELECT 'enableCron', '1'
 											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'enableCron')");
+		$this->db->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'newFilenameStructure', 'ddatum - ffirma - bbetreff (wwer) (bbetrag) [nt] -- '
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'newFilenameStructure')");
+		$this->db->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'appendOldFilename', '1'
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'appendOldFilename')");
 		} // End constructor
+
 
 
 		// gets active ruleset
@@ -131,12 +144,24 @@
 			// dont output debug information
 			$this->debug = false;
 
+			// creating db handler to talk to DB
+			$this->db=$db;
+
 			// old name equals new name in the beginning
 			$this->oldName=$pdf;
 
 			// set new name only if it has not been applied already (e.g. a document is not fully recognized and rematched with updated DB entries)
 			if (!preg_match('(ddatum|ffirma|bbetreff|wwer|bbetrag)',$pdf) && !preg_match('(^\d{8}\s\-)',$pdf)) {
-					$this->newName="ddatum - ffirma - bbetreff (wwer) (bbetrag) [nt] -- " . $pdf;
+					// getting new file name structure from database
+					$this->newName=$this->db->getConfigValue('newFilenameStructure');
+					// appending old file name - otherwise just add .pdf to the end
+					if ($db->getConfigValue('appendOldFilename')==1) {
+						$this->newName .=  $pdf;
+					} else {
+						$this->newName .= ".pdf";
+					}
+
+
 					}
 				else {
 					$this->newName=$pdf;
@@ -148,8 +173,7 @@
 			// standard tag if no tags are found
 			$this->tags = "[nt]";
 
-			// creating db handler to talk to DB
-			$this->db=$db;
+
 
 			// what mimimum score is required until we accept the company as correct
 			$this->companyMatchRating = $this->db->getConfigValue("companyMatchRating");
@@ -616,8 +640,21 @@
 
 	}
 
+
+	/**
+	 * Sorts thru PDF documents and puts them into corresponding folders etc.
+	 * @param none
+	 * @return none
+	 **/
+
 	class pdfSorter {
 
+		/**
+		 * constructor
+		 * @param string file name to be processed
+		 * @param string database handler
+		 * @return none
+		 **/
 		public function __construct($pdf, $db) {
 				$this->pdf = $pdf;
 
@@ -626,33 +663,50 @@
 
 		}
 
+		/**
+		 * function gets from file name the information what the date, company and subject is.
+		 **/
+
 		function splitUpFilename() {
-			echo $this->pdf . "\n";
+			$this->output("working on: " . $this->pdf);
+
+			// getting the file name template - needed to see what part (date, company, subject) is at which part of the string
+			$newFilenameStructure=$this->db->getConfigValue('newFilenameStructure');
+
+			// getting things via regex
+			// removing closing parts of the brackets as they are not needed in this case
+			$unwanted = array(')',']');
+			$separators = "/ - | \(| \[| \-\- /";
+			$templateName = str_replace($unwanted, '', $newFilenameStructure);
+
+			// splitting up template name into parts
+			$templateParts = array_flip(preg_split($separators, $templateName));
+
+			// now doing the same stuff with the actual file
+			$tmpName = str_replace($unwanted, '', $this->pdf);
+			$filenameParts = preg_split($separators, $tmpName);
+
+
 
 			// separating the file name into its parts
 			$parts = explode(" - ", $this->pdf);
 
 			// date is 1st
-			$this->date = trim($parts[0]);
+			$this->date = $filenameParts[$templateParts['ddatum']];
 			$this->year = date('Y',strtotime($this->date));
 			$this->month = date('m',strtotime($this->date));
 			$this->day = date('d',strtotime($this->date));
 
-			// company 2nd
-			$this->company = trim($parts[1]);
-
-			// remainder needs to be processed further
-			$remainder = $parts[2];
-
-			//get recipient
-			preg_match('/\(.*\)/',$remainder,$recipients);
-			$this->recipient = trim(str_replace(array('(',')'),'',$recipients[0]));
-			$this->subject = trim(substr($remainder, 0,strpos($remainder, "(" .$this->recipient. ")")));
+			// company etc.
+			$this->company = $filenameParts[$templateParts['ffirma']];
+			$this->recipient = $filenameParts[$templateParts['wwer']];
+			$this->subject = $filenameParts[$templateParts['bbetreff']];
+			$this->amount = $filenameParts[$templateParts['bbetrag']];
 
 
 
 			// getting all tags @todo - needs to be least greedy ...
-			preg_match_all('/\[(\d|\w)*\]/',$remainder,$tags);
+			preg_match_all('/\[(\d|\w)*\]/',$this->pdf,$tags);
 			$this->tags = implode($tags[0]);
 
 			//
@@ -664,7 +718,18 @@
 			$this->output( "company: " . $this->company);
 			$this->output( "recipient: " . $this->recipient);
 			$this->output( "subject: " . $this->subject);
+			$this->output( "amount: " . $this->amount);
 			$this->output( "tags: " . $this->tags);
+
+		}
+
+		/**
+		 * Output formatter
+		 * @param string what to output
+		 * @debug integer to specify if debug or not
+		 **/
+		function output($string, $debug=0) {
+					echo "$string\n";
 
 		}
 
@@ -761,6 +826,7 @@ foreach($files as $pdf){
 
 /********************************************************************************/
 
+echo "\n";
 echo "calling the sorter ... \n";
 chdir("/data/sort");
 

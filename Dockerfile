@@ -1,5 +1,5 @@
-#Download base image ubuntu 16.04
-FROM ubuntu:16.04
+#Download base image ubuntu 16.10
+FROM ubuntu:16.10
 
 ### beginning to apt install
 
@@ -19,22 +19,39 @@ RUN apt-get -y install nano
 RUN apt-get -y install less
 RUN apt-get -y install git
 RUN apt-get -y install cron
+RUN apt-get -y install wget
 
-### apt install end
+#ocr my pdf
+RUN apt-get -y install ocrmypdf
+RUN apt-get -y install python-pip
 
 # installing pdftotext
 RUN apt-get -y install poppler-utils
 
+# for doxygen
+RUN apt-get -y install cmake
+RUN apt-get -y install flex
+RUN apt-get -y install bison
+
+RUN git clone https://github.com/doxygen/doxygen.git
+
+WORKDIR doxygen/build
+RUN cmake -G "Unix Makefiles" ..
+RUN make
+RUN make install
+
+WORKDIR /
 # adding configuration for webserver
 ADD config/nginx /etc/nginx/sites-enabled/default
 
+# adding configuration for doxygen
+ADD config/doxygenconfig /
 
-#WORKDIR /tmp
-#RUN git clone https://github.com/ACTtaiwan/phpLiteAdmin.git
-
+# exposing webserver port
 EXPOSE 80
-# WORKDIR /
-# gogogo
+
+# adding read the docs environment
+#RUN pip install sphinx
 
 # adding start script
 ADD /paperyard/start.sh /

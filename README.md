@@ -32,10 +32,10 @@ Detailierte Logs sind in der Datenbank /data/paperyard.sqlite vorhanden
 
 Docker container bauen. Im Hauptverzeichnis folgenden Befehl ausführen:
 
-      docker build -t ppyrd_image . 
+      docker build -t ppyrd_image .
 
 ## run
 
-Programm starten. Im Hauptverzeichnis folgenden Befehl ausführen:
+zuerst müssen die Pfadangaben in der Datei angepasst werden, damit Paperyard weiß wo es nach Dokumenten suchen soll und wohin die korrekt benannten Dokumente hinterlegt werden sollen:
 
-      docker run --name ppyrd --rm -v "$(pwd)/data:/data" -v "$(pwd)/app:/app" -i -t ppyrd_image
+      ./dockerRun.sh (oder im Falle von Windows in .bat umbennenen und dann ausführen)

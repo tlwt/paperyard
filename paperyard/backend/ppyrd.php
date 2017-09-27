@@ -2,16 +2,23 @@
 <body>
 	<pre>
 <?php
+	/**
+	 * Paperyard is a tool for automatically naming and organizing files
+	 */
 
-	class paperyard {
 
-	}
-
+	/**
+	 * database handler
+	 * @param none
+	 * @return none
+	 */
 	class dbHandler {
 		var $db;
 
-		// constructor
-		// takes care of basic db handling
+		/**
+		 * constructor
+		 * takes care of basic db handling
+		 */
 		public function __construct() {
 		// connects or creates sqlite db file
 		$this->db = new SQLite3("/data/database/paperyard.sqlite");
@@ -88,34 +95,53 @@
 
 
 
-		// gets active ruleset
+		/**
+		 * gets active ruleset
+		 */
 		function getActiveArchiveRules () {
 			return $this->db->query("SELECT * FROM rule_archive WHERE isActive = 1");
 		}
 
-		// gets active ruleset
+		/**
+		 * gets active senders
+		 */
 		function getActiveSenders () {
 			return $this->db->query("SELECT * FROM rule_senders WHERE isActive = 1");
 		}
 
-		function getConfigValue ($variable) {
-			$results = $this->db->query("SELECT * FROM config WHERE configVariable = '$variable'");
+		/**
+		 * gets config values
+		 * @param string $varname to query
+		 * @return string containing variable value
+		 */
+		function getConfigValue ($varname) {
+			$results = $this->db->query("SELECT * FROM config WHERE configVariable = '$varname'");
 			$row = $results->fetchArray();
 			return $row['configValue'];
 		}
 
 
-		// gets active ruleset
+		/**
+		 * gets active subjects
+		 */
 		function getActiveSubjects () {
 			return $this->db->query("SELECT * FROM rule_subjects WHERE isActive = 1");
 		}
 
-		// gets active ruleset
+		/**
+		 * gets active recipients
+		 */
 		function getActiveRecipients () {
 			return $this->db->query("SELECT * FROM rule_recipients WHERE isActive = 1");
 		}
 
-		// adds something to the log
+		/**
+		 * writes to logs
+		 * @param string $oldName name of the old file
+		 * @param string $newName of the file
+		 * @param string $content of the file
+		 * @param string $log message
+		 */
 		function writeLog($oldName, $newName, $content, $log) {
 			$safe = SQLite3::escapeString($content);
 			$this->db->exec("INSERT INTO logs (oldFileName, newFileName, fileContent, log) VALUES ('$oldName', '$newName', '$safe', '$log');");
@@ -129,14 +155,15 @@
 	 * Paperyard PDF Namer class
 	 * @param none
 	 * @return none
-	 **/
+	 */
 	class pdfNamer {
 
 		/**
 		 * constructor for the class
-		 * @param $pdf string with file name to process
+		 * @param string $pdf with file name to process
+		 * @param string $db with database connection
 		 * @return none
-		 **/
+		 */
 		public function __construct($pdf, $db) {
 			// cleaning the log
 			$this->log = "";
@@ -187,6 +214,11 @@
 			$this->getTextFromPdf($pdf);
 		}
 
+		/**
+		 * outputs string
+		 * @param string $string to output
+		 * @param int $debug set to 1 to debug
+		 */
 		function output($string, $debug=0) {
 					echo "$string\n";
 
@@ -195,7 +227,8 @@
 
 		/**
 		 * function executes pdftotext to extract text from
-		 **/
+		 * @param string $pdf name of file
+		 */
 		function getTextFromPdf($pdf) {
 			// reads content into $this->content
 			exec('pdftotext -layout "' . $pdf . '" -', $this->content);
@@ -233,14 +266,14 @@
 		 * takes an array of dates and returns the closest one before today.
 		 * Paper documents have dates in the past, not in the future
 		 *
-		 * @param array $array containing all dates in YYYYMMDD format
+		 * @param array $dates containing all dates in YYYYMMDD format
 		 * @return string YYYYMMDD if match or ddatum if failed to match a date
 		 */
-		function closestDateToToday ($array) {
-			arsort($array);
-			foreach ($array as $value) {
-				if ($value<=date('Ymd'))
-					return $value;
+		function closestDateToToday ($dates) {
+			arsort($dates);
+			foreach ($dates as $date) {
+				if ($date<=date('Ymd'))
+					return $date;
 			}
 			return "ddatum";
 		}
@@ -248,7 +281,6 @@
 
 		/**
 		 * takes the PDF content and cleans it up
-		 *
 		 * @param none
 		 * @return none
 		 */
@@ -271,7 +303,6 @@
 		//
 		/**
 		 * looks regular expression dates in the content of the file
-		 *
 		 * @param none
 		 * @return none
 		 */
@@ -391,7 +422,9 @@
 
 		}
 
-		// checks if there is a price in the text
+		/**
+		 * checks if there is a price in the text
+		 */
 		function matchPrice() {
 			// matching all potential price mentions
 			preg_match_all($this->db->getConfigValue('matchPriceRegex'), $this->content, $results);
@@ -417,7 +450,9 @@
 			}
 
 
-
+			/**
+			 * matching subject
+			 */
 		function matchSubjects() {
 			// looking for active rules from database to check document against
 			$results = $this->db->getActiveSubjects();
@@ -548,7 +583,7 @@
 
 		/**
 		 * function adds tags once company and subject are correctly matched
-		 **/
+		 */
 		function addTags() {
 			// tossing all tags into one array
 			@$alltags = array_merge($this->matchedCompanyTags, $this->matchedSubjectTags);
@@ -593,7 +628,6 @@
 		 * @param none
 		 * @return none
 		 */
-
 		function run() {
 			// cleaning content of the PDF document
 			$this->cleanContent();
@@ -645,16 +679,15 @@
 	 * Sorts thru PDF documents and puts them into corresponding folders etc.
 	 * @param none
 	 * @return none
-	 **/
-
+	 */
 	class pdfSorter {
 
 		/**
 		 * constructor
-		 * @param string file name to be processed
-		 * @param string database handler
+		 * @param string $pdf file name to be processed
+		 * @param string $db database handler
 		 * @return none
-		 **/
+		 */
 		public function __construct($pdf, $db) {
 				$this->pdf = $pdf;
 
@@ -665,8 +698,7 @@
 
 		/**
 		 * function gets from file name the information what the date, company and subject is.
-		 **/
-
+		 */
 		function splitUpFilename() {
 			$this->output("working on: " . $this->pdf);
 
@@ -725,14 +757,17 @@
 
 		/**
 		 * Output formatter
-		 * @param string what to output
-		 * @debug integer to specify if debug or not
-		 **/
+		 * @param string $string what to output
+		 * @debug int $debug to specify if debug or not
+		 */
 		function output($string, $debug=0) {
 					echo "$string\n";
 
 		}
 
+		/**
+		 * checks rules
+		 */
 		function checkRules() {
 			$rules = $this->db->getActiveArchiveRules();
 			while ($row = $rules->fetchArray()) {
@@ -772,6 +807,9 @@
 
 		}
 
+		/**
+		 * runs the main process
+		 */
 		function run() {
 
 			// process the file name first
@@ -824,7 +862,7 @@ foreach($files as $pdf){
 	$pdf->run();
 }
 
-/********************************************************************************/
+/*******************************************************************************/
 
 echo "\n";
 echo "calling the sorter ... \n";

@@ -2,26 +2,19 @@
 
 namespace Paperyard;
 
-/**
- * Class RuleSenders
- *
- * Represents a single rule and allows its creation, modification and deletion.
- *
- * @package Paperyard
- */
-class RuleSenders implements iRule
+class RuleSenders extends BasicController implements iRule
 {
     /** @var int set if already in database */
     private $_id;
     /** @var string (comma separated) word(s) to search for */
     private $_foundWords;
-    /** @var string the company to match agains, if word(s) are found  */
+    /** @var string the company to match against, if word(s) are found  */
     private $_fileCompany;
     /** @var int temporary naming score if matched */
     private $_companyScore;
     /** @var string (comma separated) tag(s) to add to file if matched */
     private $_tags;
-    /** @var bool indication of rule shall be applied or nit */
+    /** @var bool indication of rule shall be applied or not */
     private $_isActive;
 
     public static function fromId($ruleId) {
@@ -127,21 +120,21 @@ class RuleSenders implements iRule
         # empty array to store potential error codes
         $errorCodes = [];
 
-        # we actually only realy care about tags and isActive, as these are non-string
+        # we actually only realy care about companyScore and isActive, as these are non-string
         if (!is_int($this->_companyScore)) {
-            array_push($errorCodes, ErrorCodes::COMPANY_SCORE_TYPE);
+            array_push($errorCodes, ErrorCodes::PARAMETER_FORMAT_MISMATCH);
         }
         if (!is_bool($this->_isActive)) {
-            array_push($errorCodes, ErrorCodes::IS_ACTIVE_TYPE);
+            array_push($errorCodes, ErrorCodes::PARAMETER_FORMAT_MISMATCH);
         }
 
         # basic empty checking should still be made
         if (empty($this->_foundWords)) {
-            array_push($errorCodes, ErrorCodes::FOUND_WORDS_NULL);
+            array_push($errorCodes, ErrorCodes::PARAMETER_NULL);
         }
         // TODO: for tagging only, company could be empty
         //if (empty($this->fileCompany == "")) {
-        //    array_push($errorCodes, ErrorCodes::FILE_COMPANY_NULL);
+        //    array_push($errorCodes, ErrorCodes::PARAMETER_NULL);
         //}
 
         # isActive will be set due to isset()

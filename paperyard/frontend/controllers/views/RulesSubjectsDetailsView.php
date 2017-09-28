@@ -4,13 +4,13 @@ namespace Paperyard\Views;
 use Paperyard\BasicView;
 
 /**
- * Class RulesSendersDetailsView
+ * Class RulesSubjectsDetailsView
  *
  * Loads information about a rule and renders it.
  *
  * @package Paperyard\Views
  */
-class RulesSendersDetailsView extends BasicView
+class RulesSubjectsDetailsView extends BasicView
 {
     /** @var int id of the current rule */
     private $_rule;
@@ -20,14 +20,14 @@ class RulesSendersDetailsView extends BasicView
         # call parent for db init
         parent::__construct();
 
-        $this->breadcrumbs = ["Rules", "Senders", "Detail"];
-        $this->_rule = \Paperyard\RuleSenders::fromId($ruleId);
+        $this->breadcrumbs = ["Rules", "Subjects", "Detail"];
+        $this->_subject = \Paperyard\RuleSubjects::fromId($ruleId);
     }
 
     public function render() {
         return array(
             "breadcrumbs" => $this->breadcrumbs,
-            "rule" => $this->_rule->toArray()
+            "subject" => $this->_subject->toArray()
         );
     }
 }

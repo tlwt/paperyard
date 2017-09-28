@@ -3,14 +3,14 @@
 namespace Paperyard\Views;
 use Paperyard\BasicView;
 
-class RulesSendersView extends BasicView
+class RulesRecipientsView extends BasicView
 {
     public function __construct()
     {
         parent::__construct();
 
-        $this->breadcrumbs = ["Rules", "Senders"];
-        $this->pageScript = "rules_senders";
+        $this->breadcrumbs = ["Rules", "Recipients"];
+        $this->pageScript = "rules_recipients";
     }
 
     public function render()
@@ -18,13 +18,13 @@ class RulesSendersView extends BasicView
         return array(
             "breadcrumbs" => $this->breadcrumbs,
             "pageScript" => $this->pageScript,
-            "senders" => $this->getSenderRules()
+            "recipients" => $this->getRecipientRules()
         );
     }
 
-    private function getSenderRules()
+    private function getRecipientRules()
     {
-        $results = $this->db->query("SELECT * FROM rule_senders ORDER BY isActive DESC, foundWords ASC");
+        $results = $this->db->query("SELECT * FROM rule_recipients ORDER BY isActive DESC, recipientName ASC");
         $rows = array();
         while ($row = $results->fetchArray(1)) {
             array_push($rows, $row);

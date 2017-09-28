@@ -2,7 +2,13 @@
 
 namespace Paperyard;
 
-
+/**
+ * Interface iRule
+ *
+ * Represents a single rule and allows its creation, modification and deletion.
+ *
+ * @package Paperyard
+ */
 interface iRule
 {
     /**
@@ -26,6 +32,13 @@ interface iRule
      */
     public static function fromPostValues($postValues);
 
+    /**
+     * toArray
+     *
+     * Return the properties necessary to render the rule.
+     *
+     * @return array
+     */
     public function toArray();
 
     public function insert();

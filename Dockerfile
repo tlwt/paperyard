@@ -43,6 +43,7 @@ RUN make install
 WORKDIR /
 # adding configuration for webserver
 ADD config/nginx /etc/nginx/sites-enabled/default
+RUN ln -s /var/www/html /www
 
 # adding configuration for doxygen
 ADD config/doxygenconfig /

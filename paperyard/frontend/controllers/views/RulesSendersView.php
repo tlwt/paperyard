@@ -18,7 +18,7 @@ class RulesSendersView extends BasicView
         return array(
             "breadcrumbs" => $this->breadcrumbs,
             "pageScript" => $this->pageScript,
-            "senders" => $this->getSenderRules()
+            "rules" => $this->getSenderRules()
         );
     }
 

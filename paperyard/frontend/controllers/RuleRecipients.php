@@ -106,7 +106,7 @@ class RuleRecipients extends BasicController implements iRule
         # empty array to store potential error codes
         $errorCodes = [];
 
-        # we actually only realy care about companyScore and isActive, as these are non-string
+        # basic empty checking
         if ($this->_recipientName == "") {
             array_push($errorCodes, ErrorCodes::PARAMETER_FORMAT_MISMATCH);
         }

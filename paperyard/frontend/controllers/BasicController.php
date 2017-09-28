@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jannik
- * Date: 27.09.17
- * Time: 03:23
- */
 
 namespace Paperyard;
 

@@ -19,7 +19,7 @@ class RulesSubjectsView extends BasicView
         return array(
             "breadcrumbs" => $this->breadcrumbs,
             "pageScript" => $this->pageScript,
-            "subjects" => $this->getSubjectRules()
+            "rules" => $this->getSubjectRules()
         );
     }
 

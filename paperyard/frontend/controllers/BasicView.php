@@ -2,14 +2,17 @@
 
 namespace Paperyard;
 
-class BasicView
+/**
+ * Class BasicView
+ *
+ * Extends BasicController by a few view related vars which are always needed.
+ *
+ * @package Paperyard
+ */
+class BasicView extends BasicController
 {
-    protected $db;
+    /** @var array|null list if subpages for breadcrumb element on page */
     protected $breadcrumbs;
+    /** @var string name of site specific script without path nor .js */
     protected $pageScript;
-
-    public function __construct()
-    {
-        $this->db = new \SQLite3("/data/database/paperyard.sqlite");
-    }
 }

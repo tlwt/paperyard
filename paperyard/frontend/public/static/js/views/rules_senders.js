@@ -1,10 +1,7 @@
 $(function(){
     'use strict';
-/*
-    $('#foundWordsInput, #tagsInput').tagsinput({
-        tagClass: 'big',      trimValie: true
 
+    $("body").on('click', '.clickable-row', function () {
+        window.location = $(this).attr('data-url');
     });
-    $('.bootstrap-tagsinput').addClass('form-control');
-*/
 });

@@ -193,6 +193,7 @@
 			$this->oldName=$pdf;
 
 			// set new name only if it has not been applied already (e.g. a document is not fully recognized and rematched with updated DB entries)
+			/** \bug this still checks for a date at the start - but this may change according to configured value.*/
 			if (!preg_match('(ddatum|ffirma|bbetreff|wwer|bbetrag)',$pdf) && !preg_match('(^\d{8}\s\-)',$pdf)) {
 					// getting new file name structure from database
 					$this->newName=$this->db->getConfigValue('newFilenameStructure');
@@ -840,6 +841,47 @@
 		}
 	}
 
+	class pdfScanner
+	{
+		function __construct($pdf,$db)
+		{
+				$this->pdf = $pdf;
+				$this->db = $db;
+		}
+
+		function run()
+		{
+			// ensuring that we only have one OcrMyPDF running process running even though
+			$fp = fopen('/tmp/ppyrdOcrMyPdf.txt', 'w+');
+			var_dump($fp);
+
+			/* Aktiviere die LOCK_NB-Option bei einer LOCK_EX-Operation */
+			if(flock($fp, LOCK_EX))
+			{
+					exec("ocrmypdf -l deu --tesseract-timeout 600  --deskew --rotate-pages --tesseract-timeout 600 --oversample 600 --force-ocr '" . $this->pdf . "' '/data/inbox/" . $this->pdf . "'");
+					if (file_exists("/data/inbox/" . $this->pdf))
+					{
+							echo "found ok OCR - moving input to archive";
+							exec("mv --backup=numbered '" . $this->pdf . "' '/data/scan/archive/" . $this->pdf . "'");
+					} else
+					{
+						echo "did not find ok OCR - moving input to error";
+
+							exec("mv --backup=numbered '" . $this->pdf . "' '/data/scan/error/" . $this->pdf . "'");
+					}
+
+			} else
+			{
+				echo "OcrMyPdf still running - cannot interfere with it ... if this persists too long check /tmp/ppyrOcrMyPdf.txt and delete";
+			}
+
+			/* ... */
+
+			fclose($fp);
+
+		}
+	}
+
 // main program
 // looping main directory and calling the pdf parser
 echo "starting paperyard\n";
@@ -849,7 +891,10 @@ echo "starting paperyard\n";
  */
 $db=new dbHandler();
 
-/** @cond */
+
+/**
+ * checking if called via command line or webserver
+ * @cond */
 if ("cli" == php_sapi_name())
 	{
     echo "CLI\n";
@@ -864,10 +909,24 @@ if ("cli" == php_sapi_name())
 
 
 // creating folder structure in case it does not exist
+exec('mkdir -p /data/scan');
+exec('mkdir -p /data/scan/error');
+exec('mkdir -p /data/scan/archive');
+
 exec('mkdir -p /data/inbox');
 exec('mkdir -p /data/outbox');
 exec('mkdir -p /data/sort');
 
+// checking if any new PDFs need to be OCRed
+echo "calling OcrMyPDF ... \n";
+chdir("/data/scan");
+
+//loop all pdfs
+$pdfs = glob("*.pdf");
+foreach($pdfs as $pdf){
+    $pdf=new pdfScanner($pdf, $db);
+		$pdf->run();
+}
 
 // switching to working directory
 echo "calling the renamer ... \n";

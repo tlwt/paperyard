@@ -23,6 +23,7 @@ RUN apt-get -y install wget
 
 #ocr my pdf
 RUN apt-get -y install ocrmypdf
+RUN apt-get -y install tesseract-ocr-deu
 RUN apt-get -y install python-pip
 
 # installing pdftotext

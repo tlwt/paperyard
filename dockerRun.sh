@@ -1,3 +1,6 @@
+# files which have OCRed yet - will be moved to next folder
+unocredFiles=$HOME/Archiv/10_System/10_scan
+
 # files which have not been processed yet. PDFs with OCR, but no useful name
 unnamedFiles=$HOME/Archiv/10_System/20_with_ocr
 
@@ -11,6 +14,7 @@ toSort=$HOME/Archiv/10_System/22_checked_and_to_be_archived
 docker run --name ppyrd --rm \
   -v "$(pwd)/paperyard:/var/www/html/" \
   -v "$(pwd)/data/database:/data/database" \
+  -v "$unocredFiles:/data/scan" \
   -v "$unnamedFiles:/data/inbox" \
   -v "$renamedFiles:/data/outbox" \
   -v "$toSort:/data/sort" \

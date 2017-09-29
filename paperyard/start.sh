@@ -2,7 +2,10 @@
 service php7.0-fpm start
 ./usr/sbin/nginx
 
-echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.php" >>  mycron
+echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.namer.php" >>  mycron
+echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.scanner.php" >>  mycron
+echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.sorter.php" >>  mycron
+
 crontab mycron
 
 /etc/init.d/cron start

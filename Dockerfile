@@ -30,30 +30,37 @@ RUN apt-get -y install python-pip
 RUN apt-get -y install poppler-utils
 
 # for doxygen
-RUN apt-get -y install cmake
-RUN apt-get -y install flex
-RUN apt-get -y install bison
+#RUN apt-get -y install cmake
+#RUN apt-get -y install flex
+#RUN apt-get -y install bison
 
-RUN git clone https://github.com/doxygen/doxygen.git
+#RUN git clone https://github.com/doxygen/doxygen.git
 
-WORKDIR doxygen/build
-RUN cmake -G "Unix Makefiles" ..
-RUN make
-RUN make install
-
-WORKDIR /
-# adding configuration for webserver
-ADD config/nginx /etc/nginx/sites-enabled/default
-RUN ln -s /var/www/html /www
-
-# adding configuration for doxygen
-ADD config/doxygenconfig /
-
-# exposing webserver port
-EXPOSE 80
+#WORKDIR doxygen/build
+#RUN cmake -G "Unix Makefiles" ..
+#RUN make
+#RUN make install
 
 # adding read the docs environment
 #RUN pip install sphinx
+
+WORKDIR /
+
+# MySQL
+RUN apt-get -y install mariadb-server
+
+# adding config folder
+ADD config /config
+
+# moving configuration for webserver
+RUN cp config/nginx /etc/nginx/sites-enabled/default
+RUN ln -s /var/www/html /www
+
+# moving configuration for doxygen
+RUN cp /config/doxygenconfig /
+
+# exposing webserver port
+EXPOSE 80
 
 # adding start script
 ADD /paperyard/start.sh /

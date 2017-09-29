@@ -12,13 +12,14 @@ RUN apt-get -y install nginx
 # installing PHP
 #RUN apt-get -y install php
 RUN apt-get -y install php-sqlite3
-RUN apt-get -y install nginx php7.0-cli php7.0-cgi php7.0-fpm
+RUN apt-get -y install nginx php7.0-cli php7.0-cgi php7.0-fpm php7.0-mbstring php7.0-xml php7.0-zip
 
 #installing tools
 RUN apt-get -y install nano
 RUN apt-get -y install less
 RUN apt-get -y install git
 RUN apt-get -y install cron
+RUN apt-get -y install wget
 
 ### apt install end
 

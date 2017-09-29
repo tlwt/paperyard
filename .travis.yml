@@ -1,0 +1,3 @@
+language: bash
+before_install:
+- apt-get update

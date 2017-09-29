@@ -17,3 +17,9 @@ $container['view'] = function ($container) {
 
     return $view;
 };
+
+$container['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        return $container['view']->render($response, '404.twig')->withStatus(404);
+    };
+};

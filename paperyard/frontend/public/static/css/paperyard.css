@@ -1,0 +1,20 @@
+.full-width {
+    width: 100%;
+}
+.clickable-row {
+    cursor: pointer;
+}
+.switch.switch-default.switch-xl {
+    width: 66px;
+    height: 35px;
+}
+.switch.switch-default.switch-xl .switch-handle {
+    width: 46px;
+    height: 31px;
+}
+label.switch {
+    margin-bottom: 0;
+}
+div .text-serif {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}

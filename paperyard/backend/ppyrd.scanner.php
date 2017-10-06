@@ -19,6 +19,7 @@
 		{
 				$this->pdf = $pdf;
 				$this->db = $db;
+				$this->tesseractCommand = $this->db->getConfigValue('tesseractCommand');
 		}
 
 		/**
@@ -26,6 +27,7 @@
 		 */
 		function run()
 		{
+			echo "executing on " . $this->pdf;
 			// ensuring that we only have one OcrMyPDF running process running
 			// due to cron usage and large PDFs this could be an issue
 			$fp = fopen('/tmp/ppyrdOcrMyPdf.txt', 'w+');
@@ -34,7 +36,7 @@
 			if(flock($fp, LOCK_EX))
 			{
 					// running OCRmyPDF
-					exec("ocrmypdf -l deu --tesseract-timeout 600  --deskew --rotate-pages --tesseract-timeout 600 --oversample 600 --force-ocr '" . $this->pdf . "' '/data/inbox/" . $this->pdf . "'");
+					exec($this->tesseractCommand . " '" . $this->pdf . "' '/data/inbox/" . $this->pdf . "'");
 					if (file_exists("/data/inbox/" . $this->pdf))
 					{
 							echo "found ok OCR - moving input to archive";
@@ -102,7 +104,6 @@ foreach($pdfs as $pdf){
 		$pdf->run();
 }
 echo "\n";
-
 
 $db->close();
 

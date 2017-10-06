@@ -104,6 +104,10 @@
 		$this->exec("INSERT INTO config(configVariable,configValue)
 											SELECT 'appendOldFilename', '1'
 											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'appendOldFilename')");
+		$this->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'tesseractCommand', 'ocrmypdf -l deu --tesseract-timeout 600  --deskew --rotate-pages --tesseract-timeout 600 --oversample 600 --force-ocr '
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'tesseractCommand')");
+
 
 		// updating table model
 		//$this->alterTableAddColumns("testtable", "createdDate", " TEXT");

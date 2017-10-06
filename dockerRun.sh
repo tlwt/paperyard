@@ -12,7 +12,7 @@ toSort=$HOME/Archiv/10_System/22_checked_and_to_be_archived
 
 
 # set to true to use local modified app instead of current published version from github
-localDevelopment=false
+localDevelopment=true
 
 if $localDevelopment ; then
   echo local

@@ -62,6 +62,23 @@ RUN cp /config/doxygenconfig /
 # exposing webserver port
 EXPOSE 80
 
+# files for checking if the needed directories have been mounded correctly
+RUN mkdir -p /data/scan
+RUN mkdir -p /data/scan/error
+RUN mkdir -p /data/scan/archive
+RUN mkdir -p /data/inbox
+RUN mkdir -p /data/outbox
+RUN mkdir -p /data/sort
+RUN mkdir -p /data/database
+
+
+RUN touch /data/scan/paperyardDirectoryNotMounted.txt
+RUN touch /data/inbox/paperyardDirectoryNotMounted.txt
+RUN touch /data/outbox/paperyardDirectoryNotMounted.txt
+RUN touch /data/sort/paperyardDirectoryNotMounted.txt
+RUN touch /data/database/paperyardDirectoryNotMounted.txt
+
+
 # adding start script
 ADD /paperyard/start.sh /
 RUN chmod 755 /start.sh

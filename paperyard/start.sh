@@ -41,3 +41,12 @@ if [ ! -d "/var/www/html/frontend/vendor" ]; then
     cd /var/www/html/frontend
     php /tmp/composer.phar update
 fi
+
+
+# creating folder structure in case it does not exist
+mkdir -p /data/scan
+mkdir -p /data/scan/error
+mkdir -p /data/scan/archive
+mkdir -p /data/inbox
+mkdir -p /data/outbox
+mkdir -p /data/sort

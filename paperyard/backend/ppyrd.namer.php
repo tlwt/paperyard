@@ -3,7 +3,7 @@
 	<pre>
 <?php
 	require_once('dbHandler.php');
-	require_once('helper.php');
+	require_once('ppyrd.base.php');
 
 
 	/*!
@@ -11,7 +11,7 @@
 		* \brief takes care of the correct naming of files
 		* \author Till Witt
 		*/
-	class pdfNamer {
+	class pdfNamer extends ppyrd {
 
 		/**
 		 * \brief constructor for the class
@@ -69,17 +69,6 @@
 
 			// reads the pdf
 			$this->getTextFromPdf($pdf);
-		}
-
-		/**
-		 * \brief outputs string
-		 * \bug no debug handling implemented yet. https://github.com/tlwt/paperyard/issues/10
-		 * @param string $string to output
-		 * @param int $debug set to 1 to debug
-		 */
-		function output($string, $debug=0)
-		{
-					echo "$string\n";
 		}
 
 
@@ -546,6 +535,7 @@ echo "starting paperyard\n";
  * creating db handler to talk to DB
  */
 $db=new dbHandler();
+$ppyrd = new ppyrd();
 
 
 /**
@@ -562,15 +552,6 @@ if ("cli" == php_sapi_name())
     echo "Program call from Webserver detected.\n";
 }
 /** @endcond */
-
-
-// creating folder structure in case it does not exist
-exec('mkdir -p /data/scan');
-exec('mkdir -p /data/scan/error');
-exec('mkdir -p /data/scan/archive');
-exec('mkdir -p /data/inbox');
-exec('mkdir -p /data/outbox');
-exec('mkdir -p /data/sort');
 
 
 // switching to working directory

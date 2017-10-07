@@ -1,5 +1,7 @@
 <?php
-	require_once('helper.php');
+
+	require_once('ppyrd.base.php');
+
 
 	/**
 		* @file
@@ -10,7 +12,7 @@
 		* It collects files, and processes the ruleset
 		*
 	 	*/
-	class dbHandler {
+	class dbHandler extends ppyrd {
 		/*!
 			* \class dbHandler
 			* \brief handling database connection and queries
@@ -82,7 +84,6 @@
 		$this->exec("INSERT INTO config(configVariable,configValue)
 											SELECT 'companyMatchRating', '20'
 											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'companyMatchRating')");
-
 		$this->exec("INSERT INTO config(configVariable,configValue)
 											SELECT 'subjectMatchRating', '20'
 											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'subjectMatchRating')");
@@ -107,9 +108,14 @@
 		$this->exec("INSERT INTO config(configVariable,configValue)
 											SELECT 'tesseractCommand', 'ocrmypdf -l deu --tesseract-timeout 600  --deskew --rotate-pages --tesseract-timeout 600 --oversample 600 --force-ocr '
 											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'tesseractCommand')");
+		$this->exec("INSERT INTO config(configVariable,configValue)
+											SELECT 'databaseVersion', '1'
+											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'databaseVersion')");
 
 
 		// updating table model
+		$this->update();
+
 		//$this->alterTableAddColumns("testtable", "createdDate", " TEXT");
 		//$this->alterTableDropColumns("testtable", "createdDate,modifiedDate,publishedDate");
 
@@ -164,7 +170,7 @@
 			{
 				// remove unwanted spaces
 				$column = trim($column);
-				echo "looking for $column\n";
+				$this->output("looking for $column");
 
 				// the magical regex
 				$newTable = preg_replace("/($column \w*,)|(,\s*$column \w*)/", "", $newTable);
@@ -211,8 +217,8 @@
 			$result = $this->db->query($query);
 			if (!$result) {
 					// the query failed
-					echo "<p>There was an error in query: $query</p>";
-					echo $this->db->lastErrorMsg();
+					$this->output("There was an error in query: $query");
+					$this->output($this->db->lastErrorMsg());
 			}
 			return $result;
 		}
@@ -227,8 +233,9 @@
 				$result = $this->db->exec($query);
 				if (!$result) {
 						// the query failed
-						echo "<p>There was an error in query: $query</p>";
-						echo $this->db->lastErrorMsg();
+						$this->output("There was an error in query: $query");
+						$this->output(
+							$this->db->lastErrorMsg());
 				}
 				return $result;
 		}
@@ -291,6 +298,10 @@
 			$this->exec("INSERT INTO logs (oldFileName, newFileName, fileContent, log) VALUES ('$oldName', '$newName', '$safe', '$log');");
 		}
 
+
+		/**
+		 * \brief opens database connection or creates file is not found
+		 **/
 		function open()
 		{
 			$this->db = new SQLite3("/data/database/paperyard.sqlite");
@@ -300,6 +311,21 @@
 			$this->db->exec('PRAGMA journal_mode = wal;');
 		}
 
+		/**
+		 * \brief checks if the database schema needs to be updated
+		 **/
+		function update()
+		{
+			$this->output("looking for updates");
+			$updates = glob("update_version_*.sqlite");
+			foreach($updates as $update){
+				$this->output("found update script");
+			}
+		}
+
+		/**
+		 * \brief closes database connection
+		 **/
 		function close()
 		{
 

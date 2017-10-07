@@ -3,7 +3,7 @@
 	<pre>
 <?php
 	require_once('dbHandler.php');
-	require_once('helper.php');
+	require_once('ppyrd.base.php');
 
 
 	/**
@@ -11,7 +11,7 @@
 	 * @param none
 	 * @return none
 	 */
-	class pdfSorter {
+	class pdfSorter extends ppyrd {
 
 		/**
 		 * \brief constructor
@@ -159,6 +159,7 @@ echo "starting paperyard\n";
  * creating db handler to talk to DB
  */
 $db=new dbHandler();
+$ppyrd = new ppyrd();
 
 
 /**
@@ -176,14 +177,6 @@ if ("cli" == php_sapi_name())
 }
 /** @endcond */
 
-
-// creating folder structure in case it does not exist
-exec('mkdir -p /data/scan');
-exec('mkdir -p /data/scan/error');
-exec('mkdir -p /data/scan/archive');
-exec('mkdir -p /data/inbox');
-exec('mkdir -p /data/outbox');
-exec('mkdir -p /data/sort');
 
 echo "calling the sorter ... \n";
 chdir("/data/sort");

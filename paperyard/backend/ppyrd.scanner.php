@@ -3,14 +3,14 @@
 	<pre>
 <?php
 	require_once('dbHandler.php');
-	require_once('helper.php');
+	require_once('ppyrd.base.php');
 
 
 	/**
 	 * \brief takes PDFs and runs OCRmyPDF on them
 	 */
 
-	class pdfScanner
+	class pdfScanner extends ppyrd
 	{
 		/**
 		 * \brief constructor taking care of setup
@@ -67,6 +67,7 @@ echo "starting paperyard\n";
  * creating db handler to talk to DB
  */
 $db=new dbHandler();
+$ppyrd = new ppyrd();
 
 
 /**
@@ -84,14 +85,6 @@ if ("cli" == php_sapi_name())
 }
 /** @endcond */
 
-
-// creating folder structure in case it does not exist
-exec('mkdir -p /data/scan');
-exec('mkdir -p /data/scan/error');
-exec('mkdir -p /data/scan/archive');
-exec('mkdir -p /data/inbox');
-exec('mkdir -p /data/outbox');
-exec('mkdir -p /data/sort');
 
 // checking if any new PDFs need to be OCRed
 echo "calling OcrMyPDF ... \n";

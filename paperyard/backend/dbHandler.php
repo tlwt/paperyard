@@ -64,6 +64,13 @@
 		   configVariable TEXT,
 		   configValue TEXT)");
 
+			 // config_regex
+	 		$this->exec("CREATE TABLE IF NOT EXISTS config_regexTemples(
+	 		   id INTEGER PRIMARY KEY AUTOINCREMENT,
+	 		   regextype TEXT,
+	 		   regex TEXT,
+			   regexComment TEXT)");
+
 		// logs
 		$this->exec("CREATE TABLE IF NOT EXISTS logs(
 		   id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -270,6 +270,17 @@
 
 
 		/**
+		 * gets all personal variables
+		 * @param none
+		 * @return link to query
+		 */
+		function getPersonalVariables ()
+		{
+			return $this->query("SELECT * FROM rule_personalInfo WHERE isActive = 1");
+		}
+
+
+		/**
 		 * gets active subjects
 		 */
 		function getActiveSubjects ()

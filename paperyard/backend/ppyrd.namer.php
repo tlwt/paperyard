@@ -179,6 +179,26 @@
 
 		}
 
+
+		/**
+		 * \brief replaces the personal variables within a string
+		 * @param string $searchTerm
+		 **/
+		function replacePersonalVariables($searchTerm)
+		{
+			// getting all replacement terms
+			$results = $this->db->getPersonalVariables();
+
+			// looping string thru all terms
+			while ($row = $results->fetchArray()) {
+					$searchTerm= str_replace($row['variableName'], $row['replaceWith'], $searchTerm);
+			}
+
+
+			// done
+			return $searchTerm;
+		}
+
 		/**
 		 * \brief reads rulesets from database and executes accordingly
 		 *
@@ -200,8 +220,10 @@
 				// start - just one searchterm
 				if (strpos($row['foundWords'], ",")=== false) {
 
+					$searchTerms = strtolower($this->replacePersonalVariables($row['foundWords']));
+
 					// checking if we found it at least once
-					if (substr_count($this->content, strtolower($row['foundWords']))>0) {
+					if (substr_count($this->content, $searchTerms)>0) {
 						@$company[$row['fileCompany']] += $row['companyScore'];
 						// keeping a list of match hits for later tagging
 						$tmpMatchedCompanyTags[$row['fileCompany']][]=$row['tags'];
@@ -222,7 +244,7 @@
 						if($foundAll) {
 
 							// removing any whitespace
-							$value = trim($value);
+							$value = trim($this->replacePersonalVariables($value));
 
 							// counting occurances
 							$cfound = substr_count($this->content, $value);
@@ -327,7 +349,8 @@
 					if (strpos($row['foundWords'], ",")=== false) {
 
 						// checking if we found it at least once
-						if (substr_count($this->content, strtolower($row['foundWords']))>0) {
+						$searchTerm = strtolower($this->replacePersonalVariables($row['foundWords']));
+						if (substr_count($this->content, $searchTerm)>0) {
 							@$subject[$row['fileSubject']] += $row['subjectScore'];
 
 							// keeping a list of match hits for later tagging
@@ -348,7 +371,7 @@
 							if($foundAll) {
 
 								// removing any whitespace
-								$value = trim($value);
+								$value = trim($this->replacePersonalVariables($value));
 
 								// counting occurances
 								$cfound = substr_count($this->content, $value);

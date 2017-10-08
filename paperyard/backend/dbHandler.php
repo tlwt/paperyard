@@ -30,96 +30,6 @@
 		// connects or creates sqlite db file
 		$this->open();
 
-
-		// creating tables in case they do not exist
-		// rules to detect senders of a document
-		$this->exec("CREATE TABLE IF NOT EXISTS rule_senders(
-		   id INTEGER PRIMARY KEY AUTOINCREMENT,
-		   foundWords TEXT,
-		   fileCompany TEXT,
-		   companyScore INTEGER NOT NULL DEFAULT (0),
-		   tags	TEXT,
-		   isActive INTEGER NOT NULL DEFAULT (1))");
-
-		 $this->exec("CREATE TABLE IF NOT EXISTS rule_personalInfo(
- 		   id INTEGER PRIMARY KEY AUTOINCREMENT,
- 		   variableName TEXT,
- 		   replaceWith TEXT,
- 		   comments TEXT,
- 		   isActive INTEGER NOT NULL DEFAULT (1))");
-
-		// rules to detect subject of a document
-		$this->exec("CREATE TABLE IF NOT EXISTS rule_subjects(
-		   id INTEGER PRIMARY KEY AUTOINCREMENT,
-		   foundWords TEXT,
-		   foundCompany TEXT,
-		   fileSubject TEXT,
-		   subjectScore INTEGER NOT NULL DEFAULT (0),
-		   tags	TEXT,
-		   isActive INTEGER NOT NULL DEFAULT (1))");
-
-		// config
-		$this->exec("CREATE TABLE IF NOT EXISTS config(
-		   id INTEGER PRIMARY KEY AUTOINCREMENT,
-		   configVariable TEXT,
-		   configValue TEXT)");
-
-			 // config_regex
-	 		$this->exec("CREATE TABLE IF NOT EXISTS config_regexTemples(
-	 		   id INTEGER PRIMARY KEY AUTOINCREMENT,
-	 		   regextype TEXT,
-	 		   regex TEXT,
-			   regexComment TEXT)");
-
-		// logs
-		$this->exec("CREATE TABLE IF NOT EXISTS logs(
-		   id INTEGER PRIMARY KEY AUTOINCREMENT,
-			 execDate TEXT DEFAULT (datetime('NOW')),
-			 oldFileName TEXT,
-		   newFileName TEXT,
-		   fileContent TEXT,
-		   log TEXT)");
-
-		// recipients
-		$this->exec("CREATE TABLE IF NOT EXISTS rule_recipients (
-		   id INTEGER PRIMARY KEY AUTOINCREMENT,
-		   recipientName TEXT,
-		   shortNameForFile TEXT,
-		   isActive INTEGER DEFAULT (1) )");
-
-		// Setting up config values in case they dont exist
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'companyMatchRating', '20'
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'companyMatchRating')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'subjectMatchRating', '20'
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'subjectMatchRating')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'dateRegEx', '/(\d{2}\.\d{2}\.\d{4})|([0-9]{1,2})\.\s?(januar|februar|märz|april|mai|juni|juli|august|september|oktober|november|dezember)\s?(\d{2,4})/'
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'dateRegEx')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'stripCharactersFromContent', '/[^0-9a-zA-ZÄäÖöÜüß\.\,\-]+/'
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'stripCharactersFromContent')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'matchPriceRegex', '/(\s?((\d{1,3}(\.\d{3})+)|(\d{1,3})),\d\ds?(euro?|€)?)/'
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'matchPriceRegex')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'enableCron', '1'
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'enableCron')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'newFilenameStructure', 'ddatum - ffirma - bbetreff (wwer) (bbetrag) [nt] -- '
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'newFilenameStructure')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'appendOldFilename', '1'
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'appendOldFilename')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'tesseractCommand', 'ocrmypdf -l deu --tesseract-timeout 600  --deskew --rotate-pages --tesseract-timeout 600 --oversample 600 --force-ocr '
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'tesseractCommand')");
-		$this->exec("INSERT INTO config(configVariable,configValue)
-											SELECT 'databaseVersion', '1'
-											WHERE NOT EXISTS(SELECT 1 FROM config WHERE configVariable = 'databaseVersion')");
-
-
 		// updating table model
 		$this->update();
 
@@ -127,91 +37,6 @@
 		//$this->alterTableDropColumns("testtable", "createdDate,modifiedDate,publishedDate");
 
 		} // End constructor
-
-		/**
-		 * \brief function to add columns
-		 * @param string $table containing table name
-		 * @param string $addColumns containing the names and types of columns to addColumns
-		 * @param string $defaultValues containing the default values of the corresponding addColumns
-		 */
-		function alterTableAddColumns($table, $addColumns, $defaultValues)
-		{
-			$tableQuery = $this->query("SELECT sql FROM sqlite_master WHERE tbl_name = '$table' AND type = 'table';");
-			$oldTable = $tableQuery->fetchArray()['sql'];
-			$newTable = str_replace($table, "tmp_$table", substr($oldTable,0,strrpos($oldTable,")")) . $addColumns . ");\n");
-
-			// making sure there is nothing locking the following
-			$this->close();
-			$this->open();
-
-			var_dump($newTable);
-
-			$query = "";
-			$query .= "BEGIN TRANSACTION;";
-			$query .= $newTable;
-			$query .= "INSERT INTO tmp_$table SELECT *, $defaultValues FROM $table;";
-			$query .= "DROP TABLE $table;";
-			$query .= "CREATE TABLE $table AS SELECT * FROM tmp_$table;";
-			$query .= "DROP TABLE tmp_$table;";
-			$query .= "END TRANSACTION;";
-
-			$this->exec($query);
-		}
-
-
-		/**
-		 * \brief function to drop columns
-		 * @param string $table containing table name
-		 * @param string $dropColumns containing the names to drop
-		 */
-		function alterTableDropColumns($table, $dropColumns)
-		{
-			$tableQuery = $this->query("SELECT sql FROM sqlite_master WHERE tbl_name = '$table' AND type = 'table';");
-			$oldTable = $tableQuery->fetchArray()['sql'];
-
-			$columns = explode(",", $dropColumns);
-			$newTable = $oldTable;
-
-			// looping thru columns to be removed and preg_replace them
-			foreach ($columns as $column)
-			{
-				// remove unwanted spaces
-				$column = trim($column);
-				$this->output("looking for $column");
-
-				// the magical regex
-				$newTable = preg_replace("/($column \w*,)|(,\s*$column \w*)/", "", $newTable);
-			}
-			$newTable = str_replace("$table","tmp_$table", $newTable);
-
-			// creating new table
-			$this->exec($newTable);
-
-			// getting new columnNames without types
-			$results = $this->query("PRAGMA table_info('tmp_$table')");
-			while ($column = $results->fetchArray())
-			{
-				$query[] = $column['name'];
-			}
-
-			// building fields for select statement
-			$query = join(',',$query);
-			$insertNewTable = "INSERT INTO tmp_$table ($query) SELECT $query FROM $table;";
-
-			// making sure there is nothing locking the following
-			$this->close();
-			$this->open();
-
-			$query = "";
-			$query .= "BEGIN TRANSACTION;";
-			$query .= $insertNewTable;
-			$query .= "DROP TABLE $table;";
-			$query .= "CREATE TABLE $table AS SELECT * FROM tmp_$table;";
-			$query .= "DROP TABLE tmp_$table;";
-			$query .= "END TRANSACTION;";
-
-			$this->db->exec($query);
-		}
 
 
 		/**
@@ -334,10 +159,20 @@
 		 **/
 		function update()
 		{
-			$this->output("looking for updates");
-			$updates = glob("update_version_*.sqlite");
+			$this->output("looking for DB updates");
+			chdir("/www/updates/sqlite/");
+			$updates = glob("*.sql");
 			foreach($updates as $update){
-				$this->output("found update script");
+				$dbversion = $this->getConfigValue("databaseVersion");
+				$version = str_replace(".sql", "", $update);
+				// really only execute next one - if that fails no further updates shall be attempted
+				if ($version == $dbversion+1) {
+					$this->output ("applying " . $update);
+					$this->output("found update script:" . $version);
+					$sql = file_get_contents ($update);
+					/** \bug more error handling needed? */
+					$this->exec($sql);
+				}
 			}
 		}
 

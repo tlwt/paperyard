@@ -41,7 +41,7 @@ zuerst müssen die Pfadangaben in der Datei angepasst werden, damit Paperyard we
       ./dockerRun.sh (oder im Falle von Windows in .bat umbennenen und dann ausführen)
 
 
-## license
+# license
 
 Copyright 2017 consider it GmbH
 

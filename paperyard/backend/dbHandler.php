@@ -51,6 +51,7 @@
 					// the query failed
 					$this->output("There was an error in query: $query");
 					$this->output($this->db->lastErrorMsg());
+					return false;
 			}
 			return $result;
 		}
@@ -91,13 +92,15 @@
 		/**
 		 * gets config values
 		 * @param string $varname to query
-		 * @return string containing variable value
+		 * @return string containing variable value or -1 for error
 		 */
 		function getConfigValue ($varname)
 		{
-			$results = $this->query("SELECT * FROM config WHERE configVariable = '$varname'");
-			$row = $results->fetchArray();
-			return $row['configValue'];
+				$results = $this->query("SELECT * FROM config WHERE configVariable = '$varname'");
+				if ($results == false)
+					return false;
+				$row = $results->fetchArray();
+				return $row['configValue'];
 		}
 
 
@@ -164,6 +167,8 @@
 			$updates = glob("*.sql");
 			foreach($updates as $update){
 				$dbversion = $this->getConfigValue("databaseVersion");
+				if ($dbversion == false)
+					$dbversion = 0;
 				$version = str_replace(".sql", "", $update);
 				// really only execute next one - if that fails no further updates shall be attempted
 				if ($version == $dbversion+1) {

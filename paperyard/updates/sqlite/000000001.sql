@@ -25,6 +25,15 @@ CREATE TABLE IF NOT EXISTS rule_subjects(
    tags	TEXT,
    isActive INTEGER NOT NULL DEFAULT (1));
 
+CREATE TABLE "rule_archive"(
+    "id" Integer PRIMARY KEY AUTOINCREMENT,
+    "toFolder" Text,
+    "isActive" Integer NOT NULL DEFAULT 1,
+    "company" Text,
+    "subject" Text,
+    "recipient" Text,
+    "tags" Text);
+
 -- config
 CREATE TABLE IF NOT EXISTS config(
    id INTEGER PRIMARY KEY AUTOINCREMENT,

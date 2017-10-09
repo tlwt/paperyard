@@ -1,7 +1,7 @@
 var searchData=
 [
+  ['rulearchive',['RuleArchive',['../classPaperyard_1_1RuleArchive.html',1,'Paperyard']]],
   ['rulerecipients',['RuleRecipients',['../classPaperyard_1_1RuleRecipients.html',1,'Paperyard']]],
-  ['rulesarchive',['RulesArchive',['../classPaperyard_1_1RulesArchive.html',1,'Paperyard']]],
   ['rulesarchivedetailsview',['RulesArchiveDetailsView',['../classPaperyard_1_1Views_1_1RulesArchiveDetailsView.html',1,'Paperyard::Views']]],
   ['rulesarchiveview',['RulesArchiveView',['../classPaperyard_1_1Views_1_1RulesArchiveView.html',1,'Paperyard::Views']]],
   ['rulesenders',['RuleSenders',['../classPaperyard_1_1RuleSenders.html',1,'Paperyard']]],

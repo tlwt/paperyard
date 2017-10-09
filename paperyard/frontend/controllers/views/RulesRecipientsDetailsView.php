@@ -19,7 +19,7 @@ class RulesRecipientsDetailsView extends BasicView
 
     public function render() {
         return array(
-            "breadcrumbs" => $this->breadcrumbs,
+            "parent" => parent::render(),
             "recipient" => $this->_recipient->toArray()
         );
     }

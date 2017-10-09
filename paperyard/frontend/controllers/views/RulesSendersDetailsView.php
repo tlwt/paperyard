@@ -26,7 +26,7 @@ class RulesSendersDetailsView extends BasicView
 
     public function render() {
         return array(
-            "breadcrumbs" => $this->breadcrumbs,
+            "parent" => parent::render(),
             "rule" => $this->_rule->toArray()
         );
     }

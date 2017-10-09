@@ -26,7 +26,7 @@ class RulesSubjectsDetailsView extends BasicView
 
     public function render() {
         return array(
-            "breadcrumbs" => $this->breadcrumbs,
+            "parent" => parent::render(),
             "subject" => $this->_subject->toArray()
         );
     }

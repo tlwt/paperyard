@@ -25,8 +25,8 @@
 
 
 <!-- Custom scripts required by this view -->
-{% if pageScript is defined and pageScript != "" %}
-<script src="/static/js/views/{{ pageScript }}.js"></script>
+{% if parent.pageScript is defined and parent.pageScript != "" %}
+<script src="/static/js/views/{{ parent.pageScript }}.js"></script>
 {% endif %}
 
 </body>

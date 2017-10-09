@@ -17,8 +17,7 @@ class RulesSubjectsView extends BasicView
     public function render()
     {
         return array(
-            "breadcrumbs" => $this->breadcrumbs,
-            "pageScript" => $this->pageScript,
+            "parent" => parent::render(),
             "rules" => $this->getSubjectRules()
         );
     }

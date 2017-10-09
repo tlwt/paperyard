@@ -15,16 +15,15 @@
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/pace.min.js"></script>
 
-<!-- TODO: move plugin logic to controller -->
-<script src="/static/js/bootstrap-tagsinput.min.js"></script>
+<!-- Plugin Scripts required by this view -->
+{% for plugin in parent.plugins %}
+<script src="/static/js/plugins/{{ plugin }}.js"></script>
+{% endfor %}
 
 <!-- Genesis UI main scripts -->
 <script src="/static/js/app.js"></script>
 
-<!-- Plugins and scripts required by this views -->
-
-
-<!-- Custom scripts required by this view -->
+<!-- Custom script required by this view -->
 {% if parent.pageScript is defined and parent.pageScript != "" %}
 <script src="/static/js/views/{{ parent.pageScript }}.js"></script>
 {% endif %}

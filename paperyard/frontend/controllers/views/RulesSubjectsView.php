@@ -11,7 +11,7 @@ class RulesSubjectsView extends BasicView
         parent::__construct();
 
         $this->breadcrumbs = ["Rules", "Subjects"];
-        $this->pageScript = "rules_subjects";
+        $this->plugins = ["clickable-row"];
     }
 
     public function render()

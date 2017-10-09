@@ -16,10 +16,13 @@ class BasicView extends BasicController
     /** @var string name of site specific script without path nor .js */
     protected $pageScript;
 
+    protected $plugins;
+
     public function render() {
         return array(
             "breadcrumbs" => $this->breadcrumbs,
-            "pageScript" => $this->pageScript
+            "pageScript" => $this->pageScript,
+            "plugins" => $this->plugins
         );
     }
 }

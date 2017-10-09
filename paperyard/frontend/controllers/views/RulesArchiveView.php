@@ -10,7 +10,7 @@ class RulesArchiveView extends BasicView
         parent::__construct();
 
         $this->breadcrumbs = ["Rules", "Archive"];
-        $this->pageScript = "rules_archive";
+        $this->plugins = ["clickable-row"];
     }
 
     public function render()

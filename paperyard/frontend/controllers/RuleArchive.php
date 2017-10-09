@@ -2,7 +2,7 @@
 
 namespace Paperyard;
 
-class RulesArchive implements iRule
+class RuleArchive extends BasicController  implements iRule
 {
     /** @var int set if already in database */
     private $_id;
@@ -32,7 +32,7 @@ class RulesArchive implements iRule
         $instance->_toFolder = $postValues['toFolderInput'];
         $instance->_company = $postValues['companyInput'];
         $instance->_subject = $postValues['subjectInput'];
-        $instance->_recipient = (int)$postValues['recipientInput'];
+        $instance->_recipient = $postValues['recipientInput'];
         $instance->_tags = $postValues['tagsInput'];
         $instance->_isActive = isset($postValues['activeInput']);
 
@@ -64,7 +64,7 @@ class RulesArchive implements iRule
         $statement->bindValue(':toFolder', $this->_toFolder, SQLITE3_TEXT);
         $statement->bindValue(':company', $this->_company, SQLITE3_TEXT);
         $statement->bindValue(':subject', $this->_subject, SQLITE3_TEXT);
-        $statement->bindValue(':recipient', $this->_recipient, SQLITE3_INTEGER);
+        $statement->bindValue(':recipient', $this->_recipient, SQLITE3_TEXT);
         $statement->bindValue(':tags', $this->_tags, SQLITE3_TEXT);
         $statement->bindValue(':isActive', $this->_isActive, SQLITE3_INTEGER);
         $statement->execute();
@@ -79,6 +79,8 @@ class RulesArchive implements iRule
         $validationResult = $this->validateData();
         if ($validationResult !== []) {
             var_dump($validationResult);
+            echo "<pre>";
+            var_dump($this);
             exit;
             return $validationResult;
         }
@@ -89,7 +91,7 @@ class RulesArchive implements iRule
         $statement->bindValue(':toFolder', $this->_toFolder, SQLITE3_TEXT);
         $statement->bindValue(':company', $this->_company, SQLITE3_TEXT);
         $statement->bindValue(':subject', $this->_subject, SQLITE3_TEXT);
-        $statement->bindValue(':recipient', $this->_recipient, SQLITE3_INTEGER);
+        $statement->bindValue(':recipient', $this->_recipient, SQLITE3_TEXT);
         $statement->bindValue(':tags', $this->_tags, SQLITE3_TEXT);
         $statement->bindValue(':isActive', $this->_isActive, SQLITE3_INTEGER);
         $statement->execute();

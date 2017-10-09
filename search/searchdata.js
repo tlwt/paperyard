@@ -5,7 +5,7 @@ var indexSectionsWithContent =
   2: "pt",
   3: "bcdehimprs",
   4: "_acdefgilmoqrstuvw",
-  5: "$fipr",
+  5: "$ipr",
   6: "bhrs"
 };
 

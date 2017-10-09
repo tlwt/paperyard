@@ -1,6 +1,3 @@
-<html>
-<body>
-	<pre>
 <?php
 	require_once('dbHandler.php');
 	require_once('ppyrd.base.php');
@@ -27,7 +24,7 @@
 		 */
 		function run()
 		{
-			echo "executing on " . $this->pdf;
+			$this->output("executing on " . $this->pdf);
 			// ensuring that we only have one OcrMyPDF running process running
 			// due to cron usage and large PDFs this could be an issue
 			$fp = fopen('/tmp/ppyrdOcrMyPdf.txt', 'w+');
@@ -39,18 +36,18 @@
 					exec($this->tesseractCommand . " '" . $this->pdf . "' '/data/inbox/" . $this->pdf . "'");
 					if (file_exists("/data/inbox/" . $this->pdf))
 					{
-							echo "found ok OCR - moving input to archive";
+							$this->output("found ok OCR - moving input to archive");
 							exec("mv --backup=numbered '" . $this->pdf . "' '/data/scan/archive/" . $this->pdf . "'");
 					} else
 					{
-						echo "did not find ok OCR - moving input to error";
+						$this->output("did not find ok OCR - moving input to error");
 						exec("mv --backup=numbered '" . $this->pdf . "' '/data/scan/error/" . $this->pdf . "'");
 					}
 
 			} else
 			{
 				// this will be echoed in case OCRmyPDF is still running
-				echo "OcrMyPdf still running - cannot interfere with it ... if this persists too long check /tmp/ppyrOcrMyPdf.txt and delete";
+				$this->output("OcrMyPdf still running - cannot interfere with it ... if this persists too long check /tmp/ppyrOcrMyPdf.txt and delete");
 			}
 
 			// closing lock again - so other instances can be started.
@@ -60,34 +57,26 @@
 	}
 
 // main program
-// looping main directory and calling the pdf parser
-echo "starting paperyard\n";
 
 /**
  * creating db handler to talk to DB
  */
 $db=new dbHandler();
-$ppyrd = new ppyrd();
+$ppyrd = new ppyrd($db);
+
+
+// looping main directory and calling the pdf parser
+$ppyrd->output("starting paperyard");
 
 
 /**
  * checking if called via command line or webserver
- * @cond */
-if ("cli" == php_sapi_name())
-	{
-    echo "Program call from CLI detected.\n";
-		if ($db->getConfigValue('enableCron')==0) {
-				echo "please enable cron in config\n";
-				die();
-			}
-		}else{
-    echo "Program call from Webserver detected.\n";
-}
-/** @endcond */
+ */
+ $ppyrd->checkCliVsWebserver();
 
 
 // checking if any new PDFs need to be OCRed
-echo "calling OcrMyPDF ... \n";
+$ppyrd->output( "calling OcrMyPDF ... ");
 chdir("/data/scan");
 
 //loop all pdfs
@@ -96,11 +85,7 @@ foreach($pdfs as $pdf){
     $pdf=new pdfScanner($pdf, $db);
 		$pdf->run();
 }
-echo "\n";
 
 $db->close();
 
 ?>
-	</pre>
-</body>
-</html>

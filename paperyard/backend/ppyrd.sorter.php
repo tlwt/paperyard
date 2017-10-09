@@ -1,6 +1,3 @@
-<html>
-<body>
-	<pre>
 <?php
 	require_once('dbHandler.php');
 	require_once('ppyrd.base.php');
@@ -88,16 +85,6 @@
 		}
 
 		/**
-		 * \brief Output formatter
-		 * @param string $string what to output
-		 * @debug int $debug to specify if debug or not
-		 */
-		function output($string, $debug=0)
-		{
-					echo "$string\n";
-		}
-
-		/**
 		 * \brief checks rules
 		 */
 		function checkRules()
@@ -152,33 +139,26 @@
 
 
 // main program
-// looping main directory and calling the pdf parser
-echo "starting paperyard\n";
-
 /**
  * creating db handler to talk to DB
  */
 $db=new dbHandler();
-$ppyrd = new ppyrd();
+$ppyrd = new ppyrd($db);
+
+
+
+// looping main directory and calling the pdf parser
+$ppyrd->output("starting paperyard");
+
 
 
 /**
  * checking if called via command line or webserver
- * @cond */
-if ("cli" == php_sapi_name())
-	{
-    echo "Program call from CLI detected.\n";
-		if ($db->getConfigValue('enableCron')==0) {
-				echo "please enable cron in config\n";
-				die();
-			}
-		}else{
-    echo "Program call from Webserver detected.\n";
-}
-/** @endcond */
+ */
+ $ppyrd->checkCliVsWebserver();
 
 
-echo "calling the sorter ... \n";
+$ppyrd->output("calling the sorter ...");
 chdir("/data/sort");
 
 /**
@@ -194,14 +174,10 @@ foreach ($pdfs as $pdf){
 		$pdf->run();
 }
 
-echo "\n";
 /*******************************************************************************/
 
-echo "\n Thanks for watching....\n\n";
+$ppyrd->output("Thanks for watching....");
 
 $db->close();
 
 ?>
-	</pre>
-</body>
-</html>

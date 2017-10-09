@@ -162,9 +162,16 @@
 		 **/
 		function update()
 		{
+
 			$this->output("looking for DB updates");
+
+			// changing to sqlite update directory
 			chdir("/www/updates/sqlite/");
+
+			// getting all .sql files
 			$updates = glob("*.sql");
+
+			// checking each file
 			foreach($updates as $update){
 				$dbversion = $this->getConfigValue("databaseVersion");
 				if ($dbversion == false)

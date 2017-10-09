@@ -6,7 +6,8 @@
 		* \bug certainly still a lot
 		*
 	 	*/
-	class ppyrd {
+	class ppyrd
+	{
 		/*!
 			* \class helper
 			* \brief containers helper functions
@@ -20,8 +21,10 @@
 		/**
 		 * \brief constructor
 		 */
-		function __construct() {
+		function __construct($db) {
+			$this->db = $db;
 			$this->output("checking setup");
+
 			$warning = array();
 			if (file_exists('/data/scan/paperyardDirectoryNotMounted.txt'))
 			{
@@ -50,6 +53,19 @@
 
 		} // End constructor
 
+		function checkCliVsWebserver()
+		{
+			if ("cli" == php_sapi_name())
+				{
+			    $this->output("Program call from CLI detected.");
+					if ($this->db->getConfigValue('enableCron')==0) {
+							$this->output("please enable cron in config");
+							die();
+						}
+					}else{
+			    $this->output("Program call from Webserver detected.");
+			}
+		}
 
 
 		/**
@@ -60,7 +76,11 @@
 		 */
 		function output($string, $debug=0)
 		{
-					echo "$string\n";
+					//$logProgram = basename(__FILE__, '.php');
+					$logProgram = basename($_SERVER['SCRIPT_NAME']);
+					echo "$logProgram: $string\n";
+
+					$this->db->exec("INSERT INTO logShell (logProgram, logContent) VALUES ('$logProgram','$string');");
 		}
 
 	}

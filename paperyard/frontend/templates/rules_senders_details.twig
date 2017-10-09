@@ -1,8 +1,6 @@
-{% include 'header.twig' %}
+{% extends 'layout.twig' %}
 
-{% include 'sidebar.twig' %}
-
-{% include 'breadcrumb.twig' %}
+{% block content %}
 
 <div class="container-fluid">
 
@@ -89,4 +87,4 @@
     <!-- /.modal-dialog -->
 </div>
 
-{% include 'fooder.twig' %}
+{% endblock %}

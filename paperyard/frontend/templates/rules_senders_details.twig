@@ -11,34 +11,34 @@
             <div class="col-lg-12">
 
                 <div class="card">
-                    <form action="/rules/senders/{{ rule.id }}/save" method="post">
+                    <form action="/rules/senders/{{ subject.id }}/save" method="post">
                         <div class="card-header">
                             Rule Details
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="foundWordsInput"><strong>Needles</strong></label>
-                                <input type="text" class="form-control" name="foundWordsInput" id="foundWordsInput" value="{{ rule.foundWords }}">
+                                <input type="text" class="form-control" name="foundWordsInput" id="foundWordsInput" value="{{ subject.foundWords }}">
                             </div>
                             <div class="form-group">
                                 <label for="fileCompanyInput"><strong>Company</strong></label>
-                                <input type="text" class="form-control" name="fileCompanyInput" id="fileCompanyInput" value="{{ rule.fileCompany }}">
+                                <input type="text" class="form-control" name="fileCompanyInput" id="fileCompanyInput" value="{{ subject.fileCompany }}">
                             </div>
                             <div class="form-group">
                                 <label for="tagsInput"><strong>Tags</strong></label>
-                                <input type="text" class="form-control" name="tagsInput" id="tagsInput" value="{{ rule.tags }}">
+                                <input type="text" class="form-control" name="tagsInput" id="tagsInput" value="{{ subject.tags }}">
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="companyScoreInput"><strong>Score</strong></label>
-                                        <input type="number" class="form-control" name="companyScoreInput" id="companyScoreInput" value="{{ rule.companyScore }}">
+                                        <input type="number" class="form-control" name="companyScoreInput" id="companyScoreInput" value="{{ subject.companyScore }}">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <label for="activeInput"><strong>Status</strong></label><br>
                                     <label class="switch switch-xl switch-default switch-info">
-                                        <input type="checkbox" class="switch-input" name="activeInput" id="activeInput"{% if rule.isActive == 1 %} checked{% endif %}>
+                                        <input type="checkbox" class="switch-input" name="activeInput" id="activeInput"{% if subject.isActive == 1 %} checked{% endif %}>
                                         <span class="switch-label"></span>
                                         <span class="switch-handle"></span>
                                     </label>
@@ -77,7 +77,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <form action="/rules/senders/{{ rule.id }}/delete" method="post">
+                <form action="/rules/senders/{{ subject.id }}/delete" method="post">
                     <button type="submit" class="btn btn-danger">Yes</button>
                 </form>
             </div>

@@ -23,7 +23,7 @@ class IndexView extends \Paperyard\BasicView
     public function render()
     {
         return array(
-            "breadcrumb" => $this->breadcrumbs,
+            "parent" => parent::render(),
             "scannedToday" => $this->documentsScanned()
         );
     }

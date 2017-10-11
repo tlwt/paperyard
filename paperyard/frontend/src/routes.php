@@ -15,6 +15,15 @@ $app->get('/docs', function (Request $request, Response $response, array $args) 
     return $this->view->render($response, 'index.twig', $indexView->render());
 });
 
+$app->post('/setlang', function (Request $request, Response $response, array $args) {
+    $langCode = $request->getParsedBody()['code'];
+    $supportedCodes = array_map(function ($code) { return basename($code); }, glob("../locale/*", GLOB_ONLYDIR));
+    if (in_array($langCode, $supportedCodes)) {
+        $_SESSION["lang-code"] = $langCode;
+        return $response;
+    }
+    return $response->withStatus(406);
+});
 
 include "routes_senders.php";
 

@@ -7,22 +7,20 @@
     <div class="animated fadeIn">
 
         <div class="row">
-
-            <div class="col-sm-6 col-md-2">
+            <div class="col-sm-3">
                 <div class="card text-white bg-info">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
                             <i class="fa fa-file-o"></i>
                         </div>
                         <div class="h4 mb-0">{{ scannedToday }}</div>
-                        <small class="text-muted text-uppercase font-weight-bold">scanned total</small>
+                        <small class="text-muted text-uppercase font-weight-bold">{% trans "scanned total" %}</small>
                         <div class="progress progress-white progress-xs mt-3">
-                            <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="{{ "now"|date("z") }}" aria-valuemin="0" aria-valuemax="365"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{ ("now"|date("z")/3.65)|number_format }}%"></div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div><!--/.row-->
     </div>
 

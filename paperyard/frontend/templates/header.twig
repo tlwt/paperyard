@@ -12,6 +12,7 @@
     <link href="/static/css/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/simple-line-icons.css" rel="stylesheet">
     <link href="/static/css/bootstrap-tagsinput.css" rel="stylesheet">
+    <link href="/static/css/flag-icon.min.css" rel="stylesheet">
 
     <!-- Main styles for this application -->
     <link href="/static/css/style.min.css" rel="stylesheet">
@@ -34,12 +35,21 @@
             <a class="nav-link" href="/docs">Docs</a>
         </li>
         <li class="nav-item px-3">
-            <a class="nav-link" href="/setting">Settings</a>
+            <a class="nav-link" href="/setting">{% trans "Settings" %}</a>
         </li>
     </ul>
     <ul class="nav navbar-nav ml-auto">
         <li class="nav-item d-md-down-none">
             <!-- <a class="nav-link" href="#"><i class="icon-bell"></i><span class="badge badge-pill badge-danger">5</span></a> -->
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="flag-icon {{ parent.language }}"></span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item change-lang" data-new-lang="en_US" href="#"><span class="flag-icon flag-icon-gb"></span></a>
+                <a class="dropdown-item change-lang" data-new-lang="de_DE" href="#"><span class="flag-icon flag-icon-de"></span></a>
+            </div>
         </li>
     </ul>
 </header>

@@ -13,19 +13,19 @@
                 <div class="card">
                     <form action="/rules/recipients/{{ recipient.id }}/save" method="post">
                         <div class="card-header">
-                            Rule Details
+                            {% trans "Rule Details" %}
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="recipientNameInput"><strong>Long Name</strong></label>
+                                <label for="recipientNameInput"><strong>{% trans "Long Name" %}</strong></label>
                                 <input type="text" class="form-control" name="recipientNameInput" id="recipientNameInput" value="{{ recipient.recipientName }}">
                             </div>
                             <div class="form-group">
-                                <label for="shortNameForFileInput"><strong>Name For File</strong></label>
+                                <label for="shortNameForFileInput"><strong>{% trans "Name For File" %}</strong></label>
                                 <input type="text" class="form-control" name="shortNameForFileInput" id="shortNameForFileInput" value="{{ recipient.shortNameForFile }}">
                             </div>
                             <div class="form-group">
-                                <label for="activeInput"><strong>Status</strong></label><br>
+                                <label for="activeInput"><strong>{% trans "Status" %}</strong></label><br>
                                 <label class="switch switch-xl switch-default switch-info">
                                     <input type="checkbox" class="switch-input" name="activeInput" id="activeInput"{% if recipient.isActive == 1 %} checked{% endif %}>
                                     <span class="switch-label"></span>
@@ -34,10 +34,10 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-md btn-success">save</button>
+                            <button type="submit" class="btn btn-md btn-success">{% trans "save" %}</button>
                             <div class="pull-right">
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                                    delete
+                                    {% trans "delete" %}
                                 </button>
                             </div>
                         </div>
@@ -51,28 +51,6 @@
 
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-danger" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Caution!</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Do you really want to permanently delete this rule?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <form action="/rules/recipients/{{ recipient.id }}/delete" method="post">
-                    <button type="submit" class="btn btn-danger">Yes</button>
-                </form>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+{% include 'rule_delete_modal.twig' %}
 
 {% endblock %}

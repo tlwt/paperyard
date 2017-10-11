@@ -3,7 +3,12 @@ FROM ubuntu:16.10
 
 ### beginning to apt install
 
-# Update Ubuntu Software repository
+# enable gettext support
+RUN locale-gen en_US.UTF-8
+RUN locale-gen de_DE.UTF-8
+ENV LC_ALL en_US.UTF8
+
+# update Ubuntu Software repository
 RUN apt-get update
 
 # installing nginx
@@ -14,14 +19,16 @@ RUN apt-get -y install nginx
 RUN apt-get -y install php-sqlite3
 RUN apt-get -y install nginx php7.0-cli php7.0-cgi php7.0-fpm php7.0-mbstring php7.0-xml php7.0-zip
 
-#installing tools
+# installing tools
 RUN apt-get -y install nano
 RUN apt-get -y install less
 RUN apt-get -y install git
 RUN apt-get -y install cron
 RUN apt-get -y install wget
+RUN apt-get -y install curl
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-#ocr my pdf
+# ocr my pdf
 RUN apt-get -y install ocrmypdf
 RUN apt-get -y install tesseract-ocr-deu
 RUN apt-get -y install python-pip
@@ -29,25 +36,10 @@ RUN apt-get -y install python-pip
 # installing pdftotext
 RUN apt-get -y install poppler-utils
 
-# for doxygen
-#RUN apt-get -y install cmake
-#RUN apt-get -y install flex
-#RUN apt-get -y install bison
-
-#RUN git clone https://github.com/doxygen/doxygen.git
-
-#WORKDIR doxygen/build
-#RUN cmake -G "Unix Makefiles" ..
-#RUN make
-#RUN make install
-
 # adding read the docs environment
 #RUN pip install sphinx
 
 WORKDIR /
-
-# MySQL
-RUN apt-get -y install mariadb-server
 
 # adding config folder
 ADD config /config
@@ -71,13 +63,11 @@ RUN mkdir -p /data/outbox
 RUN mkdir -p /data/sort
 RUN mkdir -p /data/database
 
-
 RUN touch /data/scan/paperyardDirectoryNotMounted.txt
 RUN touch /data/inbox/paperyardDirectoryNotMounted.txt
 RUN touch /data/outbox/paperyardDirectoryNotMounted.txt
 RUN touch /data/sort/paperyardDirectoryNotMounted.txt
 RUN touch /data/database/paperyardDirectoryNotMounted.txt
-
 
 # adding start script
 ADD /paperyard/start.sh /

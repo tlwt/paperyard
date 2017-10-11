@@ -15,31 +15,31 @@
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="foundWordsInput" id="foundWordsInput">
-                                        <label for="foundWordsInput"><strong>Needles</strong></label>
+                                        <label for="foundWordsInput"><strong>{% trans "Needles" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="foundCompanyInput" id="foundCompanyInput">
-                                        <label for="foundCompanyInput"><strong>Company</strong></label>
+                                        <label for="foundCompanyInput"><strong>{% trans "Company" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="fileSubjectInput" id="fileSubjectInput">
-                                        <label for="fileSubjectInput"><strong>Subject</strong></label>
+                                        <label for="fileSubjectInput"><strong>{% trans "Subject" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="number" class="form-control" name="subjectScoreInput" id="subjectScoreInput">
-                                        <label for="scoreInput"><strong>Score</strong></label>
+                                        <label for="scoreInput"><strong>{% trans "Score" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="tagsInput" id="tagsInput">
-                                        <label for="tagsInput"><strong>Tags</strong></label>
+                                        <label for="tagsInput"><strong>{% trans "Tags" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2 text-center">
@@ -49,7 +49,7 @@
                                         <span class="switch-handle"></span>
                                     </label>
                                     <br>
-                                    <strong>Status</strong>
+                                    <strong>{% trans "Status" %}</strong>
                                 </div>
                             </div>
                         </div>
@@ -69,12 +69,12 @@
                             <table class="table table-striped table-hover table-bordered">
                                 <thead class="thead-default">
                                 <tr>
-                                    <th>Needles</th>
-                                    <th>Company</th>
-                                    <th>Subject</th>
-                                    <th>Score</th>
-                                    <th>Tags</th>
-                                    <th>Status</th>
+                                    <th>{% trans "Needles" %}</th>
+                                    <th>{% trans "Company" %}</th>
+                                    <th>{% trans "Subject" %}</th>
+                                    <th>{% trans "Score" %}</th>
+                                    <th>{% trans "Tags" %}</th>
+                                    <th>{% trans "Status" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -97,7 +97,7 @@
                             </table>
                         {% else %}
                             <div class="text-center full-width text-serif">
-                                <em><h4>"I love rules and I love following them, unless that rule is stupid."</h4></em>
+                                <em><h4>"{% trans "I love rules and I love following them, unless that rule is stupid." %}"</h4></em>
                                 <sup>― Anna Kendrick, Scrappy Little Nobody</sup>
                             </div>
                         {% endif %}

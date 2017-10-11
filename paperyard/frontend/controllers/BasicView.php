@@ -22,7 +22,15 @@ class BasicView extends BasicController
         return array(
             "breadcrumbs" => $this->breadcrumbs,
             "pageScript" => $this->pageScript,
+            "language" => $this->codeToFlag($_SESSION['lang-code']),
             "plugins" => $this->plugins
         );
+    }
+
+    private function codeToFlag($code) {
+        $codes = array(
+            "de_DE" => "flag-icon-de",
+            "en_US" => "flag-icon-gb");
+        return $codes[$code];
     }
 }

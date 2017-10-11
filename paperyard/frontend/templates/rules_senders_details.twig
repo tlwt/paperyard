@@ -13,30 +13,30 @@
                 <div class="card">
                     <form action="/rules/senders/{{ subject.id }}/save" method="post">
                         <div class="card-header">
-                            Rule Details
+                            {% trans "Rule Details" %}
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="foundWordsInput"><strong>Needles</strong></label>
+                                <label for="foundWordsInput"><strong>{% trans "Needles" %}</strong></label>
                                 <input type="text" class="form-control" name="foundWordsInput" id="foundWordsInput" value="{{ subject.foundWords }}">
                             </div>
                             <div class="form-group">
-                                <label for="fileCompanyInput"><strong>Company</strong></label>
+                                <label for="fileCompanyInput"><strong>{% trans "Company" %}</strong></label>
                                 <input type="text" class="form-control" name="fileCompanyInput" id="fileCompanyInput" value="{{ subject.fileCompany }}">
                             </div>
                             <div class="form-group">
-                                <label for="tagsInput"><strong>Tags</strong></label>
+                                <label for="tagsInput"><strong>{% trans "Tags" %}</strong></label>
                                 <input type="text" class="form-control" name="tagsInput" id="tagsInput" value="{{ subject.tags }}">
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="companyScoreInput"><strong>Score</strong></label>
+                                        <label for="companyScoreInput"><strong>{% trans "Score" %}</strong></label>
                                         <input type="number" class="form-control" name="companyScoreInput" id="companyScoreInput" value="{{ subject.companyScore }}">
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <label for="activeInput"><strong>Status</strong></label><br>
+                                    <label for="activeInput"><strong>{% trans "Status" %}</strong></label><br>
                                     <label class="switch switch-xl switch-default switch-info">
                                         <input type="checkbox" class="switch-input" name="activeInput" id="activeInput"{% if subject.isActive == 1 %} checked{% endif %}>
                                         <span class="switch-label"></span>
@@ -46,10 +46,10 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-md btn-success">save</button>
+                            <button type="submit" class="btn btn-md btn-success">{% trans "save" %}</button>
                             <div class="pull-right">
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dangerModal">
-                                    delete
+                                    {% trans "delete" %}
                                 </button>
                             </div>
                         </div>
@@ -63,28 +63,6 @@
 
 </div>
 
-<div class="modal fade" id="dangerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-danger" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Caution!</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Do you really want to permanently delete this rule?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <form action="/rules/senders/{{ subject.id }}/delete" method="post">
-                    <button type="submit" class="btn btn-danger">Yes</button>
-                </form>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+{% include 'rule_delete_modal.twig' %}
 
 {% endblock %}

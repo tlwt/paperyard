@@ -15,6 +15,19 @@ $container['view'] = function ($container) {
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
 
+    // add multilanguage support
+    $view->addExtension(new Twig_Extensions_Extension_I18n());
+
+    if ($_SESSION["lang-code"] == "") {
+        $_SESSION["lang-code"] = "en_US";
+    }
+    $locale = $_SESSION["lang-code"];
+    $locale .= ".UTF-8";
+    putenv('LC_ALL='.$locale);
+    setlocale(LC_ALL, $locale);
+    bindtextdomain("default", '../locale');
+    textdomain("default");
+
     return $view;
 };
 

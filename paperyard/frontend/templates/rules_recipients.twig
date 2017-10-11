@@ -15,13 +15,13 @@
                                 <div class="col-md-5">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="recipientNameInput" id="recipientNameInput">
-                                        <label for="recipientNameInput"><strong>Long Name</strong></label>
+                                        <label for="recipientNameInput"><strong>{% trans "Long Name" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="shortNameForFileInput" id="shortNameForFileInput">
-                                        <label for="shortNameForFileInput"><strong>Name For File</strong></label>
+                                        <label for="shortNameForFileInput"><strong>{% trans "Name For File" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2 text-center">
@@ -31,12 +31,12 @@
                                         <span class="switch-handle"></span>
                                     </label>
                                     <br>
-                                    <strong>Status</strong>
+                                    <strong>{% trans "Status" %}</strong>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> add</button>
+                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> {% trans "add" %}</button>
                         </div>
                     </form>
                 </div>
@@ -51,9 +51,9 @@
                             <table class="table table-striped table-hover table-bordered">
                                 <thead class="thead-default">
                                 <tr>
-                                    <th>Long Name</th>
-                                    <th>Name For File</th>
-                                    <th>Status</th>
+                                    <th>{% trans "Long Name" %}</th>
+                                    <th>{% trans "Name For File" %}</th>
+                                    <th>{% trans "Status" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -73,7 +73,7 @@
                             </table>
                         {% else %}
                             <div class="text-center full-width text-serif">
-                                <em><h4>"I love rules and I love following them, unless that rule is stupid."</h4></em>
+                                <em><h4>"{% trans "I love rules and I love following them, unless that rule is stupid." %}"</h4></em>
                                 <sup>― Anna Kendrick, Scrappy Little Nobody</sup>
                             </div>
                         {% endif %}

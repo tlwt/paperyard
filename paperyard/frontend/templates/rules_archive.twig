@@ -15,31 +15,31 @@
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="toFolderInput" id="toFolderInput">
-                                        <label for="toFolderInput"><strong>Target Folder</strong></label>
+                                        <label for="toFolderInput"><strong>{% trans "Target Folder" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="companyInput" id="companyInput">
-                                        <label for="companyInput"><strong>Company</strong></label>
+                                        <label for="companyInput"><strong>{% trans "Company" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="subjectInput" id="subjectInput">
-                                        <label for="subjectInput"><strong>Subject</strong></label>
+                                        <label for="subjectInput"><strong>{% trans "Subject" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="recipientInput" id="recipientInput">
-                                        <label for="recipientInput"><strong>Recipient</strong></label>
+                                        <label for="recipientInput"><strong>{% trans "Recipient" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pull-left full-width text-center">
                                         <input type="text" class="form-control" name="tagsInput" id="tagsInput">
-                                        <label for="tagsInput"><strong>Tags</strong></label>
+                                        <label for="tagsInput"><strong>{% trans "Tags" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2 text-center">
@@ -49,7 +49,7 @@
                                         <span class="switch-handle"></span>
                                     </label>
                                     <br>
-                                    <strong>Status</strong>
+                                    <strong>{% trans "Status" %}</strong>
                                 </div>
                             </div>
                         </div>
@@ -69,12 +69,12 @@
                             <table class="table table-striped table-hover table-bordered">
                                 <thead class="thead-default">
                                 <tr>
-                                    <th>Target Folder</th>
-                                    <th>Company</th>
-                                    <th>Subject</th>
-                                    <th>Recipient</th>
-                                    <th>Tags</th>
-                                    <th>Status</th>
+                                    <th>{% trans "Target Folder" %}</th>
+                                    <th>{% trans "Company" %}</th>
+                                    <th>{% trans "Subject" %}</th>
+                                    <th>{% trans "Recipient" %}</th>
+                                    <th>{% trans "Tags" %}</th>
+                                    <th>{% trans "Status" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -97,7 +97,7 @@
                             </table>
                         {% else %}
                             <div class="text-center full-width text-serif">
-                                <em><h4>"I love rules and I love following them, unless that rule is stupid."</h4></em>
+                                <em><h4>"{% trans "I love rules and I love following them, unless that rule is stupid." %}"</h4></em>
                                 <sup>― Anna Kendrick, Scrappy Little Nobody</sup>
                             </div>
                         {% endif %}

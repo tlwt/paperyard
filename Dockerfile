@@ -48,9 +48,6 @@ ADD config /config
 RUN cp config/nginx /etc/nginx/sites-enabled/default
 RUN ln -s /var/www/html /www
 
-# moving configuration for doxygen
-RUN cp /config/doxygenconfig /
-
 # exposing webserver port
 EXPOSE 80
 

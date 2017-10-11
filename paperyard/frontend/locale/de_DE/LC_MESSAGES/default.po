@@ -11,150 +11,141 @@ msgstr ""
 "Language: de_DE\n"
 "X-Generator: Poedit 2.0.4\n"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/404.twig
+#: 404.twig
 msgid "Warning"
 msgstr "Warnung"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/404.twig
-msgid "We haven't forgot this side. We just haven't had enough coffee yet."
+#: 404.twig
+msgid "We haven't forgot this site. We just haven't had enough coffee yet."
 msgstr "Wir haben diese Seite nicht vergessen. Wir hatten nur noch nicht genug Kaffe."
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/header.twig
+#: header.twig
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/index.twig
+#: index.twig
 msgid "scanned total"
 msgstr "insg. gescannt"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rule_delete_modal.twig
+#: rule_delete_modal.twig
 msgid "Caution!"
 msgstr "Achtung!"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rule_delete_modal.twig
+#: rule_delete_modal.twig
 msgid "Do you really want to permanently delete this rule?"
 msgstr "Wollen Sie diese Regel wirklich dauerhaft löschen?"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rule_delete_modal.twig
-msgid "Yes"
-msgstr "Ja"
-
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive.twig
-msgid "Target Folder"
-msgstr "Zielordner"
-
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive.twig
-msgid "Company"
-msgstr "Unternehmen"
-
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive.twig
-msgid "Subject"
-msgstr "Betreff"
-
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive.twig
-msgid "Recipient"
-msgstr "Empfänger"
-
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive.twig
-msgid "Tags"
-msgstr "Tags"
-
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive.twig
-msgid "Status"
-msgstr "Status"
-
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rule_delete_modal.twig
+#: rule_delete_modal.twig
 msgid "No"
 msgstr "Nein"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_senders.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_subjects.twig
+#: rule_delete_modal.twig
+msgid "Yes"
+msgstr "Ja"
+
+#: rules_archive.twig rules_archive_details.twig
+msgid "Target Folder"
+msgstr "Zielordner"
+
+#: rules_archive.twig rules_archive_details.twig rules_senders.twig
+#: rules_senders_details.twig rules_subjects.twig rules_subjects_details.twig
+msgid "Company"
+msgstr "Unternehmen"
+
+#: rules_archive.twig rules_archive_details.twig rules_subjects.twig
+#: rules_subjects_details.twig
+msgid "Subject"
+msgstr "Betreff"
+
+#: rules_archive.twig rules_archive_details.twig
+msgid "Recipient"
+msgstr "Empfänger"
+
+#: rules_archive.twig rules_archive_details.twig rules_senders.twig
+#: rules_senders_details.twig rules_subjects.twig rules_subjects_details.twig
+msgid "Tags"
+msgstr "Tags"
+
+#: rules_archive.twig rules_archive_details.twig rules_recipients.twig
+#: rules_recipients_details.twig rules_senders.twig rules_senders_details.twig
+#: rules_subjects.twig rules_subjects_details.twig
+msgid "Status"
+msgstr "Status"
+
+#: rules_archive.twig rules_recipients.twig rules_senders.twig
+#: rules_subjects.twig
 msgid "I love rules and I love following them, unless that rule is stupid."
 msgstr "Ich liebe Regeln und ich liebe es, ihnen zu folgen, es sei denn, diese Regel ist dumm."
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_senders_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_subjects_details.twig
+#: rules_archive_details.twig rules_recipients_details.twig
+#: rules_senders_details.twig rules_subjects_details.twig
 msgid "Rule Details"
 msgstr "Regel Dateils"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_senders_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_subjects_details.twig
+#: rules_archive_details.twig rules_recipients_details.twig
+#: rules_senders_details.twig rules_subjects_details.twig
 msgid "save"
 msgstr "speichern"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_archive_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_senders_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_subjects_details.twig
+#: rules_archive_details.twig rules_recipients_details.twig
+#: rules_senders_details.twig rules_subjects_details.twig
 msgid "delete"
 msgstr "löschen"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients_details.twig
+#: rules_recipients.twig rules_recipients_details.twig
 msgid "Long Name"
-msgstr "Langer Name"
+msgstr "langer Name"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients_details.twig
+#: rules_recipients.twig rules_recipients_details.twig
 msgid "Name For File"
 msgstr "Dateiname"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_recipients.twig
+#: rules_recipients.twig
 msgid "add"
 msgstr "hinzufügen"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_senders.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_senders_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_subjects.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_subjects_details.twig
+#: rules_senders.twig rules_senders_details.twig rules_subjects.twig
+#: rules_subjects_details.twig
 msgid "Needles"
 msgstr "Suchbegriff"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_senders.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_senders_details.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_subjects.twig
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/rules_subjects_details.twig
+#: rules_senders.twig rules_senders_details.twig rules_subjects.twig
+#: rules_subjects_details.twig
 msgid "Score"
 msgstr "Punktzahl"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Home"
 msgstr "Home"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Documents"
 msgstr "Dokumente"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Latest"
 msgstr "Neuste"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Archive"
 msgstr "Archiv"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Rules"
 msgstr "Regeln"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Senders"
 msgstr "Absender"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Subjects"
 msgstr "Betreffe"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Recipients"
 msgstr "Empfänger"
 
-#: /Users/jannik/Developer/paperyard/paperyard/frontend/templates/sidebar.twig
+#: sidebar.twig
 msgid "Extras"
 msgstr "Extras"

@@ -4,8 +4,52 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6b65cb4e96f95f63ed3e5dcfab6ec47",
+    "content-hash": "0411a78d96e48922b3416e3206e5dc2e",
     "packages": [
+        {
+            "name": "anpk12/sysinfo",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anpk12/sysinfo.git",
+                "reference": "80a8640f9b9d39d81291b34f982c9e9f9699dacb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anpk12/sysinfo/zipball/80a8640f9b9d39d81291b34f982c9e9f9699dacb",
+                "reference": "80a8640f9b9d39d81291b34f982c9e9f9699dacb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Anpk12\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Petersson",
+                    "email": "anpk12@student.bth.se",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Reads info about memory usage, cpu, load etc",
+            "homepage": "https://github.com/anpk12/sysinfo.git",
+            "keywords": [
+                "CPU",
+                "load",
+                "memory",
+                "sysinfo"
+            ],
+            "time": "2016-04-16T21:11:30+00:00"
+        },
         {
             "name": "container-interop/container-interop",
             "version": "1.2.0",
@@ -2023,7 +2067,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "anpk12/sysinfo": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

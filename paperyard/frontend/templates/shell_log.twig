@@ -1,0 +1,23 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        <div class="animated fadeIn">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        {% trans "Shell Log" %}
+                        <span id="shell-connection" class="badge badge-pill badge-warning float-right">{% trans "connection lost, reconnecting" %}</span>
+                    </div>
+                    <div id="shell-log" class="card-body shell-log"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

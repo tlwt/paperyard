@@ -18,3 +18,14 @@ label.switch {
 div .text-serif {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
+.shell-log {
+    background-color: #29363d;
+    color: #fff;
+    font-family: "Lucida Console", Monaco, monospace;
+}
+.shell-entry::before {
+    content: '> ';
+}
+#shell-connection {
+    display: none;
+}

@@ -2,11 +2,16 @@
 	require_once('dbHandler.php');
 	require_once('ppyrd.base.php');
 
+	/**
+		* @file
+		* \author Till Witt
+		* \brief takes care of the correct naming of files
+		*
+	 	*/
 
 	/*!
 		* \class pdfNamer
 		* \brief takes care of the correct naming of files
-		* \author Till Witt
 		*/
 	class pdfNamer extends ppyrd {
 

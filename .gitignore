@@ -4,4 +4,3 @@ run.sh
 *.sqlite
 data/
 paperyard/phpmyadmin/
-paperyard/frontend/composer.lock

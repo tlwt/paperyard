@@ -22,7 +22,7 @@ crontab mycron
 
 echo " * Checking for dependencies updates"
 cd /var/www/html/frontend
-composer update --no-interaction &>/dev/null
+composer install --no-interaction &>/dev/null
 
 
 # creating folder structure in case it does not exist

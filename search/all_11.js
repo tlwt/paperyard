@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['slim_20framework_203_20skeleton_20application',['Slim Framework 3 Skeleton Application',['../md_paperyard_paperyard_frontend_README.html',1,'']]],
   ['settings_2ephp',['settings.php',['../settings_8php.html',1,'']]],
   ['shelllogview',['ShellLogView',['../classPaperyard_1_1Views_1_1ShellLogView.html',1,'Paperyard::Views']]],
   ['shelllogview_2ephp',['ShellLogView.php',['../ShellLogView_8php.html',1,'']]],

@@ -5,6 +5,5 @@ var searchData=
   ['cleancontent',['cleanContent',['../classpdfNamer.html#a0ab8eebc344d6f617a0c5e91f5e10dbb',1,'pdfNamer']]],
   ['close',['close',['../classdbHandler.html#a8ad2797a944efd4d711f6745f3b41da3',1,'dbHandler']]],
   ['closestdatetotoday',['closestDateToToday',['../classpdfNamer.html#aedecca68ac23df9816d9da3a72ad8905',1,'pdfNamer']]],
-  ['codetoflag',['codeToFlag',['../classPaperyard_1_1BasicView.html#a54ad71f4576cc74d55f34f55a3b9a148',1,'Paperyard::BasicView']]],
-  ['contributing_2emd',['CONTRIBUTING.md',['../CONTRIBUTING_8md.html',1,'']]]
+  ['codetoflag',['codeToFlag',['../classPaperyard_1_1BasicView.html#a54ad71f4576cc74d55f34f55a3b9a148',1,'Paperyard::BasicView']]]
 ];

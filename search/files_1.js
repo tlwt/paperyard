@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['contributing_2emd',['CONTRIBUTING.md',['../CONTRIBUTING_8md.html',1,'']]]
+  ['dbhandler_2ephp',['dbHandler.php',['../dbHandler_8php.html',1,'']]],
+  ['dependencies_2ephp',['dependencies.php',['../dependencies_8php.html',1,'']]]
 ];

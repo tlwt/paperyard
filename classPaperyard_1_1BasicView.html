@@ -91,6 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classPaperyard_1_1BasicView-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Paperyard\BasicView Class Reference</div>  </div>
@@ -112,6 +113,7 @@ Inheritance diagram for Paperyard\BasicView:</div>
 <area href="classPaperyard_1_1Views_1_1RulesSendersView.html" alt="Paperyard\Views\RulesSendersView" shape="rect" coords="279,448,548,472"/>
 <area href="classPaperyard_1_1Views_1_1RulesSubjectsDetailsView.html" alt="Paperyard\Views\RulesSubjectsDetailsView" shape="rect" coords="279,504,548,528"/>
 <area href="classPaperyard_1_1Views_1_1RulesSubjectsView.html" alt="Paperyard\Views\RulesSubjectsView" shape="rect" coords="279,560,548,584"/>
+<area href="classPaperyard_1_1Views_1_1ShellLogView.html" alt="Paperyard\Views\ShellLogView" shape="rect" coords="279,616,548,640"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -134,11 +136,42 @@ Protected Attributes</h2></td></tr>
 <tr class="inherit_header pro_attribs_classPaperyard_1_1BasicController"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classPaperyard_1_1BasicController')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classPaperyard_1_1BasicController.html">Paperyard\BasicController</a></td></tr>
 <tr class="memitem:afc44456ded338408ed07a883f9205397 inherit pro_attribs_classPaperyard_1_1BasicController"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPaperyard_1_1BasicController.html#afc44456ded338408ed07a883f9205397">$db</a></td></tr>
 <tr class="separator:afc44456ded338408ed07a883f9205397 inherit pro_attribs_classPaperyard_1_1BasicController"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a54ad71f4576cc74d55f34f55a3b9a148"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPaperyard_1_1BasicView.html#a54ad71f4576cc74d55f34f55a3b9a148">codeToFlag</a> ($code)</td></tr>
+<tr class="separator:a54ad71f4576cc74d55f34f55a3b9a148"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p>Definition at line <a class="el" href="BasicView_8php_source.html#l00012">12</a> of file <a class="el" href="BasicView_8php_source.html">BasicView.php</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a54ad71f4576cc74d55f34f55a3b9a148"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Paperyard\BasicView::codeToFlag </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="BasicView_8php_source.html#l00030">30</a> of file <a class="el" href="BasicView_8php_source.html">BasicView.php</a>.</p>
+<div class="fragment"><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                                       {</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        $codes = array(</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="stringliteral">&quot;de_DE&quot;</span> =&gt; <span class="stringliteral">&quot;flag-icon-de&quot;</span>,</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="stringliteral">&quot;en_US&quot;</span> =&gt; <span class="stringliteral">&quot;flag-icon-gb&quot;</span>);</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">return</span> $codes[$code];</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div></div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="a4b60d43b5c37d11f33827d5727b9eabd"></a>
 <div class="memitem">
 <div class="memproto">
@@ -153,7 +186,8 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Definition at line <a class="el" href="BasicView_8php_source.html#l00021">21</a> of file <a class="el" href="BasicView_8php_source.html">BasicView.php</a>.</p>
-<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                             {</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">return</span> array(</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <span class="stringliteral">&quot;breadcrumbs&quot;</span> =&gt; $this-&gt;breadcrumbs,</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="stringliteral">&quot;pageScript&quot;</span> =&gt; $this-&gt;pageScript,</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="stringliteral">&quot;plugins&quot;</span> =&gt; $this-&gt;plugins</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        );</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div></div><!-- fragment -->
+<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                             {</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">return</span> array(</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            <span class="stringliteral">&quot;breadcrumbs&quot;</span> =&gt; $this-&gt;breadcrumbs,</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="stringliteral">&quot;pageScript&quot;</span> =&gt; $this-&gt;pageScript,</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="stringliteral">&quot;language&quot;</span> =&gt; $this-&gt;<a class="code" href="classPaperyard_1_1BasicView.html#a54ad71f4576cc74d55f34f55a3b9a148">codeToFlag</a>($_SESSION[<span class="stringliteral">&#39;lang-code&#39;</span>]),</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="stringliteral">&quot;plugins&quot;</span> =&gt; $this-&gt;plugins</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        );</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div><div class="ttc" id="classPaperyard_1_1BasicView_html_a54ad71f4576cc74d55f34f55a3b9a148"><div class="ttname"><a href="classPaperyard_1_1BasicView.html#a54ad71f4576cc74d55f34f55a3b9a148">Paperyard\BasicView\codeToFlag</a></div><div class="ttdeci">codeToFlag($code)</div><div class="ttdef"><b>Definition:</b> <a href="BasicView_8php_source.html#l00030">BasicView.php:30</a></div></div>
+</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>

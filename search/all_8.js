@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['get',['get',['../classPaperyard_1_1Views_1_1ShellLogView.html#ab4de17c2a0e6406cd3393b33716fb778',1,'Paperyard::Views::ShellLogView']]],
   ['getactivearchiverules',['getActiveArchiveRules',['../classdbHandler.html#ab5c91e1571dd5e0e6d0eefaacd784dec',1,'dbHandler']]],
   ['getactiverecipients',['getActiveRecipients',['../classdbHandler.html#ae4ed0c1296d1ed44aec230514a771cbe',1,'dbHandler']]],
   ['getactivesenders',['getActiveSenders',['../classdbHandler.html#a621f4ff95a91a2c397b19bbbb011c072',1,'dbHandler']]],

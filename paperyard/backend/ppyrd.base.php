@@ -25,6 +25,7 @@
 			$this->db = $db;
 			$this->output("checking setup");
 
+			// checks that all relevant directories have been mounted.
 			$warning = array();
 			if (file_exists('/data/scan/paperyardDirectoryNotMounted.txt'))
 			{

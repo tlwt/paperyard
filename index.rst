@@ -10,6 +10,19 @@ Welcome to paperyard's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+Back-end
+========
+needs some description
+
+* scanner
+* namer
+* sorter
+
+
+front-end
+=========
+
+needs some description as well
 
 
 Indices and tables

@@ -1,9 +1,7 @@
 # Welcome to paperyard's documentation!
 
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+the source code can be found at: https://github.com/tlwt/paperyard
+The code documentation (doygen) can be found at: https://tlwt.github.io/paperyard/index.html
 
 ## Back-end
 

@@ -11,5 +11,5 @@ Most of the code is written in PHP.
 
 ## Links
 
-* the source code can be found at:  (https://github.com/tlwt/paperyard)
-* The code documentation (doygen) can be found at:   (https://tlwt.github.io/paperyard/index.html)
+* the source code can be found at: [Github](https://github.com/tlwt/paperyard/)
+* The code documentation (doygen) can be found at: https://tlwt.github.io/paperyard/index.html

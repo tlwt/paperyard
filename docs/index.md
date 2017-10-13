@@ -1,7 +1,13 @@
-# Welcome to paperyard's documentation!
+Welcome to paperyard's documentation!
 
-## whats paperyard
+## What is paperyard
 It is a tool which takes a scanned document, turns it into a searchable PDF documents and builds up a meaningful name based on the content of the document.
+
+## What does it consist of
+
+Since paperyard uses multiple existing tools and would be difficult to set up itself, we utilize docker to combine all tooling.
+
+Most of the code is written in PHP.
 
 ## Links
 

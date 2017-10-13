@@ -5,5 +5,5 @@ It is a tool which takes a scanned document, turns it into a searchable PDF docu
 
 ## Links
 
-* the source code can be found at:  [https://github.com/tlwt/paperyard]
-* The code documentation (doygen) can be found at:   [https://tlwt.github.io/paperyard/index.html]
+* the source code can be found at:  (https://github.com/tlwt/paperyard)
+* The code documentation (doygen) can be found at:   (https://tlwt.github.io/paperyard/index.html)

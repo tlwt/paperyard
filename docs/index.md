@@ -20,4 +20,4 @@ Most of the code is written in PHP.
 
 ## License
 
-[See here ](https://github.com/tlwt/paperyard#license)
+[See here](https://github.com/tlwt/paperyard#license)

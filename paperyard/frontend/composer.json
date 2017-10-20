@@ -21,7 +21,8 @@
         "monolog/monolog": "^1.17",
         "slim/twig-view": "^2.3",
         "twig/extensions": "^1.5",
-        "anpk12/sysinfo": "dev-master"
+        "anpk12/sysinfo": "dev-master",
+        "howtomakeaturn/pdfinfo": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.8 < 6.0"

@@ -5,7 +5,7 @@ namespace Paperyard\Views;
 /**
  * Class IndexView
  *
- * Loads dashboard informations and provide it to through the render function.
+ * Loads dashboard information and provide it to through the render function.
  *
  * @package Paperyard\Views
  */

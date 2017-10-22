@@ -1,6 +1,7 @@
 <?php
 
 namespace Paperyard\Views;
+
 use Paperyard\BasicView;
 
 class RulesSubjectsView extends BasicView
@@ -17,6 +18,11 @@ class RulesSubjectsView extends BasicView
         $this->plugins = ["clickable-row"];
     }
 
+    /**
+     * render
+     *
+     * @return array data to render the view
+     */
     public function render()
     {
         return array(
@@ -25,6 +31,13 @@ class RulesSubjectsView extends BasicView
         );
     }
 
+    /**
+     * getSubjectRules
+     *
+     * Load all rules sorted by name and status from database.
+     *
+     * @return array
+     */
     private function getSubjectRules()
     {
         $results = $this->db->query("SELECT * FROM rule_subjects ORDER BY isActive DESC, foundWords ASC");

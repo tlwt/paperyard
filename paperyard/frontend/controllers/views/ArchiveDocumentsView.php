@@ -3,9 +3,17 @@
 
 namespace Paperyard\Views;
 
+use Paperyard\BasicView;
 use Paperyard\ArchiveDocument;
 
-class ArchiveDocumentsView extends \Paperyard\BasicView
+/**
+ * Class ArchiveDocumentsView
+ *
+ * Loads infomation about an archive and provide it to through the render function.
+ *
+ * @package Paperyard\Views
+ */
+class ArchiveDocumentsView extends BasicView
 {
 
     /** @var string current path to archive with respect to archive basepath */
@@ -33,6 +41,7 @@ class ArchiveDocumentsView extends \Paperyard\BasicView
         $previous_breadcrumb = null;
         foreach($archive_breadcrumbs as $archive_breadcrumb){
 
+            // preserve previous breadcrumb to build current url
             $this->breadcrumbs[] = [$archive_breadcrumb, "/docs/archive" . $previous_breadcrumb . "/" . $archive_breadcrumb];
             $previous_breadcrumb .= DIRECTORY_SEPARATOR . $archive_breadcrumb;
         }
@@ -40,7 +49,7 @@ class ArchiveDocumentsView extends \Paperyard\BasicView
     }
 
     /**
-     * Render
+     * render
      *
      * @return array data to render the view
      */
@@ -77,6 +86,10 @@ class ArchiveDocumentsView extends \Paperyard\BasicView
     }
 
     /**
+     * getFiles
+     *
+     * Find all pdf files in current archive (folder).
+     *
      * @return ArchiveDocument[] PDFs
      */
     private function _getFiles() {

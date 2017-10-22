@@ -1,10 +1,13 @@
 <?php
 
 namespace Paperyard\Views;
+
 use Paperyard\BasicView;
+
 
 class RulesArchiveView extends BasicView
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -16,6 +19,11 @@ class RulesArchiveView extends BasicView
         $this->plugins = ["clickable-row"];
     }
 
+    /**
+     * render
+     *
+     * @return array data to render the view
+     */
     public function render()
     {
         return array(
@@ -24,6 +32,13 @@ class RulesArchiveView extends BasicView
         );
     }
 
+    /**
+     * getArchiveRules
+     *
+     * Load all rules sorted by name and status from database.
+     *
+     * @return array
+     */
     private function getArchiveRules()
     {
         $results = $this->db->query("SELECT * FROM rule_archive ORDER BY isActive DESC, toFolder ASC");

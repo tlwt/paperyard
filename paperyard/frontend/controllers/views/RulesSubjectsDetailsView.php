@@ -27,7 +27,7 @@ class RulesSubjectsDetailsView extends BasicView
     public function render() {
         return array(
             "parent" => parent::render(),
-            "subject" => $this->_subject->toArray()
+            "rule" => $this->_subject->toArray()
         );
     }
 }

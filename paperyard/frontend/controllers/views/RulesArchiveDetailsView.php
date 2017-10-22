@@ -20,7 +20,7 @@ class RulesArchiveDetailsView extends BasicView
     public function render() {
         return array(
             "parent" => parent::render(),
-            "archive" => $this->_archive->toArray()
+            "rule" => $this->_archive->toArray()
         );
     }
 }

@@ -1,0 +1,89 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        <div class="animated fadeIn">
+
+            <div class="row">
+
+
+                <div class="col-lg-3">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <img class="img-fluid" src="/thumbnail/{{ document.identifier }}">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="card">
+                        <div class="card-header">
+                            {% trans "Document Details" %}
+                        </div>
+                        <div class="card-body">
+                            <form action="" method="post" class="form-horizontal">
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="hf-email"><strong>{% trans "Subject" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" value="{{ document.subject }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="hf-password"><strong>{% trans "Company" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" value="{{ document.company }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="hf-password"><strong>{% trans "Tags" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" value="{{ document.tags }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="hf-password"><strong>{% trans "Recipient" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" value="{{ document.recipient }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="hf-password"><strong>{% trans "Price" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" value="{{ document.price }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="hf-password"><strong>{% trans "Date" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" value="{{ document.date }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-3 form-control-label"><strong>{% trans "Pages" %}</strong></div>
+                                    <div class="col-md-9">{{ document.pages }}</div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-3 form-control-label"><strong>{% trans "Size" %}</strong></div>
+                                    <div class="col-md-9">{{ document.size }}</div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-3 form-control-label"><strong>{% trans "Hash" %}</strong></div>
+                                    <div class="col-md-9">{{ document.hash }}</div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div><!-- /.row -->
+        </div>
+
+    </div>
+
+{% endblock %}

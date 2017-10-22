@@ -36,6 +36,9 @@ class ArchiveDocumentsView extends BasicView
             [_("Archive"), "/docs/archive"]
         );
 
+        // because we cant wrap tr in a
+        $this->plugins = ["clickable-row"];
+
         // add current archive to breadcrumbs with links
         $archive_breadcrumbs = explode("/", $archive_path);
         $previous_breadcrumb = null;

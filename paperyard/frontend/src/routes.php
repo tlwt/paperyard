@@ -16,8 +16,13 @@ $app->get('/docs', function (Request $request, Response $response, array $args) 
 });
 
 $app->get('/docs/archive[/{path:.*}]', function (Request $request, Response $response, array $args) {
-    $documentsArchiveView = new Paperyard\Views\ArchiveDocumentsView($request->getAttribute('path'));
-    return $this->view->render($response, 'documents_archive.twig', $documentsArchiveView->render());
+    $archiveDocumentsView = new Paperyard\Views\ArchiveDocumentsView($request->getAttribute('path'));
+    return $this->view->render($response, 'documents_archive.twig', $archiveDocumentsView->render());
+});
+
+$app->get('/docs/{path}', function (Request $request, Response $response, array $args) {
+    $archiveDocumentsDetailsView = new Paperyard\Views\ArchiveDocumentsDetailsView(base64_decode($request->getAttribute('path')));
+    return $this->view->render($response, 'document_detail.twig', $archiveDocumentsDetailsView->render());
 });
 
 $app->get('/thumbnail/{path}', function (Request $request, Response $response, array $args) {

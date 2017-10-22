@@ -53,6 +53,10 @@ class ArchiveDocument
     /** @var string base64 string of filepath starting without / */
     public $identifier;
 
+    /** @var string sha256 hash of file contents */
+    public $hash;
+
+
     /** @var string Absolute or relative path to document. */
     private $_full_path;
 
@@ -82,6 +86,23 @@ class ArchiveDocument
         $this->tags = $this->_parseAttribute(self::INDEX_TAGS);
         $this->pages = $this->_getNumberOfPages($full_path);
         $this->identifier = base64_encode($full_path);
+        $this->hash = hash_file("sha256", $full_path);
+    }
+
+    public function toArray() {
+        return array(
+            "name" => $this->name,
+            "size" => $this->size,
+            "date" => $this->date,
+            "company" => $this->company,
+            "subject" => $this->subject,
+            "recipient" => $this->recipient,
+            "price" => $this->price,
+            "tags" => $this->tags,
+            "pages" => $this->pages,
+            "identifier" => $this->identifier,
+            "hash" => $this->hash
+        );
     }
 
     /**
@@ -142,5 +163,4 @@ class ArchiveDocument
         $factor = floor((strlen($bytes) - 1) / 3);
         return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . ' ' . @$size[$factor];
     }
-
 }

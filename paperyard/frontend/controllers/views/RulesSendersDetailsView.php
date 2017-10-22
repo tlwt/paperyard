@@ -14,6 +14,7 @@ use Paperyard\RuleSenders;
  */
 class RulesSendersDetailsView extends BasicView
 {
+
     /** @var RuleSenders object of current rule */
     private $_rule;
 

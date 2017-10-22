@@ -9,7 +9,10 @@ class RulesSendersView extends BasicView
     {
         parent::__construct();
 
-        $this->breadcrumbs = ["Rules", "Senders"];
+        $this->breadcrumbs = array(
+            ["Rules", ""],
+            ["Senders", ""]
+        );
         $this->plugins = ["clickable-row"];
     }
 

@@ -13,7 +13,11 @@ class RulesRecipientsDetailsView extends BasicView
         # call parent for db init
         parent::__construct();
 
-        $this->breadcrumbs = ["Rules", "Recipients", "Detail"];
+        $this->breadcrumbs = array(
+            ["Rules", ""],
+            ["Recipients", ""],
+            ["Detail", ""]
+        );
         $this->_recipient = \Paperyard\RuleRecipients::fromId($ruleId);
     }
 

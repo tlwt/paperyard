@@ -20,7 +20,11 @@ class RulesSendersDetailsView extends BasicView
         # call parent for db init
         parent::__construct();
 
-        $this->breadcrumbs = ["Rules", "Senders", "Detail"];
+        $this->breadcrumbs = array(
+            ["Rules", ""],
+            ["Senders", ""],
+            ["Detail", ""]
+        );
         $this->_rule = \Paperyard\RuleSenders::fromId($ruleId);
     }
 

@@ -13,7 +13,11 @@ class RulesArchiveDetailsView extends BasicView
         # call parent for db init
         parent::__construct();
 
-        $this->breadcrumbs = ["Rules", "Archive", "Detail"];
+        $this->breadcrumbs = array(
+            ["Rules", ""],
+            ["Archive", ""],
+            ["Detail", ""]
+        );
         $this->_archive = \Paperyard\RuleArchive::fromId($ruleId);
     }
 

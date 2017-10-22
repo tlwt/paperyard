@@ -10,7 +10,10 @@ class RulesSubjectsView extends BasicView
     {
         parent::__construct();
 
-        $this->breadcrumbs = ["Rules", "Subjects"];
+        $this->breadcrumbs = array(
+            ["Rules", ""],
+            ["Subjects", ""]
+        );
         $this->plugins = ["clickable-row"];
     }
 

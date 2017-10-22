@@ -20,7 +20,11 @@ class RulesSubjectsDetailsView extends BasicView
         # call parent for db init
         parent::__construct();
 
-        $this->breadcrumbs = ["Rules", "Subjects", "Detail"];
+        $this->breadcrumbs = array(
+            [_("Rules"), ""],
+            [_("Subjects"), ""],
+            [_("Detail"), ""]
+        );
         $this->_subject = \Paperyard\RuleSubjects::fromId($ruleId);
     }
 

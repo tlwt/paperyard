@@ -12,8 +12,8 @@ class ShellLogView extends BasicView
 
         # index view, no breadcrumbs
         $this->breadcrumbs = array(
-            ["Extras", ""],
-            ["Shell Log", ""]
+            [_("Extras"), ""],
+            [_("Shell Log"), ""]
         );
         $this->pageScript = "shell-log";
     }

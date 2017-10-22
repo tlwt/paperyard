@@ -10,8 +10,8 @@ class RulesRecipientsView extends BasicView
         parent::__construct();
 
         $this->breadcrumbs = array(
-            ["Rules", ""],
-            ["Recipients", ""]
+            [_("Rules"), ""],
+            [_("Recipients"), ""]
         );
         $this->plugins = ["clickable-row"];
     }

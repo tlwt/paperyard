@@ -10,8 +10,8 @@ class RulesArchiveView extends BasicView
         parent::__construct();
 
         $this->breadcrumbs = array(
-            ["Rules", ""],
-            ["Archive", ""]
+            [_("Rules"), ""],
+            [_("Archive"), ""]
         );
         $this->plugins = ["clickable-row"];
     }

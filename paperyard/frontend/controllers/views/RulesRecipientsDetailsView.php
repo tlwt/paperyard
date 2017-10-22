@@ -14,9 +14,9 @@ class RulesRecipientsDetailsView extends BasicView
         parent::__construct();
 
         $this->breadcrumbs = array(
-            ["Rules", ""],
-            ["Recipients", ""],
-            ["Detail", ""]
+            [_("Rules"), ""],
+            [_("Recipients"), ""],
+            [_("Detail"), ""]
         );
         $this->_recipient = \Paperyard\RuleRecipients::fromId($ruleId);
     }

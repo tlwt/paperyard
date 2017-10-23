@@ -25,8 +25,21 @@ INSERT INTO tmp_logs SELECT id, execDate, oldFileName, newFileName, fileContent,
 DROP TABLE logs;
 
 -- recreate original table
-CREATE TABLE logs AS SELECT * FROM tmp_logs;
+CREATE TABLE logs(
+		   id INTEGER PRIMARY KEY AUTOINCREMENT,
+			 `execDate` TEXT DEFAULT (datetime('NOW')),
+			 oldFileName TEXT,
+		   newFileName TEXT,
+		   fileContent TEXT,
+		   log TEXT,
+       fileHash TEXT,
+       hashFunction TEXT,
+       updated_at TEXT,
+       created_at TEXT );
 
+ -- moving data
+ INSERT INTO logs SELECT * FROM tmp_logs;
+ 
 -- drop tmp table
 DROP TABLE tmp_logs;
 

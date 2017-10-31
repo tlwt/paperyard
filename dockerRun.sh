@@ -1,18 +1,21 @@
+# where do you store your documents
+paperyardDocRoot=$HOME/Archiv/10_System
+
 # files which have OCRed yet - will be moved to next folder
-unocredFiles=$HOME/Archiv/10_System/10_scan
+unocredFiles=$paperyardDocRoot/10_scan
 
 # files which have not been processed yet. PDFs with OCR, but no useful name
-unnamedFiles=$HOME/Archiv/10_System/20_with_ocr
+unnamedFiles=$paperyardDocRoot/20_with_ocr
 
 # files which have been renamed
-renamedFiles=$HOME/Archiv/10_System/21_renamed_with_paperyard
+renamedFiles=$paperyardDocRoot/21_renamed_with_paperyard
 
 # files which will be sorted
-toSort=$HOME/Archiv/10_System/22_checked_and_to_be_archived
+toSort=$paperyardDocRoot/22_checked_and_to_be_archived
 
 
 # set to true to use local modified app instead of current published version from github
-localDevelopment=true
+localDevelopment=false
 
 if $localDevelopment ; then
   echo local

@@ -2,11 +2,12 @@
 # for production we need to pull the current repository
 echo "setting up paperyard"
 if [ ! -d "/var/www/html/backend" ]; then
- mkdir -p /tmp
+ mkdir -p /paperyardSrc
  mkdir -p /var/www/html
- cd /tmp
+ cd /paperyardSrc
  git clone https://github.com/tlwt/paperyard.git
- mv paperyard/paperyard/* /var/www/html/
+ rm -rf /var/www/html
+ ln -s /paperyardSrc/paperyard/paperyard /var/www/html
 fi
 
 # starting PHP & nginx
@@ -17,6 +18,9 @@ service php7.0-fpm start
 echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.namer.php" >>  mycron
 echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.scanner.php" >>  mycron
 echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.sorter.php" >>  mycron
+echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.sorter.php" >>  mycron
+echo "*/15 * * * * su -s /bin/sh -c 'cd /paperyardSrc/paperyard && /usr/bin/git pull -q origin master' "  >>  mycron
+
 crontab mycron
 /etc/init.d/cron start
 

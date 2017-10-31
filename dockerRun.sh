@@ -25,8 +25,8 @@ localDevelopment=false
 if $localDevelopment ; then
   echo local
   docker run --name ppyrd --rm \
-      -v "$(pwd)/data/database:/data/database" \
       -v "$(pwd)/paperyard:/var/www/html/" \
+      -v "$database:/data/database" \
       -v "$unocredFiles:/data/scan" \
       -v "$unnamedFiles:/data/inbox" \
       -v "$renamedFiles:/data/outbox" \

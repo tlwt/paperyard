@@ -30,6 +30,7 @@ composer install --no-interaction &>/dev/null
 
 
 # creating folder structure in case it does not exist
+mkdir -p /data/database
 mkdir -p /data/scan
 mkdir -p /data/scan/error
 mkdir -p /data/scan/archive

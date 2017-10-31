@@ -13,6 +13,11 @@ renamedFiles=$paperyardDocRoot/21_renamed_with_paperyard
 # files which will be sorted
 toSort=$paperyardDocRoot/22_checked_and_to_be_archived
 
+#where shall the database be stored?
+database=$paperyardDocRoot/01_ppyrd
+
+#which port shall be exposed?
+port=80
 
 # set to true to use local modified app instead of current published version from github
 localDevelopment=false
@@ -26,16 +31,16 @@ if $localDevelopment ; then
       -v "$unnamedFiles:/data/inbox" \
       -v "$renamedFiles:/data/outbox" \
       -v "$toSort:/data/sort" \
-      -p 80:80 \
+      -p "$port:80" \
       -i -t ppyrd_image
 else
   echo from github
   docker run --name ppyrd --rm \
-      -v "$(pwd)/data/database:/data/database" \
+      -v "$database:/data/database" \
       -v "$unocredFiles:/data/scan" \
       -v "$unnamedFiles:/data/inbox" \
       -v "$renamedFiles:/data/outbox" \
       -v "$toSort:/data/sort" \
-      -p 80:80 \
+      -p "$port:80" \
       -i -t ppyrd_image
 fi

@@ -66,6 +66,9 @@ RUN touch /data/outbox/paperyardDirectoryNotMounted.txt
 RUN touch /data/sort/paperyardDirectoryNotMounted.txt
 RUN touch /data/database/paperyardDirectoryNotMounted.txt
 
+# make internal folder accessible for webserver
+RUN chmod -R 777 /data
+
 # adding start script
 ADD /paperyard/start.sh /
 RUN chmod 755 /start.sh

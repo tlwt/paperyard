@@ -49,19 +49,18 @@ RUN ln -s /var/www/html /www
 EXPOSE 80
 
 # files for checking if the needed directories have been mounded correctly
-RUN mkdir -p /data/scan
-RUN mkdir -p /data/scan/error
-RUN mkdir -p /data/scan/archive
-RUN mkdir -p /data/inbox
-RUN mkdir -p /data/outbox
-RUN mkdir -p /data/sort
-RUN mkdir -p /data/database
-
-RUN touch /data/scan/paperyardDirectoryNotMounted.txt
-RUN touch /data/inbox/paperyardDirectoryNotMounted.txt
-RUN touch /data/outbox/paperyardDirectoryNotMounted.txt
-RUN touch /data/sort/paperyardDirectoryNotMounted.txt
-RUN touch /data/database/paperyardDirectoryNotMounted.txt
+RUN mkdir -p /data/scan \
+    && mkdir -p /data/scan/error \
+    && mkdir -p /data/scan/archive \
+    && mkdir -p /data/inbox \
+    && mkdir -p /data/outbox \
+    && mkdir -p /data/sort \
+    && mkdir -p /data/database \
+    && touch /data/scan/paperyardDirectoryNotMounted.txt \
+    && touch /data/inbox/paperyardDirectoryNotMounted.txt \
+    && touch /data/outbox/paperyardDirectoryNotMounted.txt \
+    && touch /data/sort/paperyardDirectoryNotMounted.txt \
+    && touch /data/database/paperyardDirectoryNotMounted.txt
 
 # adding start script
 ADD /paperyard/start.sh /

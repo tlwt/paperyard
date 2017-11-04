@@ -5,7 +5,7 @@ use Slim\Http\Response;
 
 // Routes
 
-$app->get('/', Paperyard\Controllers\IndexView::class);
+$app->get('/', Paperyard\Controllers\Misc\Index::class);
 
 //
 //$app->get('/docs', function (Request $request, Response $response, array $args) {

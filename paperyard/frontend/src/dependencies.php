@@ -61,10 +61,11 @@ $container['notFoundHandler'] = function ($c) {
 };
 
 // index callable
-$container[\Paperyard\Controllers\IndexView::class] = function($c) {
+$container[\Paperyard\Controllers\Misc\Index::class] = function($c) {
     $view = $c->get('view');
     $logger = $c->get('logger');
-    return new Paperyard\Controllers\IndexView($view, $logger);
+    $flash = $c->get('flash');
+    return new Paperyard\Controllers\Misc\Index($view, $logger, $flash);
 };
 
 // recipient callables

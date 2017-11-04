@@ -42,10 +42,13 @@
                 <div class="card">
                     <div class="card-header">
                         <strong>{% trans "Archive" %}</strong>
+                        <div class="float-right">
+                            <input type="text" class="searchable form-control" placeholder="{% trans "What you looking for?" %}">
+                        </div>
                     </div>
                     <div class="card-body">
                         {% if files|length > 0 %}
-                        <table class="table table-hover table-bordered table-striped">
+                        <table class="table table-hover table-bordered table-striped searchable">
                             <thead class="thead-default">
                                 <tr>
                                     <th>{% trans "Subject" %}</th>
@@ -61,10 +64,10 @@
                                 <tr class='clickable-row'  data-url="/docs/{{ file.identifier }}">
                                     <td>{{ file.subject }}</td>
                                     <td>{{ file.company }}</td>
-                                    <td>{{ file.date }}</td>
+                                    <td class="searchable-ignore">{{ file.date }}</td>
                                     <td>{{ file.tags }}</td>
-                                    <td>{{ file.pages }}</td>
-                                    <td>{{ file.size }}</td>
+                                    <td class="searchable-ignore">{{ file.pages }}</td>
+                                    <td class="searchable-ignore">{{ file.size }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

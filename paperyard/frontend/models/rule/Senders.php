@@ -27,6 +27,7 @@ class Senders extends Rule
         ]
     ];
 
+    /** @var array maps internal field names to readable labels */
     protected $labels = [
         'foundWords' => 'Needles',
         'fileCompany' => 'Company',

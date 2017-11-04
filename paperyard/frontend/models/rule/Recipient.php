@@ -23,6 +23,7 @@ class Recipient extends Rule
         ]
     ];
 
+    /** @var array maps internal field names to readable labels */
     protected $labels = [
         'recipientName' => 'Long Name',
         'shortNameForFile' => 'Name For File',

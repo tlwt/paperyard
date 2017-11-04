@@ -7,7 +7,7 @@ use Valitron\Validator;
 
 class Rule extends Model
 {
-    /** matches AlphaNum, umlauts and commas */
+    /** matches Alphanum, special german chars */
     const TAG_REGEX = '/^([ÄäÜüÖöß\sa-zA-Z0-9]+,)*[ÄäÜüÖöß\sa-zA-Z0-9]+$/';
 
     /** @var array preset by overwrite */

@@ -29,5 +29,10 @@ class Subjects extends Rule
     ];
 
     protected $labels = [
+        'foundWords' => 'Needles',
+        'fileSubject' => 'Subject',
+        'subjectScore' => 'Score',
+        'tags' => 'Tags',
+        'isActive' => 'Status'
     ];
 }

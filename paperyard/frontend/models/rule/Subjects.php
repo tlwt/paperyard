@@ -14,7 +14,6 @@ class Subjects extends Rule
     protected $rules = [
         'required' => [
             ['foundWords'],
-            ['foundCompany'],
             ['fileSubject'],
             ['subjectScore']
         ],

@@ -9,8 +9,18 @@ use Slim\Flash\Messages;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+/**
+ * Class Archives
+ * @package Paperyard\Controllers\Rule
+ */
 class Archives extends BasicController
 {
+    /**
+     * Archives constructor.
+     * @param Twig $view
+     * @param LoggerInterface $logger
+     * @param Messages $flash
+     */
     public function __construct(Twig $view, LoggerInterface $logger, Messages $flash)
     {
         $this->view = $view;
@@ -21,6 +31,12 @@ class Archives extends BasicController
         $this->registerPlugin('bootstrap-notify.min');
     }
 
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
     public function __invoke(Request $request, Response $response, $args)
     {
 

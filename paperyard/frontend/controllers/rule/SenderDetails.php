@@ -9,11 +9,21 @@ use Slim\Flash\Messages;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+/**
+ * Class SenderDetails
+ * @package Paperyard\Controllers\Rule
+ */
 class SenderDetails extends BasicController
 {
     /** @var \Paperyard\Models\Rule\Senders */
     private $rule;
 
+    /**
+     * SenderDetails constructor.
+     * @param Twig $view
+     * @param LoggerInterface $logger
+     * @param Messages $flash
+     */
     public function __construct(Twig $view, LoggerInterface $logger, Messages $flash)
     {
         $this->view = $view;
@@ -23,6 +33,12 @@ class SenderDetails extends BasicController
         $this->registerPlugin('bootstrap-notify.min');
     }
 
+    /**
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response|static
+     */
     public function __invoke(Request $request, Response $response, $args)
     {
         // find model from id

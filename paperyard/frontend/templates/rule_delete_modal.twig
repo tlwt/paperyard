@@ -12,7 +12,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "No" %}</button>
-                <form action="/rules/{{ parent.breadcrumbs[1]|lower }}/{{ rule.id }}/delete" method="post">
+                <form action="/rules/{{ type }}/delete" method="post">
+                    <input type="hidden" name="ruleId" value="{{ rule.id }}">
                     <button type="submit" class="btn btn-danger">{% trans "Yes" %}</button>
                 </form>
             </div>

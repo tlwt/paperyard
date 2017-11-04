@@ -1,0 +1,70 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="animated fadeIn">
+
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <form action="/rules/archives/save" method="post">
+                        <div class="card-header">
+                            {% trans "Rule Details" %}
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="toFolder"><strong>{% trans "Target Folder" %}</strong></label>
+                                <input type="text" class="form-control" name="toFolder" id="toFolder" value="{{ rule.toFolder }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="company"><strong>{% trans "Company" %}</strong></label>
+                                <input type="text" class="form-control" name="company" id="company" value="{{ rule.company }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject"><strong>{% trans "Subject" %}</strong></label>
+                                <input type="text" class="form-control" name="subject" id="subject" value="{{ rule.subject }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient"><strong>{% trans "Recipient" %}</strong></label>
+                                <input type="text" class="form-control" name="recipient" id="recipient" value="{{ rule.recipient }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="tags"><strong>{% trans "Tags" %}</strong></label>
+                                <input type="text" class="form-control" name="tags" id="tags" value="{{ rule.tags }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="activeInput"><strong>{% trans "Status" %}</strong></label><br>
+                                <label class="switch switch-xl switch-default switch-info">
+                                    <input type="hidden" name="isActive" value="off">
+                                    <input type="checkbox" class="switch-input" name="isActive" id="isActive"{% if rule.isActive == 1 %} checked{% endif %}>
+                                    <span class="switch-label"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <input type="hidden" name="ruleId" value="{{ rule.id }}">
+                            <button type="submit" class="btn btn-md btn-success">{% trans "save" %}</button>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                    {% trans "delete" %}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div><!-- /.row -->
+    </div>
+
+</div>
+
+{% include 'rule_delete_modal.twig' with {'type': 'archives'} %}
+
+{% endblock %}

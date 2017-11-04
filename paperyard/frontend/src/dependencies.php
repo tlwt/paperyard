@@ -68,6 +68,14 @@ $container[\Paperyard\Controllers\Misc\Index::class] = function($c) {
     return new Paperyard\Controllers\Misc\Index($view, $logger, $flash);
 };
 
+// archive callables
+$container[\Paperyard\Controllers\Archive\Documents::class] = function ($c) {
+    $view = $c->get('view');
+    $logger = $c->get('logger');
+    $flash = $c->get('flash');
+    return new Paperyard\Controllers\Archive\Documents($view, $logger, $flash);
+};
+
 // recipient callables
 $container[\Paperyard\Controllers\Rule\Recipients::class] = function($c) {
     $view = $c->get('view');

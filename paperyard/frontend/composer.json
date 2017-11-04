@@ -41,6 +41,7 @@
             "Paperyard\\Controllers\\": "controllers/",
             "Paperyard\\Controllers\\Rule\\": "controllers/rule/",
             "Paperyard\\Controllers\\Misc\\": "controllers/misc/",
+            "Paperyard\\Controllers\\Archive\\": "controllers/archive/",
             "Paperyard\\Models\\": "models/",
             "Paperyard\\Models\\Rule\\": "models/rule",
             "Paperyard\\Models\\Log\\": "models/log",

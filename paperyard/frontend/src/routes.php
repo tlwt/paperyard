@@ -7,17 +7,8 @@ use Slim\Http\Response;
 
 $app->get('/', Paperyard\Controllers\Misc\Index::class);
 
-//
-//$app->get('/docs', function (Request $request, Response $response, array $args) {
-//    $indexView = new Paperyard\Views\IndexView();
-//    return $this->view->render($response, 'index.twig', $indexView->render());
-//});
-//
-//$app->get('/docs/archive[/{path:.*}]', function (Request $request, Response $response, array $args) {
-//    $archiveDocumentsView = new Paperyard\Views\ArchiveDocumentsView($request->getAttribute('path'));
-//    return $this->view->render($response, 'documents_archive.twig', $archiveDocumentsView->render());
-//});
-//
+$app->get('/archive[/{path:.*}]', Paperyard\Controllers\Archive\Documents::class);
+
 //$app->get('/docs/{path}', function (Request $request, Response $response, array $args) {
 //    $archiveDocumentsDetailsView = new Paperyard\Views\ArchiveDocumentsDetailsView(base64_decode($request->getAttribute('path')));
 //    return $this->view->render($response, 'document_detail.twig', $archiveDocumentsDetailsView->render());

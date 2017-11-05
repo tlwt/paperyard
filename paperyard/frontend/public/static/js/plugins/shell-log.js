@@ -1,19 +1,14 @@
 $(function() {
 
-    window.paceOptions = {
-        ajax: false,
-        restartOnRequestAfter: false,
-    };
-
     // get the newest 40 entries
     lastId = 0;
-    updateShell()
+    updateShell(40,0);
 
     // start timer to refresh every second
     setInterval(function(){ updateShell(40,lastId); }, 2000);
     function updateShell(count, since) {
         $.ajax({
-            url: '/shell-log/' + count + '/' + since,
+            url: '/shell/' + count + '/' + since,
             type: 'GET',
             dataType:'JSON',
             success: function(data) {

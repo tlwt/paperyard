@@ -1,6 +1,6 @@
 <?php
 
-namespace Paperyard\Controllers\Rule;
+namespace Paperyard\Controllers\Misc;
 
 use Paperyard\Controllers\BasicController;
 use Slim\Views\Twig;
@@ -17,16 +17,18 @@ class Shell extends BasicController
         $this->logger = $logger;
         $this->flash = $flash;
 
-        $this->registerPlugin('clickable-row');
-        $this->registerPlugin('bootstrap-notify.min');
+        $this->registerPlugin('shell-log');
     }
 
     public function __invoke(Request $request, Response $response, $args)
     {
-
-        // show rule list
-        $this->view->render($response, 'rule/archives.twig', $this->render());
-        return $response;
+        if ($request->isXhr()) {
+            // provide entities
+            return $response->withJson(\Paperyard\Models\Log\Shell::where('id', '>=', (int)$request->getAttribute('since'))->orderBy('id', 'DESC')->take((int)$request->getAttribute('count'))->get());
+        } else {
+            // provide view
+            $this->view->render($response, 'misc/shell.twig', $this->render());
+        }
     }
 
     /**
@@ -37,7 +39,6 @@ class Shell extends BasicController
     {
         return array(
             'plugins' => parent::getPlugins(),
-            'rules' => \Paperyard\Models\Rule\Archive::all(),
             'languageFlag' => parent::getLanguageFlag()
         );
     }

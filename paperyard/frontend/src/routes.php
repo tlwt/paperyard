@@ -41,5 +41,5 @@ include "recipients.rules.router.php";
 include "subjects.rules.router.php";
 
 include "archive.rules.router.php";
-//
-//include "routes_log.php";
+
+include "log.shell.router.php";

@@ -42,9 +42,6 @@
                 <div class="card">
                     <div class="card-header">
                         <strong>{% trans "Archive" %}</strong>
-                        <div class="float-right">
-                            <input type="text" class="searchable form-control" placeholder="{% trans "What you looking for?" %}">
-                        </div>
                     </div>
                     <div class="card-body">
                         {% if files|length > 0 %}
@@ -53,10 +50,10 @@
                                 <tr>
                                     <th>{% trans "Subject" %}</th>
                                     <th>{% trans "Company" %}</th>
-                                    <th>{% trans "Date" %}</th>
+                                    <th class="column-type-date">{% trans "Date" %}</th>
                                     <th>{% trans "Tags" %}</th>
                                     <th>{% trans "Pages" %}</th>
-                                    <th>{% trans "Size" %}</th>
+                                    <th class="column-type-file-size">{% trans "Size" %}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,10 +61,10 @@
                                 <tr class='clickable-row'  data-url="/docs/{{ file.identifier }}">
                                     <td>{{ file.subject }}</td>
                                     <td>{{ file.company }}</td>
-                                    <td class="searchable-ignore">{{ file.date }}</td>
+                                    <td>{{ file.date }}</td>
                                     <td>{{ file.tags }}</td>
-                                    <td class="searchable-ignore">{{ file.pages }}</td>
-                                    <td class="searchable-ignore">{{ file.size }}</td>
+                                    <td>{{ file.pages }}</td>
+                                    <td>{{ file.size }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

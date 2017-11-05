@@ -48,12 +48,12 @@
                 <div class="card">
                     <div class="card-body">
                         {% if rules|length > 0 %}
-                            <table class="table table-striped table-hover table-bordered">
+                            <table class="table table-striped table-hover table-bordered searchable">
                                 <thead class="thead-default">
                                 <tr>
                                     <th>{% trans "Long Name" %}</th>
                                     <th>{% trans "Name For File" %}</th>
-                                    <th>{% trans "Status" %}</th>
+                                    <th class="column-type-status">{% trans "Status" %}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

@@ -60,14 +60,14 @@
                 <div class="card">
                     <div class="card-body">
                         {% if rules|length > 0 %}
-                        <table class="table table-striped table-hover table-bordered">
+                        <table class="table table-striped table-hover table-bordered searchable">
                             <thead class="thead-default">
                             <tr>
                                 <th>{% trans "Needles" %}</th>
                                 <th>{% trans "Company" %}</th>
                                 <th>{% trans "Score" %}</th>
                                 <th>{% trans "Tags" %}</th>
-                                <th>{% trans "Status" %}</th>
+                                <th class="column-type-status">{% trans "Status" %}</th>
                             </tr>
                             </thead>
                             <tbody>

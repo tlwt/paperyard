@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name localhost;
+    server_name _;
     index index.php;
     error_log /root/error.log;
     access_log /root/access.log;

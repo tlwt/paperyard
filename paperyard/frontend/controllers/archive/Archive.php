@@ -14,13 +14,16 @@ use Slim\Http\Response;
  * Class Documents
  * @package Paperyard\Controllers\Archive
  */
-class Documents extends BasicController
+class Archive extends BasicController
 {
-    /** @var string current path to archive with respect to archive basepath */
-    private $archivePath;
-
     /** @var string base path to all archives */
-    private $rootPath = '/data/sort/';
+    private $rootPath = '/data/sort';
+
+    /** @var string current path to archive with respect to archive basepath (without leading slash) */
+    private $archiveRelPath;
+
+    /** @var string full path to archive (without ending slash) */
+    private $archiveFullPath;
 
     /**
      * @param Twig $view
@@ -32,7 +35,6 @@ class Documents extends BasicController
         $this->view = $view;
         $this->logger = $logger;
         $this->flash = $flash;
-
 
         $this->registerPlugin('clickable-row');
         $this->registerPlugin('searchable-table');
@@ -48,9 +50,15 @@ class Documents extends BasicController
      */
     public function __invoke(Request $request, Response $response, $args)
     {
-        $this->archivePath = $request->getAttribute('path');
+        $this->archiveRelPath = $request->getAttribute('path');
+        $this->archiveFullPath = $this->rootPath . $this->archiveRelPath;
 
-        $this->view->render($response, 'archive/documents.twig', $this->render());
+        if (!is_dir($this->archiveFullPath)) {
+            $this->flash->addMessage('error', _('Archive not found.'));
+            return $response->withRedirect('/archive');
+        }
+
+        $this->view->render($response, 'archive/archive.twig', $this->render());
         return $response;
     }
 
@@ -62,7 +70,7 @@ class Documents extends BasicController
         return array(
             'plugins' => parent::getPlugins(),
             'languageFlag' => parent::getLanguageFlag(),
-            //'archives' => $this->getArchives(),
+            'archives' => $this->getArchives(),
             'files' => $this->getFiles()
         );
     }
@@ -75,7 +83,7 @@ class Documents extends BasicController
     private function getArchives()
     {
         // combine to current path
-        $archive_path = $this->rootPath . $this->archivePath;
+        $archive_path = $this->rootPath . $this->archiveRelPath;
 
         // iterate over current folder and get every deeper folder
         $archives = [];
@@ -96,16 +104,15 @@ class Documents extends BasicController
     private function getFiles()
     {
         // searchpattern for current archive
-        $archive_search_pattern = $this->rootPath . $this->archivePath . "/*.pdf";
+        $archive_search_pattern = $this->archiveFullPath . "/*.pdf";
 
         // get files as strings from filesystem
         $pdfs = glob($archive_search_pattern, GLOB_NOSORT);
 
         // convert string elements into ArchiveDocuments objects
         array_walk($pdfs, function (&$pdf) {
-            $pdf = get_object_vars(new Document($pdf));
+            $pdf = (new Document($pdf))->toArray();
         });
-
         return $pdfs;
     }
 }

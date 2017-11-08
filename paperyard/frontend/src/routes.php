@@ -7,13 +7,10 @@ use Slim\Http\Response;
 
 $app->get('/', Paperyard\Controllers\Misc\Index::class);
 
-$app->get('/archive[/{path:.*}]', Paperyard\Controllers\Archive\Documents::class);
+$app->get('/archive[{path:.*}]', Paperyard\Controllers\Archive\Archive::class);
 
-//$app->get('/docs/{path}', function (Request $request, Response $response, array $args) {
-//    $archiveDocumentsDetailsView = new Paperyard\Views\ArchiveDocumentsDetailsView(base64_decode($request->getAttribute('path')));
-//    return $this->view->render($response, 'document_detail.twig', $archiveDocumentsDetailsView->render());
-//});
-//
+$app->get('/doc/{path}', \Paperyard\Controllers\Archive\Details::class);
+
 $app->get('/thumbnail/{path}', \Paperyard\Controllers\Misc\Thumbnail::class);
 
 $app->post('/setlang', function (Request $request, Response $response, array $args) {

@@ -14,14 +14,7 @@ $app->get('/archive[/{path:.*}]', Paperyard\Controllers\Archive\Documents::class
 //    return $this->view->render($response, 'document_detail.twig', $archiveDocumentsDetailsView->render());
 //});
 //
-//$app->get('/thumbnail/{path}', function (Request $request, Response $response, array $args) {
-//    $im = new imagick(base64_decode($request->getAttribute('path')) . '[0]');
-//    $im->setImageFormat('jpg');
-//    $newResponse = $response->withHeader('Content-type', 'application/jpeg');
-//    echo $im;
-//    $im->destroy();
-//    return $newResponse;
-//});
+$app->get('/thumbnail/{path}', \Paperyard\Controllers\Misc\Thumbnail::class);
 
 $app->post('/setlang', function (Request $request, Response $response, array $args) {
     $langCode = $request->getParsedBody()['code'];

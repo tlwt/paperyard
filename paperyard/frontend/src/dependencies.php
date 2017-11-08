@@ -145,8 +145,7 @@ $container[\Paperyard\Controllers\Rule\ArchiveDetails::class] = function ($c) {
 };
 
 // pdf thumbnail generator
-$container[\Paperyard\Helpers\ThumbnailGenerator::class] = function($c) {
-    $view = $c->get('view');
+$container[\Paperyard\Controllers\Misc\Thumbnail::class] = function($c) {
     $logger = $c->get('logger');
-    return new Paperyard\Helpers\ThumbnailGenerator($view, $logger);
+    return new Paperyard\Controllers\Misc\Thumbnail($logger);
 };

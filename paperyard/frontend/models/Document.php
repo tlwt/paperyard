@@ -60,7 +60,7 @@ class Document
     private $rawAttributes = [];
 
     /**
-     * @param $full_path
+     * @param $full_path string
      */
     public function __construct($full_path)
     {

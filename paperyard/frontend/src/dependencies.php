@@ -68,7 +68,7 @@ $container[\Paperyard\Controllers\Misc\Index::class] = function($c) {
     return new Paperyard\Controllers\Misc\Index($view, $logger, $flash);
 };
 
-// shell log calable
+// shell log callable
 $container[\Paperyard\Controllers\Misc\Shell::class] = function($c) {
     $view = $c->get('view');
     $logger = $c->get('logger');

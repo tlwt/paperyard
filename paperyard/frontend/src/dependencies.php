@@ -76,12 +76,20 @@ $container[\Paperyard\Controllers\Misc\Shell::class] = function($c) {
     return new Paperyard\Controllers\Misc\Shell($view, $logger, $flash);
 };
 
-// archive callables
-$container[\Paperyard\Controllers\Archive\Documents::class] = function ($c) {
+// doc callable
+$container[\Paperyard\Controllers\Archive\Details::class] = function($c) {
     $view = $c->get('view');
     $logger = $c->get('logger');
     $flash = $c->get('flash');
-    return new Paperyard\Controllers\Archive\Documents($view, $logger, $flash);
+    return new Paperyard\Controllers\Archive\Details($view, $logger, $flash);
+};
+
+// archive callables
+$container[\Paperyard\Controllers\Archive\Archive::class] = function ($c) {
+    $view = $c->get('view');
+    $logger = $c->get('logger');
+    $flash = $c->get('flash');
+    return new Paperyard\Controllers\Archive\Archive($view, $logger, $flash);
 };
 
 // recipient callables

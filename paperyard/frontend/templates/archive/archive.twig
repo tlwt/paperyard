@@ -9,10 +9,10 @@
             <div class="row">
                 {% for archive in archives|slice(0,8) %}
                         <div class="col-sm-3">
-                            <a href="/docs/archive/{{ archive|replace({' ': '%20'}) }}">
+                            <a href="/archive{{ archive|replace({' ': '%20'}) }}">
                             <div class="card text-white bg-success">
                                 <div class="card-body archive-card">
-                                /{{ archive }}
+                                    {{ archive }}
                                 </div>
                             </div>
                             </a>
@@ -58,7 +58,7 @@
                             </thead>
                             <tbody>
                                 {% for file in files %}
-                                <tr class='clickable-row'  data-url="/docs/{{ file.identifier }}">
+                                <tr class='clickable-row'  data-url="/doc/{{ file.identifier }}">
                                     <td>{{ file.subject }}</td>
                                     <td>{{ file.company }}</td>
                                     <td>{{ file.date }}</td>

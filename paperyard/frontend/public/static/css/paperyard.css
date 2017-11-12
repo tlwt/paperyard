@@ -1,6 +1,6 @@
 .full-width {
-    width: 100%;
-}
+     width: 100%;
+ }
 .clickable-row {
     cursor: pointer;
 }
@@ -28,4 +28,38 @@ div .text-serif {
 }
 #shell-connection {
     display: none;
+}
+.card-body.archive-card img {
+    display: block;
+    margin: 0 auto;
+    width: 112px;
+}
+.card-body.archive-card img[class^="pages-"] {
+    background: #fff;
+    box-shadow:
+            0 1px 1px rgba(0,0,0,0.15);
+}
+.card-body.archive-card img.pages-2 {
+    box-shadow:
+            0 1px 1px rgba(0,0,0,0.15),
+            0 8px 0 -4px #eee,
+            0 8px 1px -3px rgba(0,0,0,0.15);
+}
+.card-body.archive-card img.pages-3 {
+    box-shadow:
+            0 1px 1px rgba(0,0,0,0.15),
+            0 8px 0 -4px #eee,
+            0 8px 1px -3px rgba(0,0,0,0.15),
+            0 16px 0 -8px #eee,
+            0 16px 1px -7px rgba(0,0,0,0.15);
+}
+.card-body.archive-card img.pages-4 {
+    box-shadow:
+            0 1px 1px rgba(0,0,0,0.15),
+            0 8px 0 -4px #eee,
+            0 8px 1px -3px rgba(0,0,0,0.15),
+            0 16px 0 -8px #eee,
+            0 16px 1px -7px rgba(0,0,0,0.15),
+            0 24px 0 -12px rgba(0,0,0,0.15),
+            0 24px 1px -11px rgba(0,0,0,0.15);
 }

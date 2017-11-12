@@ -5,15 +5,13 @@ use Slim\Http\Response;
 
 // Routes
 
-$app->get('/', function (Request $request, Response $response, array $args) {
-    $indexView = new Paperyard\Views\IndexView();
-    return $this->view->render($response, 'index.twig', $indexView->render());
-});
+$app->get('/', Paperyard\Controllers\Misc\Index::class);
 
-$app->get('/docs', function (Request $request, Response $response, array $args) {
-    $indexView = new Paperyard\Views\IndexView();
-    return $this->view->render($response, 'index.twig', $indexView->render());
-});
+$app->get('/archive[{path:.*}]', Paperyard\Controllers\Archive\Archive::class);
+
+$app->get('/doc/{path}', \Paperyard\Controllers\Archive\Details::class);
+
+$app->get('/thumbnail/{path}', \Paperyard\Controllers\Misc\Thumbnail::class);
 
 $app->post('/setlang', function (Request $request, Response $response, array $args) {
     $langCode = $request->getParsedBody()['code'];
@@ -25,12 +23,13 @@ $app->post('/setlang', function (Request $request, Response $response, array $ar
     return $response->withStatus(406);
 });
 
-include "routes_senders.php";
 
-include "routes_subjects.php";
+include "senders.rules.router.php";
 
-include "routes_recipients.php";
+include "recipients.rules.router.php";
 
-include "routes_archive.php";
+include "subjects.rules.router.php";
 
-include "routes_log.php";
+include "archive.rules.router.php";
+
+include "log.shell.router.php";

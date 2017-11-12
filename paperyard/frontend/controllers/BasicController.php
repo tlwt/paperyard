@@ -1,21 +1,54 @@
 <?php
 
-namespace Paperyard;
+namespace Paperyard\Controllers;
 
-/**
- * Class BasicController
- *
- * Basically provides direct sqlite3 access for all child classes.
- *
- * @package Paperyard
- */
 class BasicController
 {
-    /** @var \SQLite3 instance to access database */
-    protected $db;
+    /** @var \Slim\Views\Twig */
+    protected $view;
 
-    public function __construct()
+    /** @var \Psr\Log\LoggerInterface */
+    protected $logger;
+
+    /** @var \Slim\Flash\Messages */
+    protected $flash;
+
+    /** @var array */
+    private $plugins;
+
+    /**
+     * return successfully registered plugins
+     *
+     * @return array plugins which exist
+     */
+    public function getPlugins()
     {
-        $this->db = new \SQLite3("/data/database/paperyard.sqlite");
+        return $this->plugins;
+    }
+
+    /**
+     * checks if plugin exist and adds it to the plugin list
+     *
+     * @param $name string plugin to search for in plugin directory
+     */
+    public function registerPlugin($name)
+    {
+        if (file_exists($_SERVER["DOCUMENT_ROOT"] . '/frontend/public/static/js/plugins/' . $name . '.js')) {
+            $this->plugins[] = $name;
+        } else {
+            $this->logger->warning('cant find plugin: ' . $name . ' for ' . get_called_class());
+        }
+    }
+
+    /**
+     * maps current set language to html class
+     *
+     * @return string
+     */
+    public function getLanguageFlag() {
+        $codes = array(
+            "de_DE" => "flag-icon-de",
+            "en_US" => "flag-icon-gb");
+        return $codes[$_SESSION['lang-code']];
     }
 }

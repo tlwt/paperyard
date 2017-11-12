@@ -9,17 +9,30 @@
         </span>
 </footer>
 
+
 <!-- Bootstrap and necessary plugins -->
 <script src="/static/js/jquery.min.js"></script>
 <script src="/static/js/popper.min.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/pace.min.js"></script>
 <script src="/static/js/change-lang.js"></script>
 
 <!-- Plugin Scripts required by this view -->
-{% for plugin in parent.plugins %}
-<script src="/static/js/plugins/{{ plugin }}.js"></script>
+{% for plugin in plugins %}
+    <script src="/static/js/plugins/{{ plugin }}.js"></script>
 {% endfor %}
+
+
+<script>
+    $(function () {
+        {% for msg in flash('error') %}
+        $.notify({
+            message: '{{ msg }}'
+        },{
+            type: 'danger'
+        });
+        {% endfor %}
+    });
+</script>
 
 <!-- Genesis UI main scripts -->
 <script src="/static/js/app.js"></script>

@@ -21,7 +21,12 @@
         "monolog/monolog": "^1.17",
         "slim/twig-view": "^2.3",
         "twig/extensions": "^1.5",
-        "anpk12/sysinfo": "dev-master"
+        "anpk12/sysinfo": "dev-master",
+        "howtomakeaturn/pdfinfo": "^1.1",
+        "illuminate/database": "~5.1",
+        "vlucas/valitron": "^1.4",
+        "slim/flash": "^0.4.0",
+        "kanellov/slim-twig-flash": "^0.2.0"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.8 < 6.0"
@@ -33,8 +38,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Paperyard\\": "controllers/",
-            "Paperyard\\Views\\": "controllers/views/"
+            "Paperyard\\Controllers\\": "controllers/",
+            "Paperyard\\Controllers\\Rule\\": "controllers/rule/",
+            "Paperyard\\Controllers\\Misc\\": "controllers/misc/",
+            "Paperyard\\Controllers\\Archive\\": "controllers/archive/",
+            "Paperyard\\Models\\": "models/",
+            "Paperyard\\Models\\Rule\\": "models/rule",
+            "Paperyard\\Models\\Log\\": "models/log",
+            "Paperyard\\Helpers\\": "helpers/"
         }
     },
     "config": {

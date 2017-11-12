@@ -37,19 +37,19 @@ RUN apt-get -y install python-pip
 RUN apt-get -y install poppler-utils
 
 # install xdebug
-#RUN apt-get -y install php7.0-dev
-#RUN apt-get -y install php-pear
-#RUN yes | pecl install xdebug \
-#    && echo "zend_extension=$(find /usr/lib/php/ -name xdebug.so)" > /etc/php/7.0/fpm/conf.d/xdebug.ini \
-#    && echo "xdebug.remote_host=172.254.254.254" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-#    && echo "xdebug.remote_enable=on" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-#    && echo "xdebug.remote_autostart=on" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-#    && echo "xdebug.remote_port=9000" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-#    && echo "xdebug.idekey=PHPSTORM" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-#    && echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-#    && echo "xdebug.remote_log=/tmp/xdebug.log" >> /etc/php/7.0/fpm/conf.d/xdebug.ini
+RUN apt-get -y install php7.0-dev
+RUN apt-get -y install php-pear
+RUN yes | pecl install xdebug \
+    && echo "zend_extension=$(find /usr/lib/php/ -name xdebug.so)" > /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_host=172.254.254.254" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_port=9000" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.idekey=PHPSTORM" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_log=/tmp/xdebug.log" >> /etc/php/7.0/fpm/conf.d/xdebug.ini
 
-#ENV PHP_IDE_CONFIG "serverName=docker"
+ENV PHP_IDE_CONFIG "serverName=docker"
 
 WORKDIR /
 

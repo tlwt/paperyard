@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['errorcodes_2ephp',['ErrorCodes.php',['../ErrorCodes_8php.html',1,'']]]
+  ['captwigextension_2ephp',['CapTwigExtension.php',['../CapTwigExtension_8php.html',1,'']]]
 ];

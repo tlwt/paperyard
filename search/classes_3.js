@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['helper',['helper',['../classhelper.html',1,'']]],
-  ['homepagetest',['HomepageTest',['../classTests_1_1Functional_1_1HomepageTest.html',1,'Tests::Functional']]]
+  ['dbhandler',['dbHandler',['../classdbHandler.html',1,'']]],
+  ['details',['Details',['../classPaperyard_1_1Controllers_1_1Archive_1_1Details.html',1,'Paperyard::Controllers::Archive']]],
+  ['document',['Document',['../classPaperyard_1_1Models_1_1Document.html',1,'Paperyard::Models']]]
 ];

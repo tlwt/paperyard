@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['errorcodes',['ErrorCodes',['../classPaperyard_1_1ErrorCodes.html',1,'Paperyard']]]
+  ['captwigextension',['CapTwigExtension',['../classPaperyard_1_1Helpers_1_1CapTwigExtension.html',1,'Paperyard::Helpers']]]
 ];

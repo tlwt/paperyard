@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['validatedata',['validateData',['../classPaperyard_1_1RuleArchive.html#a7e4a5042bc52e5be9a734e149e6a5f19',1,'Paperyard\RuleArchive\validateData()'],['../classPaperyard_1_1RuleRecipients.html#a3a3d3c7088fa529e0ad48f03ac99b8f6',1,'Paperyard\RuleRecipients\validateData()'],['../classPaperyard_1_1RuleSenders.html#ad6f7d16cc80cec6230bb815fdae0d618',1,'Paperyard\RuleSenders\validateData()'],['../classPaperyard_1_1RuleSubjects.html#a09cb127a31cb4720e94fc75fe90c1d67',1,'Paperyard\RuleSubjects\validateData()']]]
+  ['validate',['validate',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#a92a1c409bd9f476d8a9588ee58509421',1,'Paperyard::Models::Rule::Rule']]],
+  ['validateandsave',['validateAndSave',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#acc20c56460a5a2d8b1fe7549def0b469',1,'Paperyard::Models::Rule::Rule']]],
+  ['validateandupdate',['validateAndUpdate',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#a4a1071ae899bbd8e2844a56ed1ab15fd',1,'Paperyard::Models::Rule::Rule']]]
 ];

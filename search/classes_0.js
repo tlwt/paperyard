@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['basetestcase',['BaseTestCase',['../classTests_1_1Functional_1_1BaseTestCase.html',1,'Tests::Functional']]],
-  ['basiccontroller',['BasicController',['../classPaperyard_1_1BasicController.html',1,'Paperyard']]],
-  ['basicview',['BasicView',['../classPaperyard_1_1BasicView.html',1,'Paperyard']]]
+  ['archive',['Archive',['../classPaperyard_1_1Controllers_1_1Archive_1_1Archive.html',1,'Paperyard::Controllers::Archive']]],
+  ['archive',['Archive',['../classPaperyard_1_1Models_1_1Rule_1_1Archive.html',1,'Paperyard::Models::Rule']]],
+  ['archivedetails',['ArchiveDetails',['../classPaperyard_1_1Controllers_1_1Rule_1_1ArchiveDetails.html',1,'Paperyard::Controllers::Rule']]],
+  ['archives',['Archives',['../classPaperyard_1_1Controllers_1_1Rule_1_1Archives.html',1,'Paperyard::Controllers::Rule']]]
 ];

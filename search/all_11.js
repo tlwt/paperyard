@@ -1,7 +1,24 @@
 var searchData=
 [
+  ['senderdetails',['SenderDetails',['../classPaperyard_1_1Controllers_1_1Rule_1_1SenderDetails.html',1,'Paperyard::Controllers::Rule']]],
+  ['senderdetails_2ephp',['SenderDetails.php',['../SenderDetails_8php.html',1,'']]],
+  ['senders',['Senders',['../classPaperyard_1_1Controllers_1_1Rule_1_1Senders.html',1,'Paperyard::Controllers::Rule']]],
+  ['senders',['Senders',['../classPaperyard_1_1Models_1_1Rule_1_1Senders.html',1,'Paperyard::Models::Rule']]],
+  ['senders_2ephp',['Senders.php',['../controllers_2rule_2Senders_8php.html',1,'']]],
+  ['senders_2ephp',['Senders.php',['../models_2rule_2Senders_8php.html',1,'']]],
+  ['senders_2erules_2erouter_2ephp',['senders.rules.router.php',['../senders_8rules_8router_8php.html',1,'']]],
+  ['setisactiveattribute',['setIsActiveAttribute',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#aa6e6afe5fcdf8ff0b8c99ec9056621f9',1,'Paperyard::Models::Rule::Rule']]],
   ['settings_2ephp',['settings.php',['../settings_8php.html',1,'']]],
-  ['shelllogview',['ShellLogView',['../classPaperyard_1_1Views_1_1ShellLogView.html',1,'Paperyard::Views']]],
-  ['shelllogview_2ephp',['ShellLogView.php',['../ShellLogView_8php.html',1,'']]],
-  ['splitupfilename',['splitUpFilename',['../classpdfSorter.html#a8683a890d71b7e8603a301f0615d02d7',1,'pdfSorter']]]
+  ['shell',['Shell',['../classPaperyard_1_1Models_1_1Log_1_1Shell.html',1,'Paperyard::Models::Log']]],
+  ['shell',['Shell',['../classPaperyard_1_1Controllers_1_1Misc_1_1Shell.html',1,'Paperyard::Controllers::Misc']]],
+  ['shell_2ephp',['Shell.php',['../controllers_2misc_2Shell_8php.html',1,'']]],
+  ['shell_2ephp',['Shell.php',['../models_2log_2Shell_8php.html',1,'']]],
+  ['splitupfilename',['splitUpFilename',['../classpdfSorter.html#a8683a890d71b7e8603a301f0615d02d7',1,'pdfSorter']]],
+  ['subjectdetails',['SubjectDetails',['../classPaperyard_1_1Controllers_1_1Rule_1_1SubjectDetails.html',1,'Paperyard::Controllers::Rule']]],
+  ['subjectdetails_2ephp',['SubjectDetails.php',['../SubjectDetails_8php.html',1,'']]],
+  ['subjects',['Subjects',['../classPaperyard_1_1Models_1_1Rule_1_1Subjects.html',1,'Paperyard::Models::Rule']]],
+  ['subjects',['Subjects',['../classPaperyard_1_1Controllers_1_1Rule_1_1Subjects.html',1,'Paperyard::Controllers::Rule']]],
+  ['subjects_2ephp',['Subjects.php',['../models_2rule_2Subjects_8php.html',1,'']]],
+  ['subjects_2ephp',['Subjects.php',['../controllers_2rule_2Subjects_8php.html',1,'']]],
+  ['subjects_2erules_2erouter_2ephp',['subjects.rules.router.php',['../subjects_8rules_8router_8php.html',1,'']]]
 ];

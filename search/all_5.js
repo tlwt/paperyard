@@ -2,7 +2,12 @@ var searchData=
 [
   ['dbhandler',['dbHandler',['../classdbHandler.html',1,'']]],
   ['dbhandler_2ephp',['dbHandler.php',['../dbHandler_8php.html',1,'']]],
-  ['delete',['delete',['../interfacePaperyard_1_1iRule.html#a47c7072d82e4411c4a3dc126ece54fca',1,'Paperyard\iRule\delete()'],['../classPaperyard_1_1RuleArchive.html#a3f3443780ac93a93ac1307b4b851157f',1,'Paperyard\RuleArchive\delete()'],['../classPaperyard_1_1RuleRecipients.html#a326e808b4f82bfa9f73a9e90bfe258a1',1,'Paperyard\RuleRecipients\delete()'],['../classPaperyard_1_1RuleSenders.html#aac5212926cc16015ab6f10a64c125a4f',1,'Paperyard\RuleSenders\delete()'],['../classPaperyard_1_1RuleSubjects.html#a512a7804e17783eaacd5d3a36937eb00',1,'Paperyard\RuleSubjects\delete()']]],
   ['dependencies_2ephp',['dependencies.php',['../dependencies_8php.html',1,'']]],
-  ['documentsscanned',['documentsScanned',['../classPaperyard_1_1Views_1_1IndexView.html#a39c035342d273ccc6b4ade7259f5507b',1,'Paperyard::Views::IndexView']]]
+  ['details',['Details',['../classPaperyard_1_1Controllers_1_1Archive_1_1Details.html',1,'Paperyard::Controllers::Archive']]],
+  ['details_2ephp',['Details.php',['../Details_8php.html',1,'']]],
+  ['doc_5ftype_5fother',['DOC_TYPE_OTHER',['../classPaperyard_1_1Models_1_1Document.html#ac45d4ceae8f981d04d7b482c53fa0839',1,'Paperyard::Models::Document']]],
+  ['doc_5ftype_5fpdf',['DOC_TYPE_PDF',['../classPaperyard_1_1Models_1_1Document.html#a501877ca320d2af56913e9cc8579e5bf',1,'Paperyard::Models::Document']]],
+  ['document',['Document',['../classPaperyard_1_1Models_1_1Document.html',1,'Paperyard::Models']]],
+  ['document_2ephp',['Document.php',['../Document_8php.html',1,'']]],
+  ['documentsscanned',['documentsScanned',['../classPaperyard_1_1Controllers_1_1Misc_1_1Index.html#adc71e962c89a17746828bfad33a17a0f',1,'Paperyard::Controllers::Misc::Index']]]
 ];

@@ -1,10 +1,12 @@
 var searchData=
 [
   ['if',['if',['../index_8php.html#a1addae66f8b076f32c0295e7f027e097',1,'index.php']]],
-  ['index_2ephp',['index.php',['../index_8php.html',1,'']]],
-  ['indexview',['IndexView',['../classPaperyard_1_1Views_1_1IndexView.html',1,'Paperyard::Views']]],
-  ['indexview_2ephp',['IndexView.php',['../IndexView_8php.html',1,'']]],
-  ['insert',['insert',['../interfacePaperyard_1_1iRule.html#a737ad94fc5f6c2b5835aa0724ff3fb25',1,'Paperyard\iRule\insert()'],['../classPaperyard_1_1RuleArchive.html#a925c0669363778894f03d1c52230f975',1,'Paperyard\RuleArchive\insert()'],['../classPaperyard_1_1RuleRecipients.html#a6d84bd51c6f3c360b3dd0191c9acbbe4',1,'Paperyard\RuleRecipients\insert()'],['../classPaperyard_1_1RuleSenders.html#a11377337af2d42c3cc12b50fc23d26fc',1,'Paperyard\RuleSenders\insert()'],['../classPaperyard_1_1RuleSubjects.html#a19dcbc82bfabe82c6d385b5e937150cf',1,'Paperyard\RuleSubjects\insert()']]],
-  ['irule',['iRule',['../interfacePaperyard_1_1iRule.html',1,'Paperyard']]],
-  ['irule_2ephp',['iRule.php',['../iRule_8php.html',1,'']]]
+  ['index',['Index',['../classPaperyard_1_1Controllers_1_1Misc_1_1Index.html',1,'Paperyard::Controllers::Misc']]],
+  ['index_2ephp',['Index.php',['../Index_8php.html',1,'(Global Namespace)'],['../index_8php.html',1,'(Global Namespace)']]],
+  ['index_5fcompany',['INDEX_COMPANY',['../classPaperyard_1_1Models_1_1Document.html#a9bd503b3dce718ecd76176929aea4b55',1,'Paperyard::Models::Document']]],
+  ['index_5fdate',['INDEX_DATE',['../classPaperyard_1_1Models_1_1Document.html#a99c32478546b639dc82b6c571fa2823b',1,'Paperyard::Models::Document']]],
+  ['index_5fprice',['INDEX_PRICE',['../classPaperyard_1_1Models_1_1Document.html#a58126a47141695c433d5126ce4e0484d',1,'Paperyard::Models::Document']]],
+  ['index_5frecipient',['INDEX_RECIPIENT',['../classPaperyard_1_1Models_1_1Document.html#ae2fdbaf5f5656d69b0dd496ce1ae06f5',1,'Paperyard::Models::Document']]],
+  ['index_5fsubject',['INDEX_SUBJECT',['../classPaperyard_1_1Models_1_1Document.html#a4e39e3ab31c066b962f4280c091d4df6',1,'Paperyard::Models::Document']]],
+  ['index_5ftags',['INDEX_TAGS',['../classPaperyard_1_1Models_1_1Document.html#a49f4fadcd74d54e74f66d9b8a56f7d8d',1,'Paperyard::Models::Document']]]
 ];

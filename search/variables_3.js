@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['return',['return',['../settings_8php.html#acbb9eb774ab751820659389c00d513d4',1,'settings.php']]]
+  ['return',['return',['../settings_8php.html#aaf6ff8c1f0da18d41b8f5cbaa8547d96',1,'settings.php']]]
 ];

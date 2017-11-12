@@ -1,5 +1,17 @@
 var searchData=
 [
-  ['fromid',['fromId',['../interfacePaperyard_1_1iRule.html#a4e50f35a13515fa35526f62173d9b447',1,'Paperyard\iRule\fromId()'],['../classPaperyard_1_1RuleArchive.html#a06fbea3c7c5afe00a97b059d36d77cd6',1,'Paperyard\RuleArchive\fromId()'],['../classPaperyard_1_1RuleRecipients.html#acc7cfe58551b5025fcccaffbdbaf4185',1,'Paperyard\RuleRecipients\fromId()'],['../classPaperyard_1_1RuleSenders.html#ac31319e6d0d827a071acb9dd3e7336f5',1,'Paperyard\RuleSenders\fromId()'],['../classPaperyard_1_1RuleSubjects.html#afa97e8793aa8b130b4a17de18d4e87ce',1,'Paperyard\RuleSubjects\fromId()']]],
-  ['frompostvalues',['fromPostValues',['../interfacePaperyard_1_1iRule.html#a629480c53849590cd980e6570fee00c2',1,'Paperyard\iRule\fromPostValues()'],['../classPaperyard_1_1RuleArchive.html#a2e50898f37ba9fab9cb178b9ac70b39e',1,'Paperyard\RuleArchive\fromPostValues()'],['../classPaperyard_1_1RuleRecipients.html#afdc8cb85835fa5b213b94ea17f32ede1',1,'Paperyard\RuleRecipients\fromPostValues()'],['../classPaperyard_1_1RuleSenders.html#a544b8703e8dab037691d941f49418b5a',1,'Paperyard\RuleSenders\fromPostValues()'],['../classPaperyard_1_1RuleSubjects.html#a4c9e8e1c939b07aafd23fc7fe09d7833',1,'Paperyard\RuleSubjects\fromPostValues()']]]
+  ['getactivearchiverules',['getActiveArchiveRules',['../classdbHandler.html#ab5c91e1571dd5e0e6d0eefaacd784dec',1,'dbHandler']]],
+  ['getactiverecipients',['getActiveRecipients',['../classdbHandler.html#ae4ed0c1296d1ed44aec230514a771cbe',1,'dbHandler']]],
+  ['getactivesenders',['getActiveSenders',['../classdbHandler.html#a621f4ff95a91a2c397b19bbbb011c072',1,'dbHandler']]],
+  ['getactivesubjects',['getActiveSubjects',['../classdbHandler.html#a6b55f4b55f5321dd176be18d3591230a',1,'dbHandler']]],
+  ['getarchives',['getArchives',['../classPaperyard_1_1Controllers_1_1Archive_1_1Archive.html#a432d224fb936cc21a242b06cecbf6fea',1,'Paperyard::Controllers::Archive::Archive']]],
+  ['getconfigvalue',['getConfigValue',['../classdbHandler.html#a4e143ec5ee0a867019a7d0cb9181244e',1,'dbHandler']]],
+  ['getfiles',['getFiles',['../classPaperyard_1_1Controllers_1_1Archive_1_1Archive.html#afb39493163ad7dc1408d8629e6ba8898',1,'Paperyard::Controllers::Archive::Archive']]],
+  ['getfilters',['getFilters',['../classPaperyard_1_1Helpers_1_1CapTwigExtension.html#a46eb8c5b4312498c8440ffe82ae8fd77',1,'Paperyard::Helpers::CapTwigExtension']]],
+  ['getlanguageflag',['getLanguageFlag',['../classPaperyard_1_1Controllers_1_1BasicController.html#a2e87a9380c818a2a09020897ff57cba9',1,'Paperyard::Controllers::BasicController']]],
+  ['getname',['getName',['../classPaperyard_1_1Helpers_1_1CapTwigExtension.html#ab2b8773923930dc7be63f3c66fc88747',1,'Paperyard::Helpers::CapTwigExtension']]],
+  ['getnumberofpages',['getNumberOfPages',['../classPaperyard_1_1Models_1_1Document.html#a7e42903c8cf6d7caff6e27ac70627732',1,'Paperyard::Models::Document']]],
+  ['getpersonalvariables',['getPersonalVariables',['../classdbHandler.html#a5663219bc605a393b60f5d2f890cd197',1,'dbHandler']]],
+  ['getplugins',['getPlugins',['../classPaperyard_1_1Controllers_1_1BasicController.html#a680e542f00fcb588085d585b096b1696',1,'Paperyard::Controllers::BasicController']]],
+  ['gettextfrompdf',['getTextFromPdf',['../classpdfNamer.html#ad76543583e6b45aff4be931abeed12bc',1,'pdfNamer']]]
 ];

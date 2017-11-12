@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['pdfnamer',['pdfNamer',['../classpdfNamer.html',1,'']]],
-  ['pdfscanner',['pdfScanner',['../classpdfScanner.html',1,'']]],
-  ['pdfsorter',['pdfSorter',['../classpdfSorter.html',1,'']]],
-  ['ppyrd',['ppyrd',['../classppyrd.html',1,'']]]
+  ['helper',['helper',['../classhelper.html',1,'']]],
+  ['homepagetest',['HomepageTest',['../classTests_1_1Functional_1_1HomepageTest.html',1,'Tests::Functional']]]
 ];

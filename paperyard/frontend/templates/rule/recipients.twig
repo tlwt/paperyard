@@ -11,15 +11,15 @@
                 <div class="card">
                     <form action="/rules/recipients/add" method="POST">
                         <div class="card-body">
-                            <div class="row full-width">
+                            <div class="row w-100">
                                 <div class="col-md-5">
-                                    <div class="pull-left full-width text-center">
+                                    <div class="pull-left w-100 text-center">
                                         <input type="text" class="form-control" name="recipientName" id="recipientName">
                                         <label for="recipientName"><strong>{% trans "Long Name" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
-                                    <div class="pull-left full-width text-center">
+                                    <div class="pull-left w-100 text-center">
                                         <input type="text" class="form-control" name="shortNameForFile" id="shortNameForFile">
                                         <label for="shortNameForFile"><strong>{% trans "Name For File" %}</strong></label>
                                     </div>
@@ -58,7 +58,7 @@
                                 </thead>
                                 <tbody>
                                 {% for rule in rules %}
-                                <tr class='clickable-row' data-url="/rules/recipients/{{ rule.id }}">
+                                <tr class='clickable' data-url="/rules/recipients/{{ rule.id }}">
                                     <td class="align-middle">{{ rule.recipientName }}</td>
                                     <td class="align-middle">{{ rule.shortNameForFile }}</td>
                                     <td class="">
@@ -72,7 +72,7 @@
                                 </tbody>
                             </table>
                         {% else %}
-                            <div class="text-center full-width text-serif">
+                            <div class="text-center w-100 text-serif">
                                 <em><h4>"{% trans "I love rules and I love following them, unless that rule is stupid." %}"</h4></em>
                                 <sup>― Anna Kendrick, Scrappy Little Nobody</sup>
                             </div>

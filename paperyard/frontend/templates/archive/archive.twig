@@ -58,7 +58,7 @@
                             </thead>
                             <tbody>
                                 {% for file in files %}
-                                <tr class='clickable-row'  data-url="/doc/{{ file.identifier }}">
+                                <tr class='clickable' data-url="/doc/{{ file.identifier }}">
                                     <td>{{ file.subject }}</td>
                                     <td>{{ file.company }}</td>
                                     <td>{{ file.date }}</td>
@@ -70,7 +70,7 @@
                             </tbody>
                         </table>
                         {% else %}
-                            <div class="text-center full-width text-serif">
+                            <div class="text-center w-100 text-serif">
                                 <em>{% trans "no documents" %}</em>
                             </div>
                         {% endif %}

@@ -11,27 +11,27 @@
                 <div class="card">
                     <form action="/rules/senders/add" method="POST">
                         <div class="card-body">
-                            <div class="row full-width">
+                            <div class="row w-100">
                                 <div class="col-md-3">
-                                    <div class="pull-left full-width text-center">
+                                    <div class="pull-left w-100 text-center">
                                         <input type="text" class="form-control" name="foundWords" id="foundWords">
                                         <label for="foundWords"><strong>{% trans "Needles" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="pull-left full-width text-center">
+                                    <div class="pull-left w-100 text-center">
                                         <input type="text" class="form-control" name="fileCompany" id="fileCompany">
                                         <label for="fileCompany"><strong>{% trans "Company" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="pull-left full-width text-center">
+                                    <div class="pull-left w-100 text-center">
                                         <input type="number" class="form-control" name="companyScore" id="companyScore">
                                         <label for="companyScore"><strong>{% trans "Score" %}</strong></label>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="pull-left full-width text-center">
+                                    <div class="pull-left w-100 text-center">
                                         <input type="text" class="form-control" name="tags" id="tags">
                                         <label for="tags"><strong>{% trans "Tags" %}</strong></label>
                                     </div>
@@ -72,7 +72,7 @@
                             </thead>
                             <tbody>
                             {% for rule in rules %}
-                                <tr class='clickable-row' data-url="/rules/senders/{{ rule.id }}">
+                                <tr class='clickable' data-url="/rules/senders/{{ rule.id }}">
                                     <td class="align-middle">{{ rule.foundWords }}</td>
                                     <td class="align-middle">{{ rule.fileCompany }}</td>
                                     <td class="align-middle">{{ rule.companyScore }}</td>
@@ -88,7 +88,7 @@
                             </tbody>
                         </table>
                         {% else %}
-                            <div class="text-center full-width text-serif">
+                            <div class="text-center w-100 text-serif">
                                 <em><h4>"{% trans "I love rules and I love following them, unless that rule is stupid." %}"</h4></em>
                                 <sup>― Anna Kendrick, Scrappy Little Nobody</sup>
                             </div>

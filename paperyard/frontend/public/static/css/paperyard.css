@@ -21,22 +21,6 @@ div .text-serif {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
-/* shell log view */
-/* monospace font */
-.shell-log {
-    background-color: #29363d;
-    color: #fff;
-    font-family: "Lucida Console", Monaco, monospace;
-}
-/* promt */
-.shell-entry::before {
-    content: '> ';
-}
-/* connectivity indicator */
-#shell-connection {
-    display: none;
-}
-
 /* depth effect on multipage preview */
 .card-body.archive-card img {
     display: block;

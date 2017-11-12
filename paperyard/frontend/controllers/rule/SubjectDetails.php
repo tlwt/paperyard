@@ -29,8 +29,6 @@ class SubjectDetails extends BasicController
         $this->view = $view;
         $this->logger = $logger;
         $this->flash = $flash;
-
-        $this->registerPlugin('bootstrap-notify.min');
     }
 
     /**

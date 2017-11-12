@@ -31,7 +31,6 @@ class Confirm extends BasicController
         $this->flash = $flash;
 
         $this->registerPlugin('ekko-lightbox.min');
-        $this->registerPlugin('tooltips');
 
         $this->inboxFiles = $this->getInboxFiles();
         $this->outboxFiles = $this->getOutboxFile();

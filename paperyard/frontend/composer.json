@@ -45,7 +45,8 @@
             "Paperyard\\Models\\": "models/",
             "Paperyard\\Models\\Rule\\": "models/rule",
             "Paperyard\\Models\\Log\\": "models/log",
-            "Paperyard\\Helpers\\": "helpers/"
+            "Paperyard\\Helpers\\": "helpers/",
+            "Paperyard\\Helpers\\Enums\\": "helpers/enums/"
         }
     },
     "config": {

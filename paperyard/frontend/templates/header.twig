@@ -11,16 +11,17 @@
     <!-- Icons -->
     <link href="/static/css/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/simple-line-icons.css" rel="stylesheet">
-    <link href="/static/css/bootstrap-tagsinput.css" rel="stylesheet">
     <link href="/static/css/flag-icon.min.css" rel="stylesheet">
 
-    <link href="/static/css/datatables.css" rel="stylesheet">
-    <link href="/static/css/ekko-lightbox.css" rel="stylesheet">
+    <!-- Plugins -->
+    {% for plugin in plugins.css %}
+    <link href="/static/css/plugins/{{ plugin }}.css" rel="stylesheet">
+    {% endfor %}
 
-    <!-- Main styles for this application -->
+    <!-- Main -->
     <link href="/static/css/style.min.css" rel="stylesheet">
 
-    <!-- Paperyard styles -->
+    <!-- Paperyard -->
     <link href="/static/css/paperyard.css" rel="stylesheet">
 </head>
 

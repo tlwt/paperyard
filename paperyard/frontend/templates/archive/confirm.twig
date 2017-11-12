@@ -1,0 +1,112 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+
+
+            <div class="row">
+                <div class="col-xl-6 col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="callout">
+                                        <small class="text-muted">count</small>
+                                        <br>
+                                        <strong class="h4">{{ outboxFiles|length }}</strong>
+                                    </div>
+                                </div><!--/.col-->
+                                <div class="col-6">
+                                    <div class="callout">
+                                        <button type="button" class="btn btn-success btn-lg" disabled>confirm all</button>
+                                    </div>
+                                </div><!--/.col-->
+                            </div><!--/.row-->
+
+                            <ul class="icons-list">
+                                {% for file in outboxFiles %}
+                                <li>
+                                    <a href="/thumbnail/{{ file.identifier }}/0/300" data-gallery="gallery-{{ file.hash }}" data-toggle="lightbox" data-type="image">
+                                        <i class="fa fa-search bg-primary clickable" alt="click to preview"></i>
+                                    </a>
+                                    {% for i in range(1,file.pages-1) %}
+                                    <div data-toggle="lightbox" data-gallery="gallery-{{ file.hash }}" data-remote="/thumbnail/{{ file.identifier }}/{{ i }}/100" data-type="image"></div>
+                                    {% endfor %}
+                                    <div class="desc">
+                                        <div class="title">{{ file.subject }}</div>
+                                        <small>{{ file.company }} - {{ file.recipient }}</small>
+                                    </div>
+                                    <div class="value">
+                                        <div class="small text-muted">{{ file.oldFilename }}</div>
+                                        <strong>{{ file.date }}</strong>
+                                    </div>
+                                    <div class="actions">
+                                        <button type="button" class="btn btn-link text-muted" disabled><i class="fa fa-check"></i></button>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--/.col -->
+
+                <div class="col-xl-6 col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="callout">
+                                        <small class="text-muted">count</small>
+                                        <br>
+                                        <strong class="h4">{{ inboxFiles|length }}</strong>
+                                    </div>
+                                </div><!--/.col-->
+                                <div class="col-6">
+                                    <div class="callout">
+                                        <small class="text-muted">coverage</small>
+                                        <br>
+                                        <strong class="h4">{{ inboxScrore }}%</strong>
+                                    </div>
+                                </div><!--/.col-->
+                            </div><!--/.row-->
+
+                            <ul class="icons-list">
+                                {% for file in inboxFiles %}
+                                    <li>
+                                        <a href="/thumbnail/{{ file.identifier }}/0" data-gallery="gallery-{{ file.hash }}" data-toggle="lightbox" data-type="image">
+                                            <i class="fa fa-search bg-primary clickable" alt="click to preview"></i>
+                                        </a>
+                                        {% for i in range(1,file.pages-1) if file.pages > 1 %}
+                                            <div data-toggle="lightbox" data-gallery="gallery-{{ file.hash }}" data-remote="/thumbnail/{{ file.identifier }}/{{ i }}" data-type="image"></div>
+                                        {% endfor %}
+                                        <div class="desc">
+                                            <div class="title">{{ file.name }}</div>
+                                        </div>
+                                        <div class="value">
+                                            <div class="small text-muted">{{ file.pages }} Pages</div>
+                                            <div class="small text-muted">{{ file.compliantFields }} of 4 Fields</div>
+                                        </div>
+                                        <div class="actions">
+                                            <button type="button" class="btn btn-link text-muted" disabled><i class="fa fa-edit"></i></button>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--/.col -->
+            </div><!--/.row -->
+
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="pdf-modal" class="pdf-modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+
+{% endblock %}

@@ -12,6 +12,7 @@ class Document
     const INDEX_RECIPIENT = 4;
     const INDEX_PRICE = 5;
     const INDEX_TAGS = 6;
+    const INDEX_OLD_FILENAME = 7;
 
     const DOC_TYPE_PDF = "pdf";
     const DOC_TYPE_OTHER = "other";
@@ -40,6 +41,9 @@ class Document
     /** @var string Documents date parsed from filename. */
     public $date;
 
+    /** @var string Documents old filename parsed from filename. */
+    public $oldFilename;
+
     /** @var int Documents page count. */
     public $pages;
 
@@ -49,6 +53,8 @@ class Document
     /** @var string sha256 hash of file contents */
     public $hash;
 
+    /** @var int number of already filled fields */
+    public $compliantFields;
 
     /** @var string Absolute or relative path to document. */
     private $fullPath;
@@ -73,15 +79,24 @@ class Document
         // fill object with data
         $this->name = basename($this->fullPath);
         $this->size = $this->humanFilesize($full_path);
+        $this->hash = hash_file("sha256", $full_path);
+        $this->pages = $this->getNumberOfPages($full_path);
+        $this->identifier = base64_encode($full_path);
+        $this->compliantFields = $this->calculateCompliantFields();
+
+        if ($this->compliantFields == 4) {
+            $this->parseDataFromFilename();
+        }
+    }
+
+    private function parseDataFromFilename() {
         $this->date = $this->parseDate();
         $this->company = $this->parseAttribute(self::INDEX_COMPANY);
         $this->subject = $this->parseAttribute(self::INDEX_SUBJECT);
         $this->recipient = $this->parseAttribute(self::INDEX_RECIPIENT);
         $this->price = $this->parseAttribute(self::INDEX_PRICE);
         $this->tags = $this->parseAttribute(self::INDEX_TAGS);
-        $this->pages = $this->getNumberOfPages($full_path);
-        $this->identifier = base64_encode($full_path);
-        $this->hash = hash_file("sha256", $full_path);
+        $this->oldFilename = $this->parseAttribute(self::INDEX_OLD_FILENAME);
     }
 
     /**
@@ -90,19 +105,7 @@ class Document
      * @return array
      */
     public function toArray() {
-        return array(
-            "name" => $this->name,
-            "size" => $this->size,
-            "date" => $this->date,
-            "company" => $this->company,
-            "subject" => $this->subject,
-            "recipient" => $this->recipient,
-            "price" => $this->price,
-            "tags" => $this->tags,
-            "pages" => $this->pages,
-            "identifier" => $this->identifier,
-            "hash" => $this->hash
-        );
+        return get_object_vars($this);
     }
 
     /**
@@ -125,10 +128,22 @@ class Document
 
         // fill if still empty
         if ($this->rawAttributes == []) {
-            preg_match('/(.*?) - (.*?) - (.*?) \((.*?)\) \((.*?)\) \[(.*?)\]/', $this->name, $this->rawAttributes);
+            preg_match('/^(.*?) - (.*?) - (.*?) \((.*?)\) \((.*?)\) \[(.*?)\] -- (.*?)(?:.pdf)$/', $this->name, $this->rawAttributes);
+        }
+
+        if (!array_key_exists($attr, $this->rawAttributes)) {
+            return "";
         }
 
         return $this->rawAttributes[$attr];
+    }
+
+    private function calculateCompliantFields() {
+        preg_match_all('/ffirma|bbetreff|wwer|ddatum/', $this->name, $fields_found);
+        if (count($fields_found) > 0) {
+            return 4-count($fields_found[0]);
+        }
+        return 0;
     }
 
     /**

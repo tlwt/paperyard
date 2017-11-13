@@ -84,9 +84,7 @@ class Document
         $this->identifier = base64_encode($full_path);
         $this->compliantFields = $this->calculateCompliantFields();
 
-        if ($this->compliantFields == 4) {
-            $this->parseDataFromFilename();
-        }
+        $this->parseDataFromFilename();
     }
 
     private function parseDataFromFilename() {
@@ -115,7 +113,13 @@ class Document
      * @return false|string date or false on failure
      */
     private function parseDate() {
-        return date_format(date_create($this->parseAttribute(self::INDEX_DATE)), 'd.m.Y');
+        $raw_date = $this->parseAttribute(self::INDEX_DATE);
+
+        if (is_numeric($raw_date)) {
+            return date_format(date_create($this->parseAttribute(self::INDEX_DATE)), 'd.m.Y');
+        }
+
+        return '';
     }
 
     /**

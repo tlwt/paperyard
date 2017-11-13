@@ -26,9 +26,10 @@ $container['view'] = function ($c) {
     // multi lang support
     $view->addExtension(new Twig_Extensions_Extension_I18n());
 
-    if ($_SESSION["lang-code"] == "") {
+    if (!array_key_exists('lang-code', $_SESSION)) {
         $_SESSION["lang-code"] = "en_US";
     }
+
     $locale = $_SESSION["lang-code"];
     $locale .= ".UTF-8";
     putenv('LC_ALL='.$locale);

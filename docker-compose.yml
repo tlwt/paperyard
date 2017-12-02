@@ -12,6 +12,7 @@ services:
      - "~/Paperyard/outbox:/data/outbox"
      - "~/Paperyard/sort:/data/sort"
      - "./data/database:/data/database"
+     - "./data/profiler:/data/profiler"
      - project_volume_sync:/var/www/html:rw
 
 volumes:

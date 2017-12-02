@@ -47,7 +47,11 @@ RUN yes | pecl install xdebug \
     && echo "xdebug.remote_port=9000" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
     && echo "xdebug.idekey=PHPSTORM" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
     && echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.remote_log=/tmp/xdebug.log" >> /etc/php/7.0/fpm/conf.d/xdebug.ini
+    && echo "xdebug.remote_log=/tmp/xdebug.log" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_enable = 1" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_output_name = xdebug.profile.%t" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_output_dir = /data/profiler" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_enable_trigger = 1" >> /etc/php/7.0/fpm/conf.d/xdebug.ini
 
 ENV PHP_IDE_CONFIG "serverName=docker"
 
@@ -71,6 +75,7 @@ RUN mkdir -p /data/scan \
     && mkdir -p /data/outbox \
     && mkdir -p /data/sort \
     && mkdir -p /data/database \
+    && mkdir -p /data/profiler \
     && touch /data/scan/paperyardDirectoryNotMounted.txt \
     && touch /data/inbox/paperyardDirectoryNotMounted.txt \
     && touch /data/outbox/paperyardDirectoryNotMounted.txt \

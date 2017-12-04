@@ -15,6 +15,8 @@ $container['view'] = function ($c) {
     $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
     $view->addExtension(new \Paperyard\Helpers\CapTwigExtension());
+    $view->addExtension(new \Paperyard\Helpers\CensorTwigExtension());
+    $view->addExtension(new \Paperyard\Helpers\Din1355TwigExtension());
     $view->addExtension(new Knlv\Slim\Views\TwigMessages(
         new Slim\Flash\Messages()
     ));

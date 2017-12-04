@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['validate',['validate',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#a92a1c409bd9f476d8a9588ee58509421',1,'Paperyard::Models::Rule::Rule']]],
-  ['validateandsave',['validateAndSave',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#acc20c56460a5a2d8b1fe7549def0b469',1,'Paperyard::Models::Rule::Rule']]],
-  ['validateandupdate',['validateAndUpdate',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#a4a1071ae899bbd8e2844a56ed1ab15fd',1,'Paperyard::Models::Rule::Rule']]]
+  ['update',['update',['../classdbHandler.html#aeb1f3404f6dcd343f602f86c3732f200',1,'dbHandler']]]
 ];

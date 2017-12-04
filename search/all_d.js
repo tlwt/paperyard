@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['open',['open',['../classdbHandler.html#a867f1865e7209ab7658b517c0c3459f9',1,'dbHandler']]],
-  ['output',['output',['../classppyrd.html#a7a89622680499a2ddeb018f1a37d1d75',1,'ppyrd']]]
+  ['normal',['NORMAL',['../classPaperyard_1_1Helpers_1_1Enums_1_1PluginType.html#a8549536d9d436c0067c6dc1b17873174',1,'Paperyard::Helpers::Enums::PluginType']]]
 ];

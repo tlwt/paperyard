@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tag_5fregex',['TAG_REGEX',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#a17e42e454c53d550c94ca59023052284',1,'Paperyard::Models::Rule::Rule']]]
+  ['pdf',['PDF',['../classPaperyard_1_1Helpers_1_1Enums_1_1DocumentType.html#a852f2e199ce155a093e45393e88962ef',1,'Paperyard::Helpers::Enums::DocumentType']]]
 ];

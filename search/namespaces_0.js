@@ -2,6 +2,7 @@ var searchData=
 [
   ['archive',['Archive',['../namespacePaperyard_1_1Controllers_1_1Archive.html',1,'Paperyard::Controllers']]],
   ['controllers',['Controllers',['../namespacePaperyard_1_1Controllers.html',1,'Paperyard']]],
+  ['enums',['Enums',['../namespacePaperyard_1_1Helpers_1_1Enums.html',1,'Paperyard::Helpers']]],
   ['helpers',['Helpers',['../namespacePaperyard_1_1Helpers.html',1,'Paperyard']]],
   ['log',['Log',['../namespacePaperyard_1_1Models_1_1Log.html',1,'Paperyard::Models']]],
   ['misc',['Misc',['../namespacePaperyard_1_1Controllers_1_1Misc.html',1,'Paperyard::Controllers']]],

@@ -111,10 +111,14 @@ Variables</h2></td></tr>
 <tr class="separator:a2b67d116e34f3ee325719b4cba0af81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acad469a6356b1f1ba2b0bd8f790ffeb8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dependencies_8php.html#acad469a6356b1f1ba2b0bd8f790ffeb8">$container</a> [\Paperyard\Controllers\Misc\Shell::class]</td></tr>
 <tr class="separator:acad469a6356b1f1ba2b0bd8f790ffeb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad897c5342b041416fcf694a84dd673bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dependencies_8php.html#ad897c5342b041416fcf694a84dd673bf">$container</a> [\Paperyard\Controllers\Archive\Details::class]</td></tr>
-<tr class="separator:ad897c5342b041416fcf694a84dd673bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0ec19cdb493353540dd425c2ab3613f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dependencies_8php.html#ae0ec19cdb493353540dd425c2ab3613f">$container</a> [\Paperyard\Controllers\Archive\Archive::class]</td></tr>
 <tr class="separator:ae0ec19cdb493353540dd425c2ab3613f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad897c5342b041416fcf694a84dd673bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dependencies_8php.html#ad897c5342b041416fcf694a84dd673bf">$container</a> [\Paperyard\Controllers\Archive\Details::class]</td></tr>
+<tr class="separator:ad897c5342b041416fcf694a84dd673bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef2d9ceb854cd3dcb1917a82a5ac4302"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dependencies_8php.html#aef2d9ceb854cd3dcb1917a82a5ac4302">$container</a> [\Paperyard\Controllers\Archive\Confirm::class]</td></tr>
+<tr class="separator:aef2d9ceb854cd3dcb1917a82a5ac4302"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6bee40da93b9a9c0feb16564c0938c5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dependencies_8php.html#ae6bee40da93b9a9c0feb16564c0938c5">$container</a> [\Paperyard\Controllers\Archive\ConfirmDetails::class]</td></tr>
+<tr class="separator:ae6bee40da93b9a9c0feb16564c0938c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5dd69b1a1d0b6eff93155857673c1e70"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dependencies_8php.html#a5dd69b1a1d0b6eff93155857673c1e70">$container</a> [\Paperyard\Controllers\Rule\Recipients::class]</td></tr>
 <tr class="separator:a5dd69b1a1d0b6eff93155857673c1e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c7ded54c5828f967f64b96145026eea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="dependencies_8php.html#a9c7ded54c5828f967f64b96145026eea">$container</a> [\Paperyard\Controllers\Rule\RecipientDetails::class]</td></tr>
@@ -174,7 +178,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span> ($c) {</div><div class="line">    <a class="code" href="index_8php.html#ac7c3353107070daa85f641882931b358">$settings</a> = $c-&gt;get(<span class="stringliteral">&#39;settings&#39;</span>);</div><div class="line">    $logger = <span class="keyword">new</span> Monolog\Logger(<a class="code" href="index_8php.html#ac7c3353107070daa85f641882931b358">$settings</a>[<span class="stringliteral">&#39;logger&#39;</span>][<span class="stringliteral">&#39;name&#39;</span>]);</div><div class="line">    $logger-&gt;pushProcessor(<span class="keyword">new</span> Monolog\Processor\UidProcessor());</div><div class="line">    $logger-&gt;pushHandler(<span class="keyword">new</span> Monolog\Handler\StreamHandler(<a class="code" href="index_8php.html#ac7c3353107070daa85f641882931b358">$settings</a>[<span class="stringliteral">&#39;logger&#39;</span>][<span class="stringliteral">&#39;path&#39;</span>], Monolog\Logger::DEBUG));</div><div class="line">    <span class="keywordflow">return</span> $logger;</div><div class="line">}</div><div class="ttc" id="index_8php_html_ac7c3353107070daa85f641882931b358"><div class="ttname"><a href="index_8php.html#ac7c3353107070daa85f641882931b358">$settings</a></div><div class="ttdeci">$settings</div><div class="ttdef"><b>Definition:</b> <a href="index_8php_source.html#l00017">index.php:17</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00043">43</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00046">46</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -188,7 +192,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span> () {</div><div class="line">    <span class="keywordflow">return</span> new \Paperyard\Helpers\PaperyardMassages();</div><div class="line">}</div></div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00052">52</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00055">55</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -202,7 +206,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span> ($c) {</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">function</span> ($request, $response) use ($c) {</div><div class="line">        <span class="keywordflow">return</span> $c[<span class="stringliteral">&#39;view&#39;</span>]-&gt;render($response, <span class="stringliteral">&#39;404.twig&#39;</span>)-&gt;withStatus(404);</div><div class="line">    };</div><div class="line">}</div></div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00057">57</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00060">60</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -217,7 +221,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Misc_1_1Index.html">Paperyard\Controllers\Misc\Index</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Misc_1_1Index_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Misc_1_1Index.html">Paperyard\Controllers\Misc\Index</a></div><div class="ttdef"><b>Definition:</b> <a href="Index_8php_source.html#l00016">Index.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00064">64</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00067">67</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -232,22 +236,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Misc_1_1Shell.html">Paperyard\Controllers\Misc\Shell</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Misc_1_1Shell_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Misc_1_1Shell.html">Paperyard\Controllers\Misc\Shell</a></div><div class="ttdef"><b>Definition:</b> <a href="controllers_2misc_2Shell_8php_source.html#l00012">Shell.php:12</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00072">72</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad897c5342b041416fcf694a84dd673bf"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">$container[\Paperyard\Controllers\Archive\Details::class]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Archive_1_1Details.html">Paperyard\Controllers\Archive\Details</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Archive_1_1Details_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Archive_1_1Details.html">Paperyard\Controllers\Archive\Details</a></div><div class="ttdef"><b>Definition:</b> <a href="Details_8php_source.html#l00013">Details.php:13</a></div></div>
-</div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00080">80</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00075">75</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -262,7 +251,52 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span> ($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Archive_1_1Archive.html">Paperyard\Controllers\Archive\Archive</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Archive_1_1Archive_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Archive_1_1Archive.html">Paperyard\Controllers\Archive\Archive</a></div><div class="ttdef"><b>Definition:</b> <a href="controllers_2archive_2Archive_8php_source.html#l00017">Archive.php:17</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00088">88</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00083">83</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad897c5342b041416fcf694a84dd673bf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$container[\Paperyard\Controllers\Archive\Details::class]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Archive_1_1Details.html">Paperyard\Controllers\Archive\Details</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Archive_1_1Details_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Archive_1_1Details.html">Paperyard\Controllers\Archive\Details</a></div><div class="ttdef"><b>Definition:</b> <a href="Details_8php_source.html#l00013">Details.php:13</a></div></div>
+</div><!-- fragment -->
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00090">90</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aef2d9ceb854cd3dcb1917a82a5ac4302"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$container[\Paperyard\Controllers\Archive\Confirm::class]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Archive_1_1Confirm.html">Paperyard\Controllers\Archive\Confirm</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Archive_1_1Confirm_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Archive_1_1Confirm.html">Paperyard\Controllers\Archive\Confirm</a></div><div class="ttdef"><b>Definition:</b> <a href="Confirm_8php_source.html#l00014">Confirm.php:14</a></div></div>
+</div><!-- fragment -->
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00097">97</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae6bee40da93b9a9c0feb16564c0938c5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$container[\Paperyard\Controllers\Archive\ConfirmDetails::class]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Archive_1_1ConfirmDetails.html">Paperyard\Controllers\Archive\ConfirmDetails</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Archive_1_1ConfirmDetails_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Archive_1_1ConfirmDetails.html">Paperyard\Controllers\Archive\ConfirmDetails</a></div><div class="ttdef"><b>Definition:</b> <a href="ConfirmDetails_8php_source.html#l00014">ConfirmDetails.php:14</a></div></div>
+</div><!-- fragment -->
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00104">104</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -277,7 +311,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Rule_1_1Recipients.html">Paperyard\Controllers\Rule\Recipients</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Rule_1_1Recipients_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Rule_1_1Recipients.html">Paperyard\Controllers\Rule\Recipients</a></div><div class="ttdef"><b>Definition:</b> <a href="Recipients_8php_source.html#l00016">Recipients.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00096">96</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00112">112</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -292,7 +326,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span> ($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Rule_1_1Recipients.html">Paperyard\Controllers\Rule\Recipients</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Rule_1_1Recipients_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Rule_1_1Recipients.html">Paperyard\Controllers\Rule\Recipients</a></div><div class="ttdef"><b>Definition:</b> <a href="Recipients_8php_source.html#l00016">Recipients.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00103">103</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00119">119</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -307,7 +341,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Rule_1_1Senders.html">Paperyard\Controllers\Rule\Senders</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Rule_1_1Senders_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Rule_1_1Senders.html">Paperyard\Controllers\Rule\Senders</a></div><div class="ttdef"><b>Definition:</b> <a href="controllers_2rule_2Senders_8php_source.html#l00016">Senders.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00111">111</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00127">127</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -322,7 +356,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Rule_1_1SenderDetails.html">Paperyard\Controllers\Rule\SenderDetails</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Rule_1_1SenderDetails_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Rule_1_1SenderDetails.html">Paperyard\Controllers\Rule\SenderDetails</a></div><div class="ttdef"><b>Definition:</b> <a href="SenderDetails_8php_source.html#l00016">SenderDetails.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00118">118</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00134">134</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -337,7 +371,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Rule_1_1Subjects.html">Paperyard\Controllers\Rule\Subjects</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Rule_1_1Subjects_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Rule_1_1Subjects.html">Paperyard\Controllers\Rule\Subjects</a></div><div class="ttdef"><b>Definition:</b> <a href="controllers_2rule_2Subjects_8php_source.html#l00016">Subjects.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00126">126</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00142">142</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -352,7 +386,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Rule_1_1SubjectDetails.html">Paperyard\Controllers\Rule\SubjectDetails</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Rule_1_1SubjectDetails_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Rule_1_1SubjectDetails.html">Paperyard\Controllers\Rule\SubjectDetails</a></div><div class="ttdef"><b>Definition:</b> <a href="SubjectDetails_8php_source.html#l00016">SubjectDetails.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00133">133</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00149">149</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -367,7 +401,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span> ($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Rule_1_1Archives.html">Paperyard\Controllers\Rule\Archives</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Rule_1_1Archives_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Rule_1_1Archives.html">Paperyard\Controllers\Rule\Archives</a></div><div class="ttdef"><b>Definition:</b> <a href="Archives_8php_source.html#l00016">Archives.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00141">141</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00157">157</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -382,7 +416,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span> ($c) {</div><div class="line">    $view = $c-&gt;get(<span class="stringliteral">&#39;view&#39;</span>);</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    $flash = $c-&gt;get(<span class="stringliteral">&#39;flash&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Rule_1_1ArchiveDetails.html">Paperyard\Controllers\Rule\ArchiveDetails</a>($view, $logger, $flash);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Rule_1_1ArchiveDetails_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Rule_1_1ArchiveDetails.html">Paperyard\Controllers\Rule\ArchiveDetails</a></div><div class="ttdef"><b>Definition:</b> <a href="ArchiveDetails_8php_source.html#l00016">ArchiveDetails.php:16</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00148">148</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00164">164</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>
@@ -395,9 +429,9 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Misc_1_1Thumbnail.html">Paperyard\Controllers\Misc\Thumbnail</a>($logger);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Misc_1_1Thumbnail_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Misc_1_1Thumbnail.html">Paperyard\Controllers\Misc\Thumbnail</a></div><div class="ttdef"><b>Definition:</b> <a href="Thumbnail_8php_source.html#l00010">Thumbnail.php:10</a></div></div>
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">function</span>($c) {</div><div class="line">    $logger = $c-&gt;get(<span class="stringliteral">&#39;logger&#39;</span>);</div><div class="line">    <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classPaperyard_1_1Controllers_1_1Misc_1_1Thumbnail.html">Paperyard\Controllers\Misc\Thumbnail</a>($logger);</div><div class="line">}</div><div class="ttc" id="classPaperyard_1_1Controllers_1_1Misc_1_1Thumbnail_html"><div class="ttname"><a href="classPaperyard_1_1Controllers_1_1Misc_1_1Thumbnail.html">Paperyard\Controllers\Misc\Thumbnail</a></div><div class="ttdef"><b>Definition:</b> <a href="Thumbnail_8php_source.html#l00011">Thumbnail.php:11</a></div></div>
 </div><!-- fragment -->
-<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00156">156</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
+<p>Definition at line <a class="el" href="dependencies_8php_source.html#l00172">172</a> of file <a class="el" href="dependencies_8php_source.html">dependencies.php</a>.</p>
 
 </div>
 </div>

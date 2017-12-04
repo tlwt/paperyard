@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['writelog',['writeLog',['../classdbHandler.html#a01ffefe5cfc24d12db379e0570aaf9f1',1,'dbHandler']]]
+  ['update',['update',['../classdbHandler.html#aeb1f3404f6dcd343f602f86c3732f200',1,'dbHandler']]]
 ];

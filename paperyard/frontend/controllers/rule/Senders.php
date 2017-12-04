@@ -27,7 +27,10 @@ class Senders extends BasicController
         $this->logger = $logger;
         $this->flash = $flash;
 
+        $this->registerPlugin('clickable-row');
+        $this->registerPlugin('searchable-table');
         $this->registerPlugin('datatables.min');
+        $this->registerPlugin('bootstrap-notify.min');
     }
 
     /**

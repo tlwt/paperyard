@@ -28,6 +28,9 @@ class Details extends BasicController
         $this->view = $view;
         $this->logger = $logger;
         $this->flash = $flash;
+
+        $this->registerPlugin('datatables.min');
+        $this->registerPlugin('bootstrap-notify.min');
     }
 
     /**

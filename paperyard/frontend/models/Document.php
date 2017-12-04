@@ -179,6 +179,16 @@ class Document
     }
 
     /**
+     * Gets raw date attribute and converts it to d.m.Y.
+     *
+     * @todo date format customizable
+     * @return false|string date or false on failure
+     */
+    private function parseDate() {
+        return date_format(date_create($this->parseAttribute(self::INDEX_DATE)), 'd.m.Y');
+    }
+
+    /**
      * Capture and cache attributes with regular expression. Return on demand.
      *
      * @param $attr int index of capture group

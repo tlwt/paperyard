@@ -11,8 +11,10 @@ $app->post('/latest/confirm', function(Request $request, Response $response, $ar
 
     //todo: cleanup!
 
+    $parsed_body = $request->getParsedBody();
+
     // we encoded the path in case any special character is used
-    $fullpath = base64_decode($request->getParsedBody()['document-path']);
+    $fullpath = base64_decode($parsed_body['document-path']);
 
     // test if document exists
     if (!file_exists($fullpath)) {
@@ -28,7 +30,10 @@ $app->post('/latest/confirm', function(Request $request, Response $response, $ar
         return $response->withRedirect('/latest/' . $document->identifier);
     }
 
-    $document->confirm();
+    if (isset($parsed_body['save_and_confirm'])) {
+        $document->confirm();
+    }
+
     $document->save();
 
     // get files as strings from filesystem

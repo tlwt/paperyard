@@ -1,0 +1,4 @@
+version: '2'
+syncs:
+  project_volume_sync:
+    src: './paperyard'

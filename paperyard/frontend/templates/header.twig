@@ -11,13 +11,17 @@
     <!-- Icons -->
     <link href="/static/css/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/simple-line-icons.css" rel="stylesheet">
-    <link href="/static/css/bootstrap-tagsinput.css" rel="stylesheet">
     <link href="/static/css/flag-icon.min.css" rel="stylesheet">
 
-    <!-- Main styles for this application -->
+    <!-- Plugins -->
+    {% for plugin in plugins.css %}
+    <link href="/static/css/plugins/{{ plugin }}.css" rel="stylesheet">
+    {% endfor %}
+
+    <!-- Main -->
     <link href="/static/css/style.min.css" rel="stylesheet">
 
-    <!-- Paperyard styles -->
+    <!-- Paperyard -->
     <link href="/static/css/paperyard.css" rel="stylesheet">
 </head>
 
@@ -44,7 +48,7 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="flag-icon {{ parent.language }}"></span>
+                <span class="flag-icon {{ languageFlag }}"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item change-lang" data-new-lang="en_US" href="#"><span class="flag-icon flag-icon-gb"></span></a>

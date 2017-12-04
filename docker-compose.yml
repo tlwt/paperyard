@@ -1,0 +1,20 @@
+version: '3'
+services:
+  paperyard:
+    build: .
+    container_name: ppyrd_image
+    tty: true
+    ports:
+     - "80:80"
+    volumes:
+     - "~/Paperyard/scan:/data/scan"
+     - "~/Paperyard/inbox:/data/inbox"
+     - "~/Paperyard/outbox:/data/outbox"
+     - "~/Paperyard/sort:/data/sort"
+     - "./data/database:/data/database"
+     - "./data/profiler:/data/profiler"
+     - project_volume_sync:/var/www/html:rw
+
+volumes:
+  project_volume_sync:
+    external: true

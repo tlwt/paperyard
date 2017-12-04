@@ -1,0 +1,110 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        <div class="animated fadeIn">
+
+            <div class="row flex-column-reverse flex-md-row">
+
+                <div class="col-xl-5 col-lg-6 col-md-6">
+                    <div class="card">
+                        <div id="pdf-carousel" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                {% for i in range(0, document.pages-1) %}
+                                    <li data-target="#pdf-carousel" data-slide-to="{{ i }}"{% if loop.first %} class="active"{% endif %}></li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                {% for i in range(0, document.pages-1) %}
+                                    <div class="carousel-item{% if loop.first %} active{% endif %}">
+                                        <img class="d-block w-100" src="/thumbnail/{{ document.identifier }}/{{ i }}/300" alt="Page ">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <a class="carousel-control-prev" href="#pdf-carousel" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">{% trans "Previous" %}</span>
+                            </a>
+                            <a class="carousel-control-next" href="#pdf-carousel" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">{% trans "Next" %}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-7 col-lg-6 col-md-6">
+
+                    <div class="card">
+                        <div class="card-header">
+                            {% trans "Document Details" %}
+                        </div>
+                        <form action="/latest/confirm" method="post" class="form-horizontal">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="document-subject"><strong>{% trans "Subject" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input name="document-subject" type="text" class="form-control" value="{{ document.subject|censor(['bbetreff']) }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="document-company"><strong>{% trans "Company" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input name="document-company" type="text" class="form-control" value="{{ document.company|censor(['ffirma']) }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="document-tags"><strong>{% trans "Tags" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input name="document-tags" type="text" class="form-control" value="{{ document.tags|censor(['ok', 'nt']) }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="document-recipient"><strong>{% trans "Recipient" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input name="document-recipient" type="text" class="form-control" value="{{ document.recipient|censor(['wwer']) }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="document-price"><strong>{% trans "Price" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input name="document-price" type="text" class="form-control" value="{{ document.price|censor('bbetrag', false) }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="document-date"><strong>{% trans "Date" %}</strong></label>
+                                    <div class="col-md-9">
+                                        <input name="document-date" type="text" class="form-control datepicker" value="{{ document.date|din1355|censor(['ddatum']) }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-3 form-control-label"><strong>{% trans "Pages" %}</strong></div>
+                                    <div class="col-md-9">{{ document.pages }}</div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-3 form-control-label"><strong>{% trans "Size" %}</strong></div>
+                                    <div class="col-md-9">{{ document.size }}</div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-3 form-control-label"><strong>{% trans "Hash" %}</strong></div>
+                                    <div class="col-md-9">{{ document.hash }}</div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <input type="hidden" name="document-path" value="{{ document.identifier }}">
+                                <button type="submit" name="save_and_confirm" class="btn btn-success"><i class="fa fa-magic"></i> save & confirm</button>
+                                <button type="submit" name="confirm_only" class="btn btn-primary pull-right"><i class="fa fa-save"></i> save</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div><!-- /.row -->
+        </div>
+
+    </div>
+
+{% endblock %}

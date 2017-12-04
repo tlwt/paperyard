@@ -17,6 +17,13 @@ session_start();
 $settings = require __DIR__ . '/../src/settings.php';
 $app = new \Slim\App($settings);
 
+// boot eloquent
+$container = $app->getContainer();
+$capsule = new \Illuminate\Database\Capsule\Manager;
+$capsule->addConnection($container['settings']['db']);
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';
 

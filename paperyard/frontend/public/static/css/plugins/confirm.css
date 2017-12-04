@@ -1,0 +1,8 @@
+#outbox-files li:hover,
+#inbox-files li:hover{
+    background-color: rgba(0,0,0,0.075);
+    cursor: pointer;
+}
+.hidden {
+    display: none;
+}

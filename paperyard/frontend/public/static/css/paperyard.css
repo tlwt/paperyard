@@ -1,9 +1,9 @@
-.full-width {
-    width: 100%;
-}
-.clickable-row {
+/* general */
+.clickable {
     cursor: pointer;
 }
+
+/* slight switch compontent resizing */
 .switch.switch-default.switch-xl {
     width: 66px;
     height: 35px;
@@ -15,17 +15,58 @@
 label.switch {
     margin-bottom: 0;
 }
+
+/* quote font style */
 div .text-serif {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
-.shell-log {
-    background-color: #29363d;
-    color: #fff;
-    font-family: "Lucida Console", Monaco, monospace;
+
+/* depth effect on multipage preview */
+.card-body.archive-card img {
+    display: block;
+    margin: 0 auto;
+    width: 112px;
 }
-.shell-entry::before {
-    content: '> ';
+.card-body.archive-card img[class^="pages-"] {
+    background: #fff;
+    box-shadow:
+            0 1px 1px rgba(0,0,0,0.15);
 }
-#shell-connection {
-    display: none;
+.card-body.archive-card img.pages-2 {
+    box-shadow:
+            0 1px 1px rgba(0,0,0,0.15),
+            0 8px 0 -4px #eee,
+            0 8px 1px -3px rgba(0,0,0,0.15);
+}
+.card-body.archive-card img.pages-3 {
+    box-shadow:
+            0 1px 1px rgba(0,0,0,0.15),
+            0 8px 0 -4px #eee,
+            0 8px 1px -3px rgba(0,0,0,0.15),
+            0 16px 0 -8px #eee,
+            0 16px 1px -7px rgba(0,0,0,0.15);
+}
+.card-body.archive-card img.pages-4 {
+    box-shadow:
+            0 1px 1px rgba(0,0,0,0.15),
+            0 8px 0 -4px #eee,
+            0 8px 1px -3px rgba(0,0,0,0.15),
+            0 16px 0 -8px #eee,
+            0 16px 1px -7px rgba(0,0,0,0.15),
+            0 24px 0 -12px rgba(0,0,0,0.15),
+            0 24px 1px -11px rgba(0,0,0,0.15);
+}
+
+/* black tint for carousel indicators */
+.carousel-indicators li {
+    background-color: rgba(0,0,0,0.5);
+}
+.carousel-indicators .active {
+    background-color: #000;
+}
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }

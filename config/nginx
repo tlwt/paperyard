@@ -5,6 +5,7 @@ server {
     error_log /root/error.log;
     access_log /root/access.log;
     root /var/www/html/;
+    disable_symlinks off;
 
     location /static/ {
         autoindex off;

@@ -57,13 +57,6 @@ $(function() {
         window.location = $(this).attr('data-url');
     });
 
-    if(jQuery().ekkoLightbox) {
-        $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
-    }
-
     $("body").on('click', '.change-lang', function () {
         $.ajax({
             url: '/setlang',

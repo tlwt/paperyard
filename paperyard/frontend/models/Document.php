@@ -3,19 +3,45 @@
 namespace Paperyard\Models;
 
 use Howtomakeaturn\PDFInfo\PDFInfo;
+use Paperyard\Helpers\Enums\DocumentType;
+use Valitron\Validator;
 
 class Document
 {
+    /** @const REGEX_TAG matches comma separated tags composed of alphanum, special char and whitespace */
+    const REGEX_TAG = '/^([ÄäÜüÖöß\sa-zA-Z0-9]+,)*[ÄäÜüÖöß\sa-zA-Z0-9]+$/';
+
+    /** @const REGEX_STRING matches alphanum, special char and whitespace */
+    const REGEX_STRING = '/^[ÄäÜüÖöß\sa-zA-Z0-9]*$/';
+
+    /** @const REGEX_DATE matches sqlite style dates (Ymd) */
+    const REGEX_DATE = '/^(0[1-9]|[1-2][0-9]|3[0-1]).(0[1-9]|1[0-2]).(20\d{2})$/';
+
+    /** @const REGEX_PRICE matches special price format */
+    const REGEX_PRICE = '/^\d+,\d{2}$/';
+
+
+    /** @const INDEX_DATE date capture group index */
     const INDEX_DATE = 1;
+
+    /** @const INDEX_COMPANY date capture group index */
     const INDEX_COMPANY = 2;
+
+    /** @const INDEX_SUBJECT date capture group index */
     const INDEX_SUBJECT = 3;
+
+    /** @const INDEX_RECIPIENT date capture group index */
     const INDEX_RECIPIENT = 4;
+
+    /** @const INDEX_PRICE date capture group index */
     const INDEX_PRICE = 5;
+
+    /** @const INDEX_TAGS date capture group index */
     const INDEX_TAGS = 6;
+
+    /** @const INDEX_OLD_FILENAME date capture group index */
     const INDEX_OLD_FILENAME = 7;
 
-    const DOC_TYPE_PDF = "pdf";
-    const DOC_TYPE_OTHER = "other";
 
     /** @var string Filename with Extension. */
     public $name;
@@ -53,8 +79,8 @@ class Document
     /** @var string sha256 hash of file contents */
     public $hash;
 
-    /** @var int number of already filled fields */
-    public $compliantFields;
+    /** @var bool */
+    public $isConfirmed;
 
     /** @var string Absolute or relative path to document. */
     private $fullPath;
@@ -65,6 +91,49 @@ class Document
     /** @var array raw attribute from regex capture */
     private $rawAttributes = [];
 
+    /** @var array holds errors from validation */
+    private $errors = [];
+
+    /** @var array defining mutable request keys and maps to object properties */
+    private $fillable = [
+        'document-subject' => 'subject',
+        'document-tags' => 'tags',
+        'document-price' => 'price',
+        'document-recipient' => 'recipient',
+        'document-company' => 'company',
+        'document-date' => 'date'
+    ];
+
+    /** @var array validation rules for fields */
+    private $rules = [
+        'optional' => [
+            ['document-subject'],
+            ['document-tags'],
+            ['document-price'],
+            ['document-recipient'],
+            ['document-company'],
+            ['document-date']
+        ],
+        'regex' => [
+            ['document-subject', self::REGEX_STRING],
+            ['document-recipient', self::REGEX_STRING],
+            ['document-company', self::REGEX_STRING],
+            ['document-tags', self::REGEX_TAG],
+            ['document-price', self::REGEX_PRICE],
+            ['document-date', self::REGEX_DATE]
+        ]
+    ];
+
+    /** @var array maps internal field names to readable labels */
+    private $labels = [
+        'document-subject' => 'Subject',
+        'document-tags' => 'Tags',
+        'document-price' => 'Price',
+        'document-recipient' => 'Recipient',
+        'document-company' => 'Company',
+        'document-date' => 'Date'
+    ];
+
     /**
      * @param $full_path string
      */
@@ -74,7 +143,7 @@ class Document
         $this->fullPath = $full_path;
 
         // might be handy later to have this info
-        $this->documentType = (pathinfo($this->fullPath, PATHINFO_EXTENSION) == "pdf" ? self::DOC_TYPE_PDF : self::DOC_TYPE_OTHER);
+        $this->documentType = (pathinfo($this->fullPath, PATHINFO_EXTENSION) == "pdf" ? DocumentType::PDF : DocumentType::OTHER);
 
         // fill object with data
         $this->name = basename($this->fullPath);
@@ -82,13 +151,15 @@ class Document
         $this->hash = hash_file("sha256", $full_path);
         $this->pages = $this->getNumberOfPages($full_path);
         $this->identifier = base64_encode($full_path);
-        $this->compliantFields = $this->calculateCompliantFields();
 
         $this->parseDataFromFilename();
+
+        $this->isConfirmed = $this->isConfirmed();
     }
 
-    private function parseDataFromFilename() {
-        $this->date = $this->parseDate();
+    private function parseDataFromFilename()
+    {
+        $this->date = $this->parseAttribute(self::INDEX_DATE);
         $this->company = $this->parseAttribute(self::INDEX_COMPANY);
         $this->subject = $this->parseAttribute(self::INDEX_SUBJECT);
         $this->recipient = $this->parseAttribute(self::INDEX_RECIPIENT);
@@ -98,28 +169,13 @@ class Document
     }
 
     /**
-     * Returns all important document informations as an array.
+     * Returns all important document information as an array.
      *
      * @return array
      */
-    public function toArray() {
+    public function toArray()
+    {
         return get_object_vars($this);
-    }
-
-    /**
-     * Gets raw date attribute and converts it to d.m.Y.
-     *
-     * @todo date format customizable
-     * @return false|string date or false on failure
-     */
-    private function parseDate() {
-        $raw_date = $this->parseAttribute(self::INDEX_DATE);
-
-        if (is_numeric($raw_date)) {
-            return date_format(date_create($this->parseAttribute(self::INDEX_DATE)), 'd.m.Y');
-        }
-
-        return '';
     }
 
     /**
@@ -128,11 +184,11 @@ class Document
      * @param $attr int index of capture group
      * @return string attribute value
      */
-    private function parseAttribute($attr) {
-
+    private function parseAttribute($attr)
+    {
         // fill if still empty
         if ($this->rawAttributes == []) {
-            preg_match('/^(.*?) - (.*?) - (.*?) \((.*?)\) \((.*?)\) \[(.*?)\] -- (.*?)(?:.pdf)$/', $this->name, $this->rawAttributes);
+            preg_match('/^(.*?) - (.*?) - (.*?) \((.*?)\) \(EUR(.*?)\) \[(.*?)\] -- (.*?)(?:.pdf)$/', $this->name, $this->rawAttributes);
         }
 
         if (!array_key_exists($attr, $this->rawAttributes)) {
@@ -142,21 +198,14 @@ class Document
         return $this->rawAttributes[$attr];
     }
 
-    private function calculateCompliantFields() {
-        preg_match_all('/ffirma|bbetreff|wwer|ddatum/', $this->name, $fields_found);
-        if (count($fields_found) > 0) {
-            return 4-count($fields_found[0]);
-        }
-        return 0;
-    }
-
     /**
      * Uses pdfinfo to get the number of pages.
      *
      * @param $full_path string Absolute or relative path to pdf
      * @return int number of pages
      */
-    private function getNumberOfPages($full_path) {
+    private function getNumberOfPages($full_path)
+    {
         $pdf = new PDFInfo($full_path);
         return (int)$pdf->pages;
     }
@@ -175,5 +224,154 @@ class Document
         $size = array('B','kB','MB','GB','TB','PB','EB','ZB','YB');
         $factor = floor((strlen($bytes) - 1) / 3);
         return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . ' ' . @$size[$factor];
+    }
+
+    /**
+     * Mass assignment.
+     *
+     * @param array $attributes
+     * @return array|bool
+     */
+    public function fill(array $attributes)
+    {
+        // remove "", null, 0, false and "0"
+        $attributes = array_filter($attributes);
+
+        $this->validate($attributes);
+
+        if (!empty($this->errors)) {
+            return $this->errors;
+        }
+
+        // go through every mutable property
+        foreach ($this->fillable as $post_attribute => $obj_property) {
+            // check if property exists and has value in post attributes array
+            if (property_exists($this, $obj_property) && array_key_exists($post_attribute, $attributes)) {
+                if ($this->hasMutator($obj_property)) {
+                    $mutator = $this->mutatorFor($obj_property);
+                    $this->{$obj_property} = $this->{$mutator}($attributes[$post_attribute]);
+                } else {
+                    $this->{$obj_property} = $attributes[$post_attribute];
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if mutator a method exists.
+     *
+     * @param $attribute
+     * @return bool
+     */
+    private function hasMutator($attribute)
+    {
+        return method_exists($this, $this->mutatorFor($attribute));
+    }
+
+    /**
+     * Creates mutator string for a given attribute name.
+     * Attribute will be converted to first letter uppercase.
+     *
+     * @param $attribute
+     * @return string
+     */
+    private function mutatorFor($attribute)
+    {
+        return 'set' . ucfirst($attribute) . 'Attribute';
+    }
+
+    /**
+     * Mass assignment mutator.
+     * Converts date post (m.d.Y) to Ymd.
+     *
+     * @param $date
+     * @return false|string
+     */
+    private function setDateAttribute($date)
+    {
+        return \DateTime::createFromFormat("d.m.Y", $date)->format('Ymd');
+    }
+
+    /**
+     * Mass assignment mutator.
+     * Checks for empty tags.
+     *
+     * @param $tags
+     * @return string
+     */
+    private function setTagsAttribute($tags)
+    {
+        if (empty($tags)) {
+            return 'nt';
+        }
+
+        return $tags;
+    }
+
+    public function save()
+    {
+        $format = '%d - %s - %s (%s) (EUR%s) [%s] -- %s.pdf';
+        $filename = sprintf(
+            $format,
+            $this->date,
+            $this->company,
+            $this->subject,
+            $this->recipient,
+            $this->price,
+            $this->tags,
+            $this->oldFilename);
+
+        $dir = dirname($this->fullPath);
+        $new_fullpath = $dir . DIRECTORY_SEPARATOR . $filename;
+        rename($this->fullPath, $new_fullpath);
+        $this->fullPath = $new_fullpath;
+    }
+
+    public function confirm()
+    {
+        // tag string to array
+        $tags = explode(',', $this->tags);
+
+        // trim
+        $trimmed = array_map('trim', $tags);
+
+        // cleaning - remove nt and ok (if present)
+        $cleaned = array_diff($trimmed, ['nt', 'ok']);
+
+        // confirm - adding ok
+        $cleaned[] = 'ok';
+
+        // glue
+        $this->tags = implode(',', $cleaned);
+    }
+
+    private function isConfirmed()
+    {
+        // tag string to array
+        $tags = explode(',', $this->tags);
+
+        return in_array('ok', $tags);
+    }
+
+    /**
+     * @param array $attributes
+     */
+    private function validate(array $attributes)
+    {
+        // new validator object
+        $validator = new Validator($attributes);
+
+        // pass rules
+        $validator->rules($this->rules);
+
+        // add labels (don't show internal names)
+        $validator->labels($this->labels);
+
+        // check rules
+        if(!$validator->validate()) {
+            $this->errors = $validator->errors();
+        }
     }
 }

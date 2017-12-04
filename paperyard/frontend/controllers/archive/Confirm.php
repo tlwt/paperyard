@@ -3,6 +3,7 @@
 namespace Paperyard\Controllers\Archive;
 
 use Paperyard\Controllers\BasicController;
+use Paperyard\Helpers\Enums\PluginType;
 use Paperyard\Models\Document;
 use Slim\Views\Twig;
 use Psr\Log\LoggerInterface;
@@ -12,13 +13,6 @@ use Slim\Http\Response;
 
 class Confirm extends BasicController
 {
-    /** @var Document[] documents in inbox folder */
-    private $inboxFiles;
-
-    private $inboxScore;
-
-    private $outboxFiles;
-
     /**
      * @param Twig $view
      * @param LoggerInterface $logger
@@ -31,63 +25,46 @@ class Confirm extends BasicController
         $this->flash = $flash;
 
         $this->registerPlugin('ekko-lightbox.min');
-
-        $this->inboxFiles = $this->getInboxFiles();
-        $this->outboxFiles = $this->getOutboxFile();
-        $this->inboxScore = $this->calculateInboxScore();
+        $this->registerPlugin('confirm');
     }
 
     public function __invoke(Request $request, Response $response, $args)
     {
-
         $this->view->render($response, 'archive/confirm.twig', $this->render());
         return $response;
     }
 
-    public function render() {
+    public function render()
+    {
         return array(
             'plugins' => parent::getPlugins(),
-            'inboxFiles' => $this->inboxFiles,
-            'outboxFiles' => $this->outboxFiles,
-            'inboxScrore' => $this->inboxScore
+            'outboxFiles' => $this->getOutboxFile(),
+            'inboxFiles' => $this->getInboxFiles()
         );
     }
 
-    private function getInboxFiles() {
-        // searchpattern for current archive
-        $archive_search_pattern = "/data/inbox/*.pdf";
-
-        // get files as strings from filesystem
-        $pdfs = glob($archive_search_pattern, GLOB_NOSORT);
-
-        // no conversion to Documents objects as file tags are not fully filled
-        array_walk($pdfs, function (&$pdf) {
-            $pdf = (new Document($pdf))->toArray();
-        });
-        return $pdfs;
+    private function getOutboxFile()
+    {
+        return $this->getDocumentsFromPattern("/data/outbox/*.pdf");
     }
 
-    private function getOutboxFile() {
-        // searchpattern for current archive
-        $archive_search_pattern = "/data/outbox/*.pdf";
-
-        // get files as strings from filesystem
-        $pdfs = glob($archive_search_pattern, GLOB_NOSORT);
-
-        // convert string elements into Documents objects
-        array_walk($pdfs, function (&$pdf) {
-            $pdf = (new Document($pdf))->toArray();
-        });
-        return $pdfs;
+    private function getInboxFiles()
+    {
+        return $this->getDocumentsFromPattern("/data/inbox/*.pdf");
     }
 
-    private function calculateInboxScore() {
-        $compliant_sum = 0;
-        foreach ($this->inboxFiles as $inboxFile) {
-            $compliant_sum += (int)$inboxFile['compliantFields'];
-        }
-        $max_score = 4*count($this->inboxFiles);
-        $average_score = $compliant_sum/$max_score;
-        return floor($average_score*100);
+    private function getDocumentsFromPattern($pattern)
+    {
+        // get files as strings from filesystem
+        $pdfs = glob($pattern, GLOB_NOSORT);
+
+        // get document information as array
+        array_walk($pdfs, function (&$pdf) {
+            $pdf = (new \Paperyard\Models\Document($pdf))->toArray();
+        });
+
+        return array_filter($pdfs, function ($pdf) {
+            return !$pdf['isConfirmed'];
+        });
     }
 }

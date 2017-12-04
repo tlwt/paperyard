@@ -11,8 +11,6 @@ $app->get('/archive[{path:.*}]', Paperyard\Controllers\Archive\Archive::class);
 
 $app->get('/doc/{path}', \Paperyard\Controllers\Archive\Details::class);
 
-$app->get('/latest', \Paperyard\Controllers\Archive\Confirm::class);
-
 $app->get('/thumbnail/{path}/{page}[/{resolution}]', \Paperyard\Controllers\Misc\Thumbnail::class);
 
 $app->post('/setlang', function (Request $request, Response $response, array $args) {
@@ -25,6 +23,7 @@ $app->post('/setlang', function (Request $request, Response $response, array $ar
     return $response->withStatus(406);
 });
 
+include 'confirm.archive.router.php';
 
 include "senders.rules.router.php";
 

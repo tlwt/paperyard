@@ -158,6 +158,31 @@ $ppyrd->output("starting paperyard");
  $ppyrd->checkCliVsWebserver();
 
 
+// move confirmed file so they will be sorted
+$ppyrd->output("checking for confirmed files ...");
+
+// named regex to get tags
+const ATTRIBUTE_PATTERN = '/^(.*?) - (.*?) - (.*?) \((.*?)\) \(EUR(.*?)\) \[(?<tags>.*?)\] -- (.*?)(?:.pdf)$/';
+
+// get both folders and combine folders
+// \TODO import document class
+$outbox = glob("/data/outbox/*.pdf");
+$inbox = glob("/data/inbox/*.pdf");
+$documents = array_merge($outbox, $inbox);
+
+// get filename and the dir its in and strip all tags
+// separate tags by comma and check if "ok" is present
+// move to sort if ok tag is contained
+foreach ($documents as $document) {
+	$basename = basename($document);
+    preg_match(ATTRIBUTE_PATTERN, $basename, $attributes);
+    $tags = explode(',', $attributes['tags']);
+    if (in_array('ok', $tags)) {
+        rename($document, '/data/sort/' . $basename);
+	}
+}
+
+
 $ppyrd->output("calling the sorter ...");
 chdir("/data/sort");
 

@@ -108,6 +108,14 @@ Variables</h2></td></tr>
 <tr class="separator:a1fa3127fc82f96b1436d871ef02be319"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9077391297d9878e469a829cec8992a8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ppyrd_8sorter_8php.html#a9077391297d9878e469a829cec8992a8">$ppyrd</a> = new <a class="el" href="classppyrd.html">ppyrd</a>($db)</td></tr>
 <tr class="separator:a9077391297d9878e469a829cec8992a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64328cbd0141f5b82d38ea961f449177"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ppyrd_8sorter_8php.html#a64328cbd0141f5b82d38ea961f449177">ATTRIBUTE_PATTERN</a> = '/^(.*?) - (.*?) - (.*?) \((.*?)\) \(EUR(.*?)\) \[(?&lt;tags&gt;.*?)\] -- (.*?)(?:.pdf)$/'</td></tr>
+<tr class="separator:a64328cbd0141f5b82d38ea961f449177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d20087f01847928021f614b66b74711"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ppyrd_8sorter_8php.html#a2d20087f01847928021f614b66b74711">$outbox</a> = glob(&quot;/data/outbox/*.pdf&quot;)</td></tr>
+<tr class="separator:a2d20087f01847928021f614b66b74711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae07e714627e88ec9e2237311294a11a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ppyrd_8sorter_8php.html#ae07e714627e88ec9e2237311294a11a3">$inbox</a> = glob(&quot;/data/inbox/*.pdf&quot;)</td></tr>
+<tr class="separator:ae07e714627e88ec9e2237311294a11a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88c9a4740cff46436acb9191ada1209a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ppyrd_8sorter_8php.html#a88c9a4740cff46436acb9191ada1209a">$documents</a> = array_merge($outbox, $inbox)</td></tr>
+<tr class="separator:a88c9a4740cff46436acb9191ada1209a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46d39972a1fe24496abff551d8f1b2d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ppyrd_8sorter_8php.html#a46d39972a1fe24496abff551d8f1b2d7">$pdfs</a> = glob(&quot;*.pdf&quot;)</td></tr>
 <tr class="separator:a46d39972a1fe24496abff551d8f1b2d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -127,6 +135,48 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a88c9a4740cff46436acb9191ada1209a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$documents = array_merge($outbox, $inbox)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="ppyrd_8sorter_8php_source.html#l00171">171</a> of file <a class="el" href="ppyrd_8sorter_8php_source.html">ppyrd.sorter.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae07e714627e88ec9e2237311294a11a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$inbox = glob(&quot;/data/inbox/*.pdf&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="ppyrd_8sorter_8php_source.html#l00170">170</a> of file <a class="el" href="ppyrd_8sorter_8php_source.html">ppyrd.sorter.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2d20087f01847928021f614b66b74711"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$outbox = glob(&quot;/data/outbox/*.pdf&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="ppyrd_8sorter_8php_source.html#l00169">169</a> of file <a class="el" href="ppyrd_8sorter_8php_source.html">ppyrd.sorter.php</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a46d39972a1fe24496abff551d8f1b2d7"></a>
 <div class="memitem">
 <div class="memproto">
@@ -138,7 +188,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>reading all pdf files from current directory </p>
 
-<p>Definition at line <a class="el" href="ppyrd_8sorter_8php_source.html#l00167">167</a> of file <a class="el" href="ppyrd_8sorter_8php_source.html">ppyrd.sorter.php</a>.</p>
+<p>Definition at line <a class="el" href="ppyrd_8sorter_8php_source.html#l00192">192</a> of file <a class="el" href="ppyrd_8sorter_8php_source.html">ppyrd.sorter.php</a>.</p>
 
 </div>
 </div>
@@ -153,6 +203,20 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Definition at line <a class="el" href="ppyrd_8sorter_8php_source.html#l00146">146</a> of file <a class="el" href="ppyrd_8sorter_8php_source.html">ppyrd.sorter.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a64328cbd0141f5b82d38ea961f449177"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const ATTRIBUTE_PATTERN = '/^(.*?) - (.*?) - (.*?) \((.*?)\) \(EUR(.*?)\) \[(?&lt;tags&gt;.*?)\] -- (.*?)(?:.pdf)$/'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="ppyrd_8sorter_8php_source.html#l00165">165</a> of file <a class="el" href="ppyrd_8sorter_8php_source.html">ppyrd.sorter.php</a>.</p>
 
 </div>
 </div>

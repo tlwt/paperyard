@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tag_5fregex',['TAG_REGEX',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#a17e42e454c53d550c94ca59023052284',1,'Paperyard::Models::Rule::Rule']]]
+  ['standard_5ffilename_5fno_5ftag',['STANDARD_FILENAME_NO_TAG',['../classTests_1_1DocumentTestTest.html#ab259c7d43170a773d162cdefec155220',1,'Tests::DocumentTestTest']]]
 ];

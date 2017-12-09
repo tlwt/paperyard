@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['ocrfailures',['ocrFailures',['../classPaperyard_1_1Controllers_1_1Misc_1_1Index.html#a4c12dfa97a1d89560158af37ca611cad',1,'Paperyard::Controllers::Misc::Index']]],
   ['only_5fcss',['ONLY_CSS',['../classPaperyard_1_1Helpers_1_1Enums_1_1PluginType.html#a1a336e936eacf624a3fed0a8df84c599',1,'Paperyard::Helpers::Enums::PluginType']]],
   ['only_5fjs',['ONLY_JS',['../classPaperyard_1_1Helpers_1_1Enums_1_1PluginType.html#a17f207f0fcf99128583c6cd1c4acd6ab',1,'Paperyard::Helpers::Enums::PluginType']]],
   ['open',['open',['../classdbHandler.html#a867f1865e7209ab7658b517c0c3459f9',1,'dbHandler']]],

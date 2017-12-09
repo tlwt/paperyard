@@ -20,8 +20,8 @@ var searchData=
   ['standard_5ffilename_5fno_5ftag',['STANDARD_FILENAME_NO_TAG',['../classTests_1_1DocumentTestTest.html#ab259c7d43170a773d162cdefec155220',1,'Tests::DocumentTestTest']]],
   ['subjectdetails',['SubjectDetails',['../classPaperyard_1_1Controllers_1_1Rule_1_1SubjectDetails.html',1,'Paperyard::Controllers::Rule']]],
   ['subjectdetails_2ephp',['SubjectDetails.php',['../SubjectDetails_8php.html',1,'']]],
-  ['subjects',['Subjects',['../classPaperyard_1_1Controllers_1_1Rule_1_1Subjects.html',1,'Paperyard::Controllers::Rule']]],
   ['subjects',['Subjects',['../classPaperyard_1_1Models_1_1Rule_1_1Subjects.html',1,'Paperyard::Models::Rule']]],
+  ['subjects',['Subjects',['../classPaperyard_1_1Controllers_1_1Rule_1_1Subjects.html',1,'Paperyard::Controllers::Rule']]],
   ['subjects_2ephp',['Subjects.php',['../models_2rule_2Subjects_8php.html',1,'']]],
   ['subjects_2ephp',['Subjects.php',['../controllers_2rule_2Subjects_8php.html',1,'']]],
   ['subjects_2erules_2erouter_2ephp',['subjects.rules.router.php',['../subjects_8rules_8router_8php.html',1,'']]]

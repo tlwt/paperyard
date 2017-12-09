@@ -90,8 +90,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classPaperyard_1_1Models_1_1Document-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -111,6 +113,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af97d5343a5659ea6455679d8d5146847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac805f847f4887817179f28fefdb547b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPaperyard_1_1Models_1_1Document.html#ac805f847f4887817179f28fefdb547b7">confirm</a> ()</td></tr>
 <tr class="separator:ac805f847f4887817179f28fefdb547b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a15eed98db89baa82a2fd2f44524fab51"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPaperyard_1_1Models_1_1Document.html#a15eed98db89baa82a2fd2f44524fab51">findAll</a> (array $paths)</td></tr>
+<tr class="separator:a15eed98db89baa82a2fd2f44524fab51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -187,6 +194,11 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a8bfe3a46778afd7e1d6ccd7252c3a65e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b85f28de5ad23c59727f0fb1b74e26c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPaperyard_1_1Models_1_1Document.html#a9b85f28de5ad23c59727f0fb1b74e26c">validate</a> (array $attributes)</td></tr>
 <tr class="separator:a9b85f28de5ad23c59727f0fb1b74e26c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:a8ae884564b4fb4e35d62bc3ec6c5a451"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPaperyard_1_1Models_1_1Document.html#a8ae884564b4fb4e35d62bc3ec6c5a451">flatten</a> (array $array)</td></tr>
+<tr class="separator:a8ae884564b4fb4e35d62bc3ec6c5a451"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -286,6 +298,69 @@ Private Attributes</h2></td></tr>
 <div class="ttc" id="classPaperyard_1_1Models_1_1Document_html_abe1bc41bd8cf4c8592faf73633cdc906"><div class="ttname"><a href="classPaperyard_1_1Models_1_1Document.html#abe1bc41bd8cf4c8592faf73633cdc906">Paperyard\Models\Document\hasMutator</a></div><div class="ttdeci">hasMutator($attribute)</div><div class="ttdef"><b>Definition:</b> <a href="Document_8php_source.html#l00278">Document.php:278</a></div></div>
 <div class="ttc" id="classPaperyard_1_1Models_1_1Document_html_ac79778a64044882cdf572f89be71fc34"><div class="ttname"><a href="classPaperyard_1_1Models_1_1Document.html#ac79778a64044882cdf572f89be71fc34">Paperyard\Models\Document\$errors</a></div><div class="ttdeci">$errors</div><div class="ttdef"><b>Definition:</b> <a href="Document_8php_source.html#l00095">Document.php:95</a></div></div>
 </div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a15eed98db89baa82a2fd2f44524fab51"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Paperyard\Models\Document::findAll </td>
+          <td>(</td>
+          <td class="paramtype">array&#160;</td>
+          <td class="paramname"><em>$paths</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns document objects for all pdfs found in the paths provided.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">array</td><td class="paramname">$paths</td><td>Path to search in </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Document[] </dd></dl>
+
+<p>Definition at line <a class="el" href="Document_8php_source.html#l00394">394</a> of file <a class="el" href="Document_8php_source.html">Document.php</a>.</p>
+<div class="fragment"><div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    {</div><div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        array_walk($paths, <span class="keyword">function</span> (&amp;$path) {</div><div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;            $path = glob($path);</div><div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        });</div><div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;</div><div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;        <a class="code" href="ppyrd_8namer_8php.html#a46d39972a1fe24496abff551d8f1b2d7">$pdfs</a> = <a class="code" href="classPaperyard_1_1Models_1_1Document.html#a8ae884564b4fb4e35d62bc3ec6c5a451">Document::flatten</a>($paths);</div><div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;</div><div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        array_walk($pdfs, <span class="keyword">function</span> (&amp;$pdf) {</div><div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;            $pdf = (new \Paperyard\Models\Document($pdf))-&gt;<a class="code" href="classPaperyard_1_1Models_1_1Document.html#a67106bc400fc935692b8cac0d6388b66">toArray</a>();</div><div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        });</div><div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;</div><div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="ppyrd_8namer_8php.html#a46d39972a1fe24496abff551d8f1b2d7">$pdfs</a>;</div><div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    }</div><div class="ttc" id="ppyrd_8namer_8php_html_a46d39972a1fe24496abff551d8f1b2d7"><div class="ttname"><a href="ppyrd_8namer_8php.html#a46d39972a1fe24496abff551d8f1b2d7">$pdfs</a></div><div class="ttdeci">$pdfs</div><div class="ttdef"><b>Definition:</b> <a href="ppyrd_8namer_8php_source.html#l00580">ppyrd.namer.php:580</a></div></div>
+<div class="ttc" id="classPaperyard_1_1Models_1_1Document_html_a67106bc400fc935692b8cac0d6388b66"><div class="ttname"><a href="classPaperyard_1_1Models_1_1Document.html#a67106bc400fc935692b8cac0d6388b66">Paperyard\Models\Document\toArray</a></div><div class="ttdeci">toArray()</div><div class="ttdef"><b>Definition:</b> <a href="Document_8php_source.html#l00176">Document.php:176</a></div></div>
+<div class="ttc" id="classPaperyard_1_1Models_1_1Document_html_a8ae884564b4fb4e35d62bc3ec6c5a451"><div class="ttname"><a href="classPaperyard_1_1Models_1_1Document.html#a8ae884564b4fb4e35d62bc3ec6c5a451">Paperyard\Models\Document\flatten</a></div><div class="ttdeci">static flatten(array $array)</div><div class="ttdef"><b>Definition:</b> <a href="Document_8php_source.html#l00409">Document.php:409</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a8ae884564b4fb4e35d62bc3ec6c5a451"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Paperyard\Models\Document::flatten </td>
+          <td>(</td>
+          <td class="paramtype">array&#160;</td>
+          <td class="paramname"><em>$array</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="Document_8php_source.html#l00409">409</a> of file <a class="el" href="Document_8php_source.html">Document.php</a>.</p>
+<div class="fragment"><div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                                                  {</div><div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        $return = array();</div><div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        array_walk_recursive($array, <span class="keyword">function</span>($a) use (&amp;$return) { $return[] = $a; });</div><div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;        <span class="keywordflow">return</span> $return;</div><div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;    }</div></div><!-- fragment -->
 </div>
 </div>
 <a class="anchor" id="a7e42903c8cf6d7caff6e27ac70627732"></a>

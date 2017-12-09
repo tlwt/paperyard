@@ -7,6 +7,7 @@ var searchData=
   ['thumbnail',['Thumbnail',['../classPaperyard_1_1Controllers_1_1Misc_1_1Thumbnail.html',1,'Paperyard::Controllers::Misc']]],
   ['thumbnail_2ephp',['Thumbnail.php',['../Thumbnail_8php.html',1,'']]],
   ['toarray',['toArray',['../classPaperyard_1_1Models_1_1Document.html#a67106bc400fc935692b8cac0d6388b66',1,'Paperyard::Models::Document']]],
+  ['toconfirm',['toConfirm',['../classPaperyard_1_1Controllers_1_1Misc_1_1Index.html#a171039904507d2b1726d16736f477ab0',1,'Paperyard::Controllers::Misc::Index']]],
   ['todate',['toDate',['../classpdfNamer.html#a0c2ca97b180ebd2b4027f12a0b06b679',1,'pdfNamer']]],
   ['todo_20list',['Todo List',['../todo.html',1,'']]]
 ];

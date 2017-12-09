@@ -3,6 +3,8 @@
 namespace Paperyard\Controllers\Misc;
 
 use Paperyard\Controllers\BasicController;
+use Paperyard\Helpers\Enums\PluginType;
+use Paperyard\Models\Document;
 use Slim\Views\Twig;
 use Psr\Log\LoggerInterface;
 use Slim\Flash\Messages;
@@ -27,7 +29,7 @@ class Index extends BasicController
         $this->logger = $logger;
         $this->flash = $flash;
 
-        $this->registerPlugin('bootstrap-notify.min');
+        $this->registerPlugin('bootstrap-notify.min', PluginType::ONLY_JS);
     }
 
     /**
@@ -52,6 +54,8 @@ class Index extends BasicController
             'plugins' => parent::getPlugins(),
             'languageFlag' => parent::getLanguageFlag(),
             'scannedToday' => $this->documentsScanned(),
+            'ocrFailures' => $this->ocrFailures(),
+            'toConfirm' => $this->toConfirm(),
         ];
     }
 
@@ -65,5 +69,21 @@ class Index extends BasicController
     private function documentsScanned()
     {
         return \Paperyard\Models\Log\File::distinct()->get(['fileContent'])->count();
+    }
+
+    private function toConfirm()
+    {
+        $documents = Document::findAll(['/data/outbox/*.pdf', '/data/inbox/*.pdf']);
+
+        $to_confirm = array_filter($documents, function($document) {
+            return !$document['isConfirmed'];
+        });
+
+        return count($to_confirm);
+    }
+
+    private function ocrFailures()
+    {
+        return count(Document::findAll(['/data/scan/error/*.pdf']));
     }
 }

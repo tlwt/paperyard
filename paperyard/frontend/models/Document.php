@@ -384,4 +384,31 @@ class Document
             $this->errors = $validator->errors();
         }
     }
+
+    /**
+     * Returns document objects for all pdfs found in the paths provided.
+     *
+     * @param array $paths Path to search in
+     * @return Document[]
+     */
+    public static function findAll(array $paths)
+    {
+        array_walk($paths, function (&$path) {
+            $path = glob($path);
+        });
+
+        $pdfs = Document::flatten($paths);
+
+        array_walk($pdfs, function (&$pdf) {
+            $pdf = (new \Paperyard\Models\Document($pdf))->toArray();
+        });
+
+        return $pdfs;
+    }
+
+    private static function flatten(array $array) {
+        $return = array();
+        array_walk_recursive($array, function($a) use (&$return) { $return[] = $a; });
+        return $return;
+    }
 }

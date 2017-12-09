@@ -7,20 +7,44 @@
     <div class="animated fadeIn">
 
         <div class="row">
-            <div class="col-sm-3">
-                <div class="card text-white bg-info">
+
+            <div class="col-md-3 col-sm-6">
+                <div class="card">
                     <div class="card-body">
                         <div class="h1 text-muted text-right mb-4">
-                            <i class="fa fa-file-o"></i>
+                            <i class="fa fa-file"></i>
                         </div>
                         <div class="h4 mb-0">{{ scannedToday }}</div>
                         <small class="text-muted text-uppercase font-weight-bold">{% trans "scanned total" %}</small>
-                        <div class="progress progress-white progress-xs mt-3">
-                            <div class="progress-bar" role="progressbar" style="width: {{ ("now"|date("z")/3.65)|number_format }}%"></div>
-                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <div class="h4 mb-0">{{ toConfirm }}
+                        </div>
+                        <small class="text-muted text-uppercase font-weight-bold">{% trans "to confirm" %}</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="card{% if ocrFailures > 0 %} bg-warning text-white{% endif %}">
+                    <div class="card-body">
+                        <div class="h1 text-muted text-right mb-4">
+                            <i class="fa fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="h4 mb-0">{{ ocrFailures }}</div>
+                        <small class="text-muted text-uppercase font-weight-bold">{% trans "ocr failures" %}</small>
+                    </div>
+                </div>
+            </div>
+
         </div><!--/.row-->
     </div>
 

@@ -23,6 +23,8 @@ $app->post('/setlang', function (Request $request, Response $response, array $ar
     return $response->withStatus(406);
 });
 
+$app->post('/upload', Paperyard\Controllers\Misc\Upload::class);
+
 include 'confirm.archive.router.php';
 
 include "senders.rules.router.php";

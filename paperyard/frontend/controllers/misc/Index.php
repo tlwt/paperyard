@@ -30,6 +30,8 @@ class Index extends BasicController
         $this->flash = $flash;
 
         $this->registerPlugin('bootstrap-notify.min', PluginType::ONLY_JS);
+        $this->registerPlugin('dropzone', PluginType::ONLY_JS);
+        $this->registerPlugin('index', PluginType::ONLY_JS);
     }
 
     /**

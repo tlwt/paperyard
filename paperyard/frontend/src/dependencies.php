@@ -173,3 +173,8 @@ $container[\Paperyard\Controllers\Misc\Thumbnail::class] = function($c) {
     $logger = $c->get('logger');
     return new Paperyard\Controllers\Misc\Thumbnail($logger);
 };
+
+$container[\Paperyard\Controllers\Misc\Upload::class] = function($c) {
+    $logger = $c->get('logger');
+    return new Paperyard\Controllers\Misc\Upload($logger);
+};

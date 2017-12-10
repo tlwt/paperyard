@@ -17,5 +17,6 @@ var searchData=
   ['getoutboxfile',['getOutboxFile',['../classPaperyard_1_1Controllers_1_1Archive_1_1Confirm.html#a6cd71d83b7a82385811a1b27639c9739',1,'Paperyard::Controllers::Archive::Confirm']]],
   ['getpersonalvariables',['getPersonalVariables',['../classdbHandler.html#a5663219bc605a393b60f5d2f890cd197',1,'dbHandler']]],
   ['getplugins',['getPlugins',['../classPaperyard_1_1Controllers_1_1BasicController.html#a680e542f00fcb588085d585b096b1696',1,'Paperyard::Controllers::BasicController']]],
-  ['gettextfrompdf',['getTextFromPdf',['../classpdfNamer.html#ad76543583e6b45aff4be931abeed12bc',1,'pdfNamer']]]
+  ['gettextfrompdf',['getTextFromPdf',['../classpdfNamer.html#ad76543583e6b45aff4be931abeed12bc',1,'pdfNamer']]],
+  ['geturl',['getUrl',['../classPaperyard_1_1Models_1_1Document.html#ae154ccca1b3e53d235f18347460b2f47',1,'Paperyard::Models::Document']]]
 ];

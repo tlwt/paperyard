@@ -5,7 +5,7 @@ var indexSectionsWithContent =
   2: "pt",
   3: "abcdfilmprstu",
   4: "_acdefghimopqrstuvw",
-  5: "$ainoprst",
+  5: "$aimnoprst",
   6: "bt"
 };
 

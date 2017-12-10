@@ -3,6 +3,8 @@ var searchData=
   ['addmessages',['addMessages',['../classPaperyard_1_1Helpers_1_1PaperyardMassages.html#a5eafe68e119244e753a7d27d8986b702',1,'Paperyard::Helpers::PaperyardMassages']]],
   ['addtags',['addTags',['../classpdfNamer.html#a88ca16d1bff1a61acc96669662c6f33c',1,'pdfNamer']]],
   ['addtolog',['addToLog',['../classpdfNamer.html#a047ff1b53271caaaa524f7e8fba3a4c2',1,'pdfNamer']]],
+  ['applicationversion',['ApplicationVersion',['../classPaperyard_1_1Helpers_1_1ApplicationVersion.html',1,'Paperyard::Helpers']]],
+  ['applicationversion_2ephp',['ApplicationVersion.php',['../ApplicationVersion_8php.html',1,'']]],
   ['archive',['Archive',['../classPaperyard_1_1Controllers_1_1Archive_1_1Archive.html',1,'Paperyard::Controllers::Archive']]],
   ['archive',['Archive',['../classPaperyard_1_1Models_1_1Rule_1_1Archive.html',1,'Paperyard::Models::Rule']]],
   ['archive_2ephp',['Archive.php',['../controllers_2archive_2Archive_8php.html',1,'']]],

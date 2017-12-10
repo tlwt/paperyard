@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['normal',['NORMAL',['../classPaperyard_1_1Helpers_1_1Enums_1_1PluginType.html#a8549536d9d436c0067c6dc1b17873174',1,'Paperyard::Helpers::Enums::PluginType']]]
+  ['major',['MAJOR',['../classPaperyard_1_1Helpers_1_1ApplicationVersion.html#a523bf91003aa6e0aa6fc76b99fd1b144',1,'Paperyard::Helpers::ApplicationVersion']]],
+  ['minor',['MINOR',['../classPaperyard_1_1Helpers_1_1ApplicationVersion.html#a1f34306c0f99e6d592a049c9df11cd0b',1,'Paperyard::Helpers::ApplicationVersion']]]
 ];

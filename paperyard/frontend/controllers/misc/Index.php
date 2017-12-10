@@ -3,6 +3,7 @@
 namespace Paperyard\Controllers\Misc;
 
 use Paperyard\Controllers\BasicController;
+use Paperyard\Helpers\ApplicationVersion;
 use Paperyard\Helpers\Enums\PluginType;
 use Paperyard\Models\Document;
 use Slim\Views\Twig;
@@ -58,6 +59,7 @@ class Index extends BasicController
             'scannedToday' => $this->documentsScanned(),
             'ocrFailures' => $this->ocrFailures(),
             'toConfirm' => $this->toConfirm(),
+            'version' => ApplicationVersion::get(),
         ];
     }
 

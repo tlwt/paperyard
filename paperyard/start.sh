@@ -1,6 +1,7 @@
 #!/bin/bash
 # for production we need to pull the current repository
 echo "setting up paperyard"
+
 if [ ! -d "/var/www/html/backend" ]; then
  mkdir -p /paperyardSrc
  mkdir -p /var/www/html
@@ -33,6 +34,8 @@ if [ ! -d /var/www/html/frontend/public/static/img/cache ]; then
     echo " * Created thumbnail cache folder"
     mkdir /var/www/html/frontend/public/static/img/cache
 fi
+
+echo $COMMIT_COUNT >> /data/version
 
 # creating folder structure in case it does not exist
 mkdir -p /data/database

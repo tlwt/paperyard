@@ -38,7 +38,6 @@
           {
               // fixing user permissions since OCR is run as www-data
               $this->output("fixing permissions");
-              $this->output( "user_id=$(stat -c '%u:%g' " . $this->pdf . '); chown $user_id /data/inbox/' . $this->pdf);
               exec ("user_id=$(stat -c '%u:%g' " . $this->pdf . '); chown $user_id /data/inbox/' . $this->pdf);
               $this->output("found ok OCR - moving input to archive");
               exec("mv --backup=numbered '" . $this->pdf . "' '/data/scan/archive/" . $this->pdf . "'");

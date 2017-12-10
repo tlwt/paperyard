@@ -21,7 +21,7 @@ echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.sorter.php" >>  mycron
 echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.sorter.php" >>  mycron
 echo "*/15 * * * * su -s /bin/sh -c 'cd /paperyardSrc/paperyard && /usr/bin/git pull -q origin master' "  >>  mycron
 
-crontab -u www-data mycron
+crontab mycron
 /etc/init.d/cron start
 
 echo " * Checking for dependencies updates"

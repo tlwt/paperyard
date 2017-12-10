@@ -33,6 +33,7 @@ echo " * Checking for thumbnail cache folder"
 if [ ! -d /var/www/html/frontend/public/static/img/cache ]; then
     echo " * Created thumbnail cache folder"
     mkdir /var/www/html/frontend/public/static/img/cache
+    chmod 777 /var/www/html/frontend/public/static/img/cache
 fi
 
 echo $COMMIT_COUNT >> /data/version

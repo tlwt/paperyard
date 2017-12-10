@@ -79,6 +79,8 @@ class Document
     /** @var string sha256 hash of file contents */
     public $hash;
 
+    public $url;
+
     /** @var bool */
     public $isConfirmed;
 
@@ -151,10 +153,20 @@ class Document
         $this->hash = hash_file("sha256", $full_path);
         $this->pages = $this->getNumberOfPages($full_path);
         $this->identifier = base64_encode($full_path);
+        $this->url = $this->getUrl($full_path);
 
         $this->parseDataFromFilename();
 
         $this->isConfirmed = $this->isConfirmed();
+    }
+
+    private function getUrl($full_path) {
+        $path = explode('/', $full_path);
+        unset($path[1]);
+        array_walk($path, function(&$part) {
+            $part = rawurlencode($part);
+        });
+        return implode('/', $path);
     }
 
     private function parseDataFromFilename()

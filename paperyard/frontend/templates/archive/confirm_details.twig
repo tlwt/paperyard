@@ -16,21 +16,18 @@
                                     <li data-target="#pdf-carousel" data-slide-to="{{ i }}"{% if loop.first %} class="active"{% endif %}></li>
                                 {% endfor %}
                             </ol>
-                            <div class="carousel-inner">
-                                {% for i in range(0, document.pages-1) %}
-                                    <div class="carousel-item{% if loop.first %} active{% endif %}">
-                                        <img class="d-block w-100" src="/thumbnail/{{ document.identifier }}/{{ i }}/300" alt="Page ">
-                                    </div>
-                                {% endfor %}
+                            <div id="pdf-pages" class="carousel-inner" data-document="{{ document.url }}">
                             </div>
-                            <a class="carousel-control-prev" href="#pdf-carousel" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">{% trans "Previous" %}</span>
-                            </a>
-                            <a class="carousel-control-next" href="#pdf-carousel" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">{% trans "Next" %}</span>
-                            </a>
+                            {% if document.pages > 1 %}
+                                <a class="carousel-control-prev" href="#pdf-carousel" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">{% trans "Previous" %}</span>
+                                </a>
+                                <a class="carousel-control-next" href="#pdf-carousel" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">{% trans "Next" %}</span>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

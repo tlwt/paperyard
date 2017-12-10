@@ -9,7 +9,22 @@ server {
 
     location /static/ {
         autoindex off;
-        root  /var/www/html/frontend/public;
+        root /var/www/html/frontend/public;
+    }
+
+    location /inbox/ {
+        autoindex off;
+        root /data;
+    }
+
+    location /outbox/ {
+        autoindex off;
+        root  /data;
+    }
+
+    location /sort/ {
+        autoindex off;
+        root  /data;
     }
 
     location /phpliteadmin {

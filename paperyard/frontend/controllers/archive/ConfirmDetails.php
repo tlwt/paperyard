@@ -31,6 +31,7 @@ class ConfirmDetails extends BasicController
         $this->flash = $flash;
 
         $this->registerPlugin('bootstrap-datepicker.min');
+        $this->registerPlugin('pdf.min', PluginType::ONLY_JS);
         $this->registerPlugin('confirm_details', PluginType::ONLY_JS);
     }
 

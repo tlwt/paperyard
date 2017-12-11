@@ -113,7 +113,7 @@
             $toFolder = rtrim($toFolder, '/') . '/';
 
             // create folders in case required
-            exec("mkdir -p $toFolder");
+            exec("mkdir -p '$toFolder'");
 
             // move the file to destination folder
             exec('mv --backup=numbered "' . $this->pdf . '" "' . $toFolder . $this->pdf . '"');

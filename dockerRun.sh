@@ -32,7 +32,6 @@ if $localDevelopment ; then
       -v "$renamedFiles:/data/outbox" \
       -v "$toSort:/data/sort" \
       -p "$port:80" \
-      -e COMMIT_COUNT=$(git rev-list --count MASTER) \
       -i -t ppyrd_image
 else
   echo from github

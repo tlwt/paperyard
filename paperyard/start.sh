@@ -20,7 +20,7 @@ echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.namer.php" >>  mycron
 echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.scanner.php" >>  mycron
 echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.sorter.php" >>  mycron
 echo "* * * * * /usr/bin/php /var/www/html/backend/ppyrd.sorter.php" >>  mycron
-echo "*/15 * * * * su -s /bin/sh -c 'cd /paperyardSrc/paperyard && /usr/bin/git pull -q origin master' "  >>  mycron
+echo "*/5 * * * * su -s /bin/sh -c 'cd /paperyardSrc/paperyard && /usr/bin/git pull -q origin master && git rev-list --count master > /data/version'"  >>  mycron
 
 crontab mycron
 /etc/init.d/cron start
@@ -36,7 +36,7 @@ if [ ! -d /var/www/html/frontend/public/static/img/cache ]; then
     chmod 777 /var/www/html/frontend/public/static/img/cache
 fi
 
-echo $COMMIT_COUNT >> /data/version
+su -s /bin/sh -c 'cd /paperyardSrc/paperyard && git rev-list --count master > /data/version' > /data/version
 
 # creating folder structure in case it does not exist
 mkdir -p /data/database

@@ -1,7 +1,7 @@
 (function($) {
 
     const canvasContainer = $('#pdf-pages');
-    const options = { scale: 1 };
+    const options = { scale: window.devicePixelRatio };
     const url = $(canvasContainer).attr('data-document')
 
     function renderPage(page) {

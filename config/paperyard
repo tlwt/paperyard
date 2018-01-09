@@ -1,0 +1,23 @@
+# where do you store your documents, database and configuration
+paperyard_root=$HOME/Paperyard/
+
+# files which have OCRed yet - will be moved to next folder
+paperyard_scan=scan/
+
+# files which have not been processed yet. PDFs with OCR, but no useful name
+paperyard_inbox=inbox/
+
+# files which have been renamed
+paperyard_outbox=outbox/
+
+# files which will be sorted
+paperyard_sort=sort/
+
+# where shall the database be stored?
+paperyard_database=data/database/
+
+# which port shall be exposed?
+paperyard_port=80
+
+# set to true to use local modified app instead of current published version from github
+paperyard_development=true

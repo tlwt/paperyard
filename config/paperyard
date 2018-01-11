@@ -1,23 +1,67 @@
-# where do you store your documents, database and configuration
-paperyard_root=$HOME/Paperyard/
+# Parameter:    paperyard_root
+# Meaning:      basepath
+# Description:  Basepath from where every other folder (e.g. database, documents)
+#               cascades. Config folder is not effected.
+# Default:      $HOME/Paperyard/
+#
+# Example:
+# paperyard_root=$HOME/Paperyard/
 
-# files which have OCRed yet - will be moved to next folder
-paperyard_scan=scan/
+# Parameter:    paperyard_scan
+# Meaning:      scan folder
+# Description:  Files to be OCRed. paperyard_root will be prepend.
+# Default:      scan/
+#
+# Example:
+# paperyard_scan=scan/
 
-# files which have not been processed yet. PDFs with OCR, but no useful name
-paperyard_inbox=inbox/
+# Parameter:    paperyard_inbox
+# Meaning:      inbox folder
+# Description:  Files which have not been processed yet. PDFs with OCR, but no useful name. paperyard_root will be prepend.
+# Default:      inbox/
+#
+# Example:
+# paperyard_inbox=inbox/
 
-# files which have been renamed
-paperyard_outbox=outbox/
+# Parameter:    paperyard_outbox
+# Meaning:      outbox folder
+# Description:  Files which have been renamed but haven't been confirmed yet. paperyard_root will be prepend.
+# Default:      outbox/
+#
+# Example:
+# paperyard_outbox=outbox/
 
 # files which will be sorted
+# Parameter:    paperyard_sort
+# Meaning:      archive folder
+# Description:  Folder in which OCRed and renamed documents are finally stored. paperyard_root will be prepend.
+# Default:      sort/
+#
+# Example:
 paperyard_sort=sort/
 
-# where shall the database be stored?
-paperyard_database=data/database/
+# Parameter:    paperyard_database
+# Meaning:      database folder
+# Description:  Folder in which the database (paperyard.sqlite) will be stored. paperyard_root will be prepend.
+# Default:      data/database/
+#
+# Example:
+# paperyard_database=data/database/
 
 # which port shall be exposed?
-paperyard_port=80
+# Parameter:    paperyard_port
+# Meaning:      Frontend port
+# Description:  Exposed port to access frontend.
+# Default:      80
+#
+# Example:
+# paperyard_port=80
 
-# set to true to use local modified app instead of current published version from github
-paperyard_development=true
+#
+# Parameter:    paperyard_development
+# Meaning:      environment
+# Description:  Set to true to use local modified app instead of current published version from github.
+# Default:      false
+#
+# Example:
+# paperyard_development=true

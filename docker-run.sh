@@ -2,22 +2,32 @@
 
 function load_configuration()
 {
-    configuration_file="config/paperyard"
+    configuration_file='config/paperyard'
 
-    while IFS='= ' read lhs rhs
-    do
-        if [[ ! $lhs =~ ^\ *# && -n $lhs ]]; then
-            rhs="${rhs%%\#*}"    # Del in line right comments
-            rhs="${rhs%%*( )}"   # Del trailing spaces
-            rhs="${rhs%\"*}"     # Del opening string quotes
-            rhs="${rhs#\"*}"     # Del closing string quotes
-            declare $lhs="$rhs"
-        fi
-    done < <(envsubst < $configuration_file)
+    if [ -r ${configuration_file} ]; then
+        while IFS='=' read lhs rhs
+        do
+            if [[ ! $lhs =~ ^\ *# && -n $lhs ]]; then
+                rhs="${rhs%%\#*}"    # Del in line right comments
+                rhs="${rhs%%*( )}"   # Del trailing spaces
+                rhs="${rhs%\"*}"     # Del opening string quotes
+                rhs="${rhs#\"*}"     # Del closing string quotes
+                eval "${lhs}='${rhs}'"
+            fi
+        done < <(envsubst < $configuration_file)
+    else
+        echo 'No configuration found. Will load defaults.'
+    fi
 }
 
 function load_defaults()
 {
+    : ${paperyard_root:=$HOME/Paperyard/}
+    : ${paperyard_scan:=scan/}
+    : ${paperyard_inbox:=inbox/}
+    : ${paperyard_outbox:=outbox/}
+    : ${paperyard_sort:=sort/}
+    : ${paperyard_database:=data/database/}
     : ${paperyard_port:=80}
     : ${paperyard_development:=false}
 }
@@ -50,12 +60,12 @@ function start_production()
 
 function splash()
 {
-    echo "Paperyard"
+    echo 'Paperyard'
 
     if ${paperyard_development}; then
-        echo "Environment: development"
+        echo 'Environment: development'
     else
-        echo "Environment: production"
+        echo 'Environment: production'
     fi
 
     echo "Port: ${paperyard_port}"

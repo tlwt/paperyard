@@ -38,7 +38,7 @@
 # Default:      sort/
 #
 # Example:
-paperyard_sort=sort/
+# paperyard_sort=sort/
 
 # Parameter:    paperyard_database
 # Meaning:      database folder

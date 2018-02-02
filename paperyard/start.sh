@@ -25,6 +25,14 @@ echo "*/15 * * * * su -s /bin/sh -c 'cd /paperyardSrc/paperyard && /usr/bin/git 
 crontab mycron
 /etc/init.d/cron start
 
+# file watcher
+#echo '* Starting file watcher'
+#echo '/data/scan IN_CLOSE_WRITE tsp php /var/www/html/backend/ppyrd.scanner.php' >> /etc/incron.d/watch_scan
+#echo '/data/inbox IN_CLOSE_WRITE tsp php /var/www/html/backend/ppyrd.namer.php' >> /etc/incron.d/watch_inbox
+#echo '/data/outbox IN_CLOSE_WRITE tsp php /var/www/html/backend/ppyrd.sorter.php' >> /etc/incron.d/watch_outbox
+#echo 'root' >> /etc/incron.allow
+#/etc/init.d/incron start
+
 # composer
 echo '* Checking for dependencies updates'
 cd /var/www/html/frontend

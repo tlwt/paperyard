@@ -1,47 +1,54 @@
 # PAPERYARD
 
-ist ein Tool zur automatischen und regelbasierten Benennung von gescannten Dokumenten.
+Paperyard is the tool for autonomously naming and archiving scanned documents based on rules. It covers the entire workflow. From text recognition to filing.
 
-Paperyard kümmert sich nicht um die Texterkennung aber um die Erkennung von
+Individual rules are used to recognize information such as sender, recipient or subject. Unlike other document management systems, Paperyard stores the data in the file name:
+    
+    date - sender - subject (recipient) (price) [tags] -- original_filename.pdf
+    
+No essential data is stored in an obscure database. Simple viewing, simple backup. The documents remain yours.
 
-* Datum
-* Firma
-* Betreff
-* Empfänger
+## Installation
 
-Ausgehend von einem Dateinamen in folgemden Format:
+The easiest way is to execute via docker. Make sure docker and git are installed on your machine. Launch the terminal of your choice and run the following lines:
 
-    ddatum - ffirma - bbetreff (wwer) [tags_][Beleg]_Sachlicher_Brief_Rechtschreibung
+    git clone https://github.com/tlwt/paperyard.git
+    cd paperyard
+    ./docker-build.sh
+    ./docker-run.sh
+    
+Paperyard can be cloned to any directory. See [Configuration](#configuration) to learn how to personalise Paperyard.
 
-wird basierend auf den in der data/paperyard.sqlite hinterlegen Regeln folgende Datei:
+## Usage
 
-    20090220 - Elektroschrott - Reklamation (wwer) [tags_][Beleg]_Sachlicher_Brief_Rechtschreibung.pdf
+Paperyard lives from an individual set of rules. Follow this basic introduction to learn how to create your first few rules.
 
+For [this example](https://paperyard.ams3.digitaloceanspaces.com/paperyard_sample.pdf), we create a rule set that recognizes the sender, recipient and subject.
+- Navigate your browser to [localhost](http://localhost) (or wherever you are running the container).
+- First we create a rule that recognizes our sender "Acme DemoTec". Navigate to _Rules -> Senders_. _Needles_ are comma-separated, case insensitive search terms. If these are detected in the document, the sender specified under _Company_ is assigned to this document. Set _Score_ to "100" and leave "Tags" blank. Click on _add_.
+- To recognize the invoice as such, we now go to _Rules -> Subjects_. The idea of _Needles_ is also applied here. In addition, we can use _Company_ to restrict the application of the rule to a previously identified sender. We set _Needles_ to "Invoice" and _Company_ to "Acme DemoTec". In case of a hit, we want to receive "Invoice" as the subject. We again set _Score_ to "100" and leave _Tags_ blank. Click on _add_.
+- In order to be able to assign the invoice more easily, we also want to recognize the recipient. To do this, under _Rules -> Recipient_ enter "Test Business" in the _Long Name_ field. _Long Name_ behaves like _Needles_. Enter "Business" as the value for _Name For File_. Click on _add_.
 
-## Example
+## Configuration
 
-Das Programm wirft auf der Shell kurze Statusmeldungen aus:
+Paperyard can be adapted to your own wishes and requirements. Almost all important settings are made in [`/config/paperyard`](config/paperyard). Explanations and examples are given for each setting.
 
-    company: Elektroschrott has rating 30
-    subject: Reklamation has rating 30
-    new name: 20090220 - Elektroschrott - Reklamation (wwer) [tags_][Beleg]_Sachlicher_Brief_Rechtschreibung.pdf
+## Contributing
 
-Detailierte Logs sind in der Datenbank /data/paperyard.sqlite vorhanden
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request.
 
-## build
+## Credits
 
-Docker container bauen. Im Hauptverzeichnis folgenden Befehl ausführen:
+Jannik Kramer ([@jannik-kramer](https://github.com/jannik-kramer))  
+Till Witt ([@tlwt](https://github.com/tlwt))
 
-      docker build -t ppyrd_image .
+## License
 
-## run
-
-zuerst müssen die Pfadangaben in der Datei angepasst werden, damit Paperyard weiß wo es nach Dokumenten suchen soll und wohin die korrekt benannten Dokumente hinterlegt werden sollen:
-
-      ./dockerRun.sh (oder im Falle von Windows in .bat umbennenen und dann ausführen)
-
-
-# license
+The MIT License (MIT)
 
 Copyright 2017 consider it GmbH
 

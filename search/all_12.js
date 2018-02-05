@@ -10,6 +10,7 @@ var searchData=
   ['senders_2erules_2erouter_2ephp',['senders.rules.router.php',['../senders_8rules_8router_8php.html',1,'']]],
   ['setdateattribute',['setDateAttribute',['../classPaperyard_1_1Models_1_1Document.html#adecb5b25e9ec304daeb5945b6c833baf',1,'Paperyard::Models::Document']]],
   ['setisactiveattribute',['setIsActiveAttribute',['../classPaperyard_1_1Models_1_1Rule_1_1Rule.html#aa6e6afe5fcdf8ff0b8c99ec9056621f9',1,'Paperyard::Models::Rule::Rule']]],
+  ['setpriceattribute',['setPriceAttribute',['../classPaperyard_1_1Models_1_1Document.html#aaf2db69d19e96e6c33b1cc59bb791d32',1,'Paperyard::Models::Document']]],
   ['settagsattribute',['setTagsAttribute',['../classPaperyard_1_1Models_1_1Document.html#a129a51c82641bbeff7b901574be6281f',1,'Paperyard::Models::Document']]],
   ['settings_2ephp',['settings.php',['../settings_8php.html',1,'']]],
   ['shell',['Shell',['../classPaperyard_1_1Controllers_1_1Misc_1_1Shell.html',1,'Paperyard::Controllers::Misc']]],
@@ -20,9 +21,9 @@ var searchData=
   ['standard_5ffilename_5fno_5ftag',['STANDARD_FILENAME_NO_TAG',['../classTests_1_1DocumentTestTest.html#ab259c7d43170a773d162cdefec155220',1,'Tests::DocumentTestTest']]],
   ['subjectdetails',['SubjectDetails',['../classPaperyard_1_1Controllers_1_1Rule_1_1SubjectDetails.html',1,'Paperyard::Controllers::Rule']]],
   ['subjectdetails_2ephp',['SubjectDetails.php',['../SubjectDetails_8php.html',1,'']]],
-  ['subjects',['Subjects',['../classPaperyard_1_1Models_1_1Rule_1_1Subjects.html',1,'Paperyard::Models::Rule']]],
   ['subjects',['Subjects',['../classPaperyard_1_1Controllers_1_1Rule_1_1Subjects.html',1,'Paperyard::Controllers::Rule']]],
-  ['subjects_2ephp',['Subjects.php',['../models_2rule_2Subjects_8php.html',1,'']]],
+  ['subjects',['Subjects',['../classPaperyard_1_1Models_1_1Rule_1_1Subjects.html',1,'Paperyard::Models::Rule']]],
   ['subjects_2ephp',['Subjects.php',['../controllers_2rule_2Subjects_8php.html',1,'']]],
+  ['subjects_2ephp',['Subjects.php',['../models_2rule_2Subjects_8php.html',1,'']]],
   ['subjects_2erules_2erouter_2ephp',['subjects.rules.router.php',['../subjects_8rules_8router_8php.html',1,'']]]
 ];

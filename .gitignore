@@ -4,5 +4,5 @@ run.sh
 *.sqlite
 data/
 paperyard/phpmyadmin/
-
+config/paperyard
 \.docker-sync/

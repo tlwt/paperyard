@@ -18,7 +18,7 @@ class Document
     const REGEX_DATE = '/^(0[1-9]|[1-2][0-9]|3[0-1]).(0[1-9]|1[0-2]).(20\d{2})$/';
 
     /** @const REGEX_PRICE matches special price format */
-    const REGEX_PRICE = '/^\d+,\d{2}$/';
+    const REGEX_PRICE = '/^\d+(\.\d{3})*(,\d{2})?$/';
 
 
     /** @const INDEX_DATE date capture group index */
@@ -316,6 +316,24 @@ class Document
         return \DateTime::createFromFormat("d.m.Y", $date)->format('Ymd');
     }
 
+    /**
+     * Mass assignment mutator.
+     * Removes delimiter dot and adds double zero decimals if needed.
+     *
+     * @param $price
+     * @return string
+     */
+    private function setPriceAttribute($price)
+    {
+        $dotless = str_replace(".", "", $price);
+
+        if (strpos($dotless, ",") === false) {
+            return $dotless . ",00";
+        }
+
+        return $dotless;
+    }
+    
     /**
      * Mass assignment mutator.
      * Checks for empty tags.

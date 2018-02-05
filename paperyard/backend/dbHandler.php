@@ -140,10 +140,18 @@
 		 */
 		function writeLog($oldName, $newName, $content, $log)
 		{
+		    $this->truncateLogs();
+
 			$safe = SQLite3::escapeString($content);
 			$this->exec("INSERT INTO logs (oldFileName, newFileName, fileContent, log) VALUES ('$oldName', '$newName', '$safe', '$log');");
 		}
 
+        /**
+         * deletes everything but top n rows
+         */
+		function truncateLogs() {
+		    $this->exec("DELETE FROM logs WHERE id NOT IN (SELECT id FROM logs ORDER BY id LIMIT 1000);");
+        }
 
 		/**
 		 * \brief opens database connection or creates file is not found

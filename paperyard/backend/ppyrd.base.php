@@ -77,17 +77,11 @@
 		 */
 		function output($string, $debug=0)
 		{
-            //$logProgram = basename(__FILE__, '.php');
-            $logProgram = basename($_SERVER['SCRIPT_NAME']);
-            echo "$logProgram: $string\n";
+					//$logProgram = basename(__FILE__, '.php');
+					$logProgram = basename($_SERVER['SCRIPT_NAME']);
+					echo "$logProgram: $string\n";
 
-            //todo: sql..
-
-            // truncate logShell
-            $this->db->exec("DELETE FROM logShell WHERE id NOT IN (SELECT id FROM logShell ORDER BY id LIMIT 1000);");
-
-            // write log
-            $this->db->exec("INSERT INTO logShell (logProgram, logContent) VALUES ('$logProgram','$string');");
+					$this->db->exec("INSERT INTO logShell (logProgram, logContent) VALUES ('$logProgram','$string');");
 		}
 
 	}

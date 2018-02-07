@@ -1,15 +1,16 @@
-# download base image ubuntu 16.10
-FROM ubuntu:16.10
+# download base image ubuntu 17.10
+FROM ubuntu:17.10
 
 ### beginning to apt install
 
-# enable gettext support
-RUN locale-gen en_US.UTF-8
-RUN locale-gen de_DE.UTF-8
-ENV LC_ALL en_US.UTF8
-
 # update Ubuntu Software repository
 RUN apt-get update
+
+# enable gettext support
+RUN apt-get -y install locales \
+	&& locale-gen en_US.UTF-8 \
+	&& locale-gen de_DE.UTF-8
+ENV LC_ALL en_US.UTF8
 
 # installing nginx
 RUN apt-get -y install nginx
@@ -17,7 +18,7 @@ RUN apt-get -y install nginx
 # installing PHP
 #RUN apt-get -y install php
 RUN apt-get -y install php-sqlite3
-RUN apt-get -y install nginx php7.0-cli php7.0-cgi php7.0-fpm php7.0-mbstring php7.0-xml php7.0-zip php7.0-imagick
+RUN apt-get -y install nginx php7.1-cli php7.1-cgi php7.1-fpm php7.1-mbstring php7.1-xml php7.1-zip php7.1-imagick
 
 # installing tools
 RUN apt-get -y install nano
@@ -37,21 +38,21 @@ RUN apt-get -y install python-pip
 RUN apt-get -y install poppler-utils
 
 # install xdebug
-RUN apt-get -y install php7.0-dev
+RUN apt-get -y install php7.1-dev
 RUN apt-get -y install php-pear
 RUN yes | pecl install xdebug \
-    && echo "zend_extension=$(find /usr/lib/php/ -name xdebug.so)" > /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.remote_host=172.254.254.254" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.remote_port=9000" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.idekey=PHPSTORM" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.remote_handler=dbgp" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.remote_log=/tmp/xdebug.log" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.profiler_enable = 1" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.profiler_output_name = xdebug.profile.%t" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.profiler_output_dir = /data/profiler" >> /etc/php/7.0/fpm/conf.d/xdebug.ini \
-    && echo "xdebug.profiler_enable_trigger = 1" >> /etc/php/7.0/fpm/conf.d/xdebug.ini
+    && echo "zend_extension=$(find /usr/lib/php/ -name xdebug.so)" > /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_host=172.254.254.254" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable=on" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart=on" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_port=9000" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.idekey=PHPSTORM" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_handler=dbgp" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.remote_log=/tmp/xdebug.log" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_enable = 1" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_output_name = xdebug.profile.%t" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_output_dir = /data/profiler" >> /etc/php/7.1/fpm/conf.d/xdebug.ini \
+    && echo "xdebug.profiler_enable_trigger = 1" >> /etc/php/7.1/fpm/conf.d/xdebug.ini
 
 ENV PHP_IDE_CONFIG "serverName=docker"
 

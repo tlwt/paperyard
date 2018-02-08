@@ -12,7 +12,7 @@ if [ ! -d "/var/www/html/backend" ]; then
 fi
 
 # starting PHP & nginx
-service php7.0-fpm start
+service php7.1-fpm start
 /usr/sbin/nginx
 
 # setting up cron jobs for backend

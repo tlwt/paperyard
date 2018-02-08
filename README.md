@@ -1,5 +1,8 @@
 # PAPERYARD
 
+[![Docker Build Status](https://img.shields.io/docker/build/tlwt/paperyard.svg)]()
+[![Read the Docs](https://img.shields.io/readthedocs/paperyard.svg)]()
+
 Paperyard is the tool for autonomously naming and archiving scanned documents based on rules. It covers the entire workflow. From text recognition to filing.
 
 Individual rules are used to recognize information such as sender, recipient or subject. Unlike other document management systems, Paperyard stores the data in the file name:

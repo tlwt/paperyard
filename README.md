@@ -1,7 +1,7 @@
 # PAPERYARD
 
-[![Docker Build Status](https://img.shields.io/docker/build/tlwt/paperyard.svg)]()
-[![Read the Docs](https://img.shields.io/readthedocs/paperyard.svg)]()
+[![Docker Build Status](https://img.shields.io/docker/build/tlwt/paperyard.svg)](https://hub.docker.com/r/tlwt/paperyard/)
+[![Read the Docs](https://img.shields.io/readthedocs/paperyard.svg)](http://paperyard.readthedocs.io/en/latest/)
 
 Paperyard is the tool for autonomously naming and archiving scanned documents based on rules. It covers the entire workflow. From text recognition to filing.
 

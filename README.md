@@ -44,6 +44,10 @@ Paperyard can be adapted to your own wishes and requirements. Almost all importa
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request.
 
+## Documentation
+
+The manual with some hints on installation etc is available at: http://paperyard.readthedocs.io/en/latest/
+
 ## Credits
 
 Jannik Kramer ([@jannik-kramer](https://github.com/jannik-kramer))  

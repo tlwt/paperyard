@@ -32,11 +32,11 @@ crontab paperyard_cron
 #/etc/init.d/incron start
 
 # composer
-echo '* Checking for dependencies updates'
+echo ' * Checking for dependencies updates'
 cd /var/www/html/frontend
 composer install --no-interaction &>/dev/null
 
-echo '* Checking for thumbnail cache folder'
+echo ' * Checking for thumbnail cache folder'
 if [ ! -d '/var/www/html/frontend/public/static/img/cache' ]; then
     echo ' * Created thumbnail cache folder'
     mkdir /var/www/html/frontend/public/static/img/cache

@@ -31,7 +31,6 @@
 # Example:
 # paperyard_outbox=outbox/
 
-# files which will be sorted
 # Parameter:    paperyard_sort
 # Meaning:      archive folder
 # Description:  Folder in which OCRed and renamed documents are finally stored. paperyard_root will be prepend.
@@ -48,7 +47,6 @@
 # Example:
 # paperyard_database=data/database/
 
-# which port shall be exposed?
 # Parameter:    paperyard_port
 # Meaning:      Frontend port
 # Description:  Exposed port to access frontend.
@@ -57,7 +55,6 @@
 # Example:
 # paperyard_port=80
 
-#
 # Parameter:    paperyard_development
 # Meaning:      environment
 # Description:  Set to true to use local modified app instead of current published version from github.

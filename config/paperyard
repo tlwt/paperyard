@@ -65,3 +65,11 @@
 #
 # Example:
 # paperyard_development=true
+
+# Parameter:    paperyard_util
+# Meaning:      debug tool
+# Description:  Set to true to activate the paperyard utility tool inside the container.
+# Default:      false
+#
+# Example:
+# paperyard_util=true

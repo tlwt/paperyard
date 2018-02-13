@@ -45,6 +45,10 @@ fi
 
 echo "${COMMIT_COUNT}" >> /data/version
 
+if [ PAPERYARD_UTIL ]; then
+    echo "alias paperyard=\"php /var/www/html/backend/ppyrd.util.php\"" >> ~/.bash_aliases
+fi
+
 # creating folder structure in case it does not exist
 mkdir -p /data/database
 mkdir -p /data/scan

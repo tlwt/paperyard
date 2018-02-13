@@ -30,6 +30,7 @@ function load_defaults()
     : ${paperyard_database:=data/database/}
     : ${paperyard_port:=80}
     : ${paperyard_development:=false}
+    : ${paperyard_util:=false}
 }
 
 function start_development()
@@ -43,6 +44,7 @@ function start_development()
           -v "${paperyard_root}/${paperyard_sort}:/data/sort" \
           -p "${paperyard_port}:80" \
           -e COMMIT_COUNT=$(git rev-list --count MASTER) \
+          -e PAPERYARD_UTIL="${paperyard_util}" \
           -i -t ppyrd_image
 }
 
@@ -55,6 +57,7 @@ function start_production()
           -v "${paperyard_root}/${paperyard_outbox}:/data/outbox" \
           -v "${paperyard_root}/${paperyard_sort}:/data/sort" \
           -p "${paperyard_port}:80" \
+          -e PAPERYARD_UTIL="${paperyard_util}" \
           -i -t ppyrd_image
 }
 

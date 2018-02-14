@@ -71,6 +71,7 @@ class Archive extends BasicController
             'plugins' => parent::getPlugins(),
             'languageFlag' => parent::getLanguageFlag(),
             'archives' => $this->getArchives(),
+            'newestFiles' => $this -> getNewestFiles(),
             'files' => $this->getFiles()
         );
     }
@@ -112,6 +113,23 @@ class Archive extends BasicController
         // convert string elements into ArchiveDocuments objects
         array_walk($pdfs, function (&$pdf) {
             $pdf = (new Document($pdf))->toArray();
+        });
+        return $pdfs;
+    }
+
+    /**
+    * Sort all archives by date.
+    * 
+    * @return array sorted archives
+    */
+     private function getNewestFiles()
+    {
+        // get archive list
+        $pdfs = $this -> getFiles();
+
+        // sort archives by date
+        usort($pdfs, function($a, $b){
+            return $a['date'] < $b['date'];
         });
         return $pdfs;
     }

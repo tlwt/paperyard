@@ -71,6 +71,7 @@ class Archive extends BasicController
             'plugins' => parent::getPlugins(),
             'languageFlag' => parent::getLanguageFlag(),
             'archives' => $this->getArchives(),
+            'newestFiles' => $this -> getNewestFiles(),
             'files' => $this->getFiles()
         );
     }
@@ -108,6 +109,21 @@ class Archive extends BasicController
 
         // get files as strings from filesystem
         $pdfs = glob($archive_search_pattern, GLOB_NOSORT);
+
+        // convert string elements into ArchiveDocuments objects
+        array_walk($pdfs, function (&$pdf) {
+            $pdf = (new Document($pdf))->toArray();
+        });
+        return $pdfs;
+    }
+
+     private function getNewestFiles()
+    {
+        // searchpattern for current archive
+        $archive_search_pattern = $this->archiveFullPath . "/*.pdf";
+
+        // get files as strings from filesystem
+        $pdfs = glob($archive_search_pattern);
 
         // convert string elements into ArchiveDocuments objects
         array_walk($pdfs, function (&$pdf) {

@@ -13,6 +13,7 @@ var searchData=
   ['getinboxfiles',['getInboxFiles',['../classPaperyard_1_1Controllers_1_1Archive_1_1Confirm.html#a1b814b8a4928d570f1581d6aaaf657bf',1,'Paperyard::Controllers::Archive::Confirm']]],
   ['getlanguageflag',['getLanguageFlag',['../classPaperyard_1_1Controllers_1_1BasicController.html#a2e87a9380c818a2a09020897ff57cba9',1,'Paperyard::Controllers::BasicController']]],
   ['getname',['getName',['../classPaperyard_1_1Helpers_1_1CapTwigExtension.html#ab2b8773923930dc7be63f3c66fc88747',1,'Paperyard\Helpers\CapTwigExtension\getName()'],['../classPaperyard_1_1Helpers_1_1CensorTwigExtension.html#afa6ce2787239a94fbbb86099a4d57b11',1,'Paperyard\Helpers\CensorTwigExtension\getName()'],['../classPaperyard_1_1Helpers_1_1Din1355TwigExtension.html#a401749b6e773034f4ec7e410002762e4',1,'Paperyard\Helpers\Din1355TwigExtension\getName()']]],
+  ['getnewestfiles',['getNewestFiles',['../classPaperyard_1_1Controllers_1_1Archive_1_1Archive.html#a2e80390c3874ddc18432575551ae9062',1,'Paperyard::Controllers::Archive::Archive']]],
   ['getnumberofpages',['getNumberOfPages',['../classPaperyard_1_1Models_1_1Document.html#a7e42903c8cf6d7caff6e27ac70627732',1,'Paperyard::Models::Document']]],
   ['getoutboxfile',['getOutboxFile',['../classPaperyard_1_1Controllers_1_1Archive_1_1Confirm.html#a6cd71d83b7a82385811a1b27639c9739',1,'Paperyard::Controllers::Archive::Confirm']]],
   ['getpersonalvariables',['getPersonalVariables',['../classdbHandler.html#a5663219bc605a393b60f5d2f890cd197',1,'dbHandler']]],

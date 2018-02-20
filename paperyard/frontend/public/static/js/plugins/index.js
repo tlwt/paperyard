@@ -4,7 +4,7 @@
         url: '/upload',
         acceptFiles: "application/pdf",
         previewTemplate : '<div style="display:none"></div>',
-        clickable: true
+        clickable: '#file-upload-zone, #file-upload-zone *'
     });
 
 }());

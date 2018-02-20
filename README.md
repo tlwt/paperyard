@@ -1,5 +1,8 @@
 # PAPERYARD
 
+[![Docker Build Status](https://img.shields.io/docker/build/tlwt/paperyard.svg)](https://hub.docker.com/r/tlwt/paperyard/)
+[![Read the Docs](https://img.shields.io/readthedocs/paperyard.svg)](http://paperyard.readthedocs.io/en/latest/)
+
 Paperyard is the tool for autonomously naming and archiving scanned documents based on rules. It covers the entire workflow. From text recognition to filing.
 
 Individual rules are used to recognize information such as sender, recipient or subject. Unlike other document management systems, Paperyard stores the data in the file name:
@@ -40,6 +43,10 @@ Paperyard can be adapted to your own wishes and requirements. Almost all importa
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request.
+
+## Documentation
+
+The manual with some hints on installation etc is available at: http://paperyard.readthedocs.io/en/latest/
 
 ## Credits
 

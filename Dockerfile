@@ -56,6 +56,8 @@ RUN yes | pecl install xdebug \
 
 ENV PHP_IDE_CONFIG "serverName=docker"
 
+RUN apt-get -y install incron task-spooler
+
 WORKDIR /
 
 # adding config folder

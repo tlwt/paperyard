@@ -26,7 +26,8 @@
         "illuminate/database": "~5.1",
         "vlucas/valitron": "^1.4",
         "slim/flash": "^0.4.0",
-        "kanellov/slim-twig-flash": "^0.2.0"
+        "kanellov/slim-twig-flash": "^0.2.0",
+        "tuupola/slim-basic-auth": "^2.3"
     },
     "require-dev": {
         "phpunit/phpunit": ">=4.8 < 6.0"
